@@ -1,76 +1,137 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaverIoFlow – Plane clever, erreiche mehr</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaverIoFlow – More Structure. More Focus.</title>
+  <link rel="stylesheet" href="/style.css" />
 </head>
+
 <body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">SaverIoFlow</div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#" class="nav-cta">Start for free</a>
+      </nav>
+    </div>
+  </header>
 
-  <!-- HERO SECTION -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Plane clever. Erreiche mehr.</h1>
-      <p>Dein persönlicher KI-Coach, der dich begleitet, motiviert und zum Erfolg führt.</p>
-      <button>Jetzt starten</button>
+    <div class="container hero-content">
+      <h1>More structure.<br>More focus.<br>Better results.</h1>
+      <p>
+        An intelligent flow system that brings your time, goals and plans together —
+        from hours to years.
+      </p>
+
+      <a href="#" class="cta-primary">Start for free</a>
+      <span class="microcopy">Free forever · No credit card · Get started in 30 seconds</span>
     </div>
   </section>
 
-  <!-- FEATURES SECTION -->
-  <section class="features">
-    <h2>Was SaverIoFlow für dich tun kann</h2>
-    <div class="features-grid">
-      <div class="feature-box">
-        <img src="images/feature1.png" alt="Ziele setzen">
-        <h3>Klare Ziele</h3>
-        <p>Formuliere dein Ziel und die KI erstellt deinen optimalen Plan.</p>
-      </div>
-      <div class="feature-box">
-        <img src="images/feature2.png" alt="KI-Tipps">
-        <h3>Intelligente Schritte</h3>
-        <p>Erhalte täglich optimierte Aufgaben, basierend auf deinem Fortschritt.</p>
-      </div>
-      <div class="feature-box">
-        <img src="images/feature3.png" alt="Erinnerungen">
-        <h3>Präzise Erinnerungen</h3>
-        <p>Die App erinnert dich zur perfekten Zeit – wissenschaftlich optimiert.</p>
-      </div>
-      <div class="feature-box">
-        <img src="images/feature4.png" alt="Tracking">
-        <h3>Erfolg sichtbar</h3>
-        <p>Sieh genau, wie du dich entwickelst – Tag für Tag.</p>
+  <section id="features" class="section">
+    <div class="container">
+      <h2>Everything under one roof</h2>
+      <p class="section-intro">
+        SaverIoFlow connects planning and execution into one clear system.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">🗓️</div>
+          <h3>Hourly to yearly planning</h3>
+          <p>Plan hours, days, weeks and long-term goals in one connected flow.</p>
+          <p class="feature-example">Example: Today → This week → This year</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Goal-based structure</h3>
+          <p>Start with goals — not endless to-do lists.</p>
+          <p class="feature-example">Example: Goal → Milestones → Daily actions</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">⏱️</div>
+          <h3>Smart time blocks</h3>
+          <p>Focused sessions that fit your real schedule.</p>
+          <p class="feature-example">Example: 09:00–10:30 · Deep focus</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <h3>Progress & insights</h3>
+          <p>See what works, where time is lost, and how to improve.</p>
+          <p class="feature-example">Example: Week completed: 82%</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🔮</div>
+          <h3>Goal forecasting</h3>
+          <p>Estimate when you’ll reach your goal — and how much effort it takes.</p>
+          <p class="feature-example">Example: 6 weeks · 45 min/day · High confidence</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING SECTION -->
-  <section class="pricing">
-    <h2>Preise</h2>
-    <div class="pricing-grid">
-      <div class="price-box">
-        <h3>Free</h3>
-        <p class="price">0 € / Monat</p>
-        <p>✓ 1 Ziel<br>✓ Basis-Plan<br>✓ Standard-Erinnerungen</p>
+  <section id="pricing" class="section pricing">
+    <div class="container">
+      <h2>Choose your flow</h2>
+      <p class="section-intro">Start free. Upgrade when you’re ready.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>1 active goal</li>
+            <li>Basic daily planning</li>
+            <li>Standard reminders</li>
+            <li>Progress tracking</li>
+          </ul>
+          <a href="#" class="cta-secondary">Get started</a>
+        </div>
+
+        <div class="price-card highlight">
+          <span class="badge">Most popular</span>
+          <h3>Pro</h3>
+          <div class="price">$9.99</div>
+          <ul>
+            <li>Unlimited goals</li>
+            <li>Daily & weekly planning</li>
+            <li>Time blocks</li>
+            <li>Advanced progress stats</li>
+            <li><strong>Goal forecasting (basic)</strong></li>
+          </ul>
+          <a href="#" class="cta-primary">Upgrade to Pro</a>
+        </div>
+
+        <div class="price-card">
+          <h3>Master</h3>
+          <div class="price">$19.99</div>
+          <ul>
+            <li>Monthly & yearly planning</li>
+            <li>Focus mode</li>
+            <li>Optimization insights</li>
+            <li>Long-term strategies</li>
+            <li><strong>Advanced forecasting & optimization</strong></li>
+          </ul>
+          <a href="#" class="cta-secondary">Go Master</a>
+        </div>
       </div>
-      <div class="price-box">
-        <h3>Pro</h3>
-        <p class="price">9,99 € / Monat</p>
-        <p>✓ Unbegrenzte Ziele<br>✓ Detaillierte Tagespläne<br>✓ Premium-Statistiken<br>✓ KI-Optimierungen</p>
-      </div>
-      <div class="price-box">
-        <h3>Master</h3>
-        <p class="price">19,99 € / Monat</p>
-        <p>✓ Alles aus PRO<br>✓ Deep-Analysis KI<br>✓ Persönliche Flow-Strategien<br>✓ Langzeit-Coaching</p>
-      </div>
+
+      <p class="pricing-note">Cancel anytime · No hidden fees · GDPR compliant</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 SaverIoFlow – Dein Weg zum Erfolg beginnt hier.
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 SaverIoFlow. All rights reserved.</p>
+    </div>
   </footer>
-
 </body>
 </html>
