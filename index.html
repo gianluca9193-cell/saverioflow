@@ -3,24 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07070a" />
+  <meta name="color-scheme" content="dark" />
   <title>SaverIoFlow — More structure. More focus. Better results.</title>
-  <meta name="description" content="SaverIoFlow is a calm planning system that connects goals, milestones, time blocks, and progress — from hourly to yearly." />
+  <meta name="description" content="A calm planning system that connects goals, milestones, time blocks, and progress — from hourly to yearly. Not coaching. Just structure." />
 
-  <!-- Social -->
+  <!-- Open Graph -->
   <meta property="og:title" content="SaverIoFlow — More structure. More focus. Better results." />
   <meta property="og:description" content="A calm planning system that connects goals, milestones, time blocks, and progress — from hourly to yearly." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/images/tree-bg.png" />
-  <meta property="og:url" content="/" />
 
-  <link rel="preload" href="/images/tree-bg.png" as="image" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- Topbar -->
   <header class="topbar">
     <div class="container topbar__inner">
       <a class="brand" href="#top" aria-label="SaverIoFlow home">
@@ -28,364 +26,227 @@
         <span class="brand__name">SaverIoFlow</span>
       </a>
 
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="#features">Features</a>
         <a href="#flow">5-Minute Flow</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </nav>
 
-      <div class="topbar__cta">
-        <a class="btn btn--ghost btn--sm" href="#pricing">See pricing</a>
-        <a class="btn btn--primary btn--sm" href="#get-started">Get started</a>
+      <div class="topbar__right">
+        <div class="lang" aria-label="Language switch (optional)">
+          <button class="lang__btn is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang__btn" type="button" data-lang="de" aria-pressed="false">DE</button>
+        </div>
+
+        <div class="topbar__cta">
+          <a class="btn btn--ghost" href="#pricing">See pricing</a>
+          <a class="btn btn--primary" href="#get-started">Get started</a>
+        </div>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- Hero -->
     <section id="top" class="hero">
       <div class="container hero__inner">
-        <div class="hero__copy">
-          <p class="eyebrow">Flow-system for planning & execution</p>
-          <h1>More structure. More focus. Better results.</h1>
-          <p class="lead">
-            A calm planning system that connects goals, milestones, and time blocks —
-            from hourly to yearly. No coaching. No hype.
-          </p>
+        <p class="eyebrow" data-i18n="hero_eyebrow">Flow-System for planning & execution</p>
 
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#get-started">Start free</a>
-            <a class="btn btn--ghost" href="#features">Explore features</a>
-          </div>
+        <h1 data-i18n="hero_title">More structure. More focus. Better results.</h1>
 
-          <div class="hero__meta">
-            <div class="meta-chip" title="No credit card required">
-              <span class="dot dot--gold" aria-hidden="true"></span>
-              No credit card required
-            </div>
-            <div class="meta-chip" title="Upgrade later">
-              <span class="dot" aria-hidden="true"></span>
-              Upgrade after 3–5 days of use
-            </div>
-          </div>
+        <p class="lead" data-i18n="hero_lead">
+          A calm planning system that connects goals, milestones, and time blocks — from hourly to yearly.
+        </p>
 
-          <p class="trust">
-            Built for builders — a system you can trust when motivation is low.
-          </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#get-started" data-i18n="hero_cta_primary">Start free</a>
+          <a class="btn btn--ghost" href="#features" data-i18n="hero_cta_secondary">Explore features</a>
         </div>
 
-        <div class="hero__panel" aria-label="Preview">
-          <div class="panel">
-            <div class="panel__top">
-              <div class="panel__dots" aria-hidden="true">
-                <span></span><span></span><span></span>
+        <div class="hero__meta">
+          <p class="trust" data-i18n="hero_trust">Not coaching. No hype. Just a system you can rely on.</p>
+          <div class="hero__badges" aria-label="Highlights">
+            <span class="pill">Hourly → Yearly</span>
+            <span class="pill">Goals → Actions</span>
+            <span class="pill">Forecasting (ETA + Effort)</span>
+          </div>
+        </div>
+
+        <div class="hero__frame" aria-hidden="true">
+          <div class="frame__inner">
+            <div class="mini">
+              <div class="mini__row">
+                <span class="mini__k">Today</span>
+                <span class="mini__v">3 blocks</span>
               </div>
-              <div class="panel__title">Today</div>
-              <div class="panel__right">Flow</div>
+              <div class="mini__row">
+                <span class="mini__k">Goal</span>
+                <span class="mini__v">Launch v1</span>
+              </div>
+              <div class="mini__row">
+                <span class="mini__k">ETA</span>
+                <span class="mini__v">6 weeks · 45 min/day</span>
+              </div>
             </div>
-
-            <div class="panel__body">
-              <div class="kpi-grid">
-                <div class="kpi">
-                  <div class="kpi__label">Focus blocks</div>
-                  <div class="kpi__value">3</div>
-                  <div class="kpi__sub">Deep work protected</div>
-                </div>
-                <div class="kpi">
-                  <div class="kpi__label">Daily effort</div>
-                  <div class="kpi__value">45m</div>
-                  <div class="kpi__sub">For your main goal</div>
-                </div>
-                <div class="kpi">
-                  <div class="kpi__label">ETA</div>
-                  <div class="kpi__value">6w</div>
-                  <div class="kpi__sub">Forecast updated</div>
-                </div>
+            <div class="mini mini--muted">
+              <div class="mini__row">
+                <span class="mini__k">Focus</span>
+                <span class="mini__v">Deep work</span>
               </div>
-
-              <div class="divider"></div>
-
-              <div class="mini">
-                <div class="mini__head">
-                  <span class="mini__title">Goal → Milestones → Actions</span>
-                  <span class="mini__tag">Active</span>
-                </div>
-
-                <ul class="mini__list">
-                  <li>
-                    <span class="pill pill--gold">Milestone</span>
-                    Draft outline + scope
-                    <span class="mini__right">Today</span>
-                  </li>
-                  <li>
-                    <span class="pill">Action</span>
-                    45 min deep work block
-                    <span class="mini__right">10:00</span>
-                  </li>
-                  <li>
-                    <span class="pill">Action</span>
-                    Admin + inbox cleanup
-                    <span class="mini__right">15:30</span>
-                  </li>
-                </ul>
-
-                <div class="mini__foot">
-                  <span class="muted">Example:</span>
-                  <span class="gold">6 weeks · 45 min/day</span>
-                </div>
+              <div class="mini__row">
+                <span class="mini__k">Progress</span>
+                <span class="mini__v">+12% weekly</span>
               </div>
-
-              <div class="note">
-                <span class="note__k">Forecasting</span>
-                Required daily effort & realistic ETA — before you commit.
+              <div class="mini__row">
+                <span class="mini__k">Insight</span>
+                <span class="mini__v">Best hours: 09–11</span>
               </div>
             </div>
           </div>
-
-          <div class="panel__glow" aria-hidden="true"></div>
         </div>
+
       </div>
     </section>
 
-    <!-- LOGO / TRUST STRIP -->
-    <section class="section section--tight">
-      <div class="container">
-        <div class="strip">
-          <div class="strip__item">
-            <span class="strip__k">Planning</span>
-            Hourly → yearly
-          </div>
-          <div class="strip__sep" aria-hidden="true"></div>
-          <div class="strip__item">
-            <span class="strip__k">Structure</span>
-            Goals → actions
-          </div>
-          <div class="strip__sep" aria-hidden="true"></div>
-          <div class="strip__item">
-            <span class="strip__k">Focus</span>
-            Smart time blocks
-          </div>
-          <div class="strip__sep" aria-hidden="true"></div>
-          <div class="strip__item">
-            <span class="strip__k">Clarity</span>
-            Progress & insights
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
+    <!-- Features -->
     <section id="features" class="section">
       <div class="container">
         <div class="section__head">
-          <h2>Everything under one roof</h2>
-          <p class="muted">
-            A single system that scales from today’s schedule to long-term strategy —
-            without becoming a second job.
+          <h2 data-i18n="features_title">Everything under one roof</h2>
+          <p class="muted" data-i18n="features_sub">
+            Plan across all time horizons — with one consistent structure.
           </p>
         </div>
 
         <div class="grid cards">
           <article class="card">
-            <div class="card__top">
-              <h3>Hourly to yearly planning</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>One calm place for daily blocks, weekly momentum, and yearly direction.</p>
-            <p class="example">Example: <span>Q3 plan → weekly execution</span></p>
+            <h3 data-i18n="f1_title">Hourly to yearly planning</h3>
+            <p data-i18n="f1_desc">One system for today’s blocks and next year’s strategy.</p>
+            <p class="example" data-i18n="f1_ex"><span class="ex__label">Example:</span> <span class="ex__value">Q3 plan → weekly execution</span></p>
           </article>
 
           <article class="card">
-            <div class="card__top">
-              <h3>Goal-based structure</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>Goals → milestones → actions. Always know what “next” means.</p>
-            <p class="example">Example: <span>Launch → 6 milestones → 18 actions</span></p>
+            <h3 data-i18n="f2_title">Goal-based structure</h3>
+            <p data-i18n="f2_desc">Goals → milestones → actions. Always know the next step.</p>
+            <p class="example" data-i18n="f2_ex"><span class="ex__label">Example:</span> <span class="ex__value">Launch → 6 milestones → 18 actions</span></p>
           </article>
 
           <article class="card">
-            <div class="card__top">
-              <h3>Smart time blocks</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>Protect deep work while keeping your week realistic and flexible.</p>
-            <p class="example">Example: <span>6 weeks · 45 min/day</span></p>
+            <h3 data-i18n="f3_title">Smart time blocks</h3>
+            <p data-i18n="f3_desc">Protect focus time while keeping the week realistic.</p>
+            <p class="example" data-i18n="f3_ex"><span class="ex__label">Example:</span> <span class="ex__value">6 weeks · 45 min/day</span></p>
           </article>
 
           <article class="card">
-            <div class="card__top">
-              <h3>Progress & insights</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>Track what moves goals — and what quietly drains your time.</p>
-            <p class="example">Example: <span>Focus score · weekly trend</span></p>
+            <h3 data-i18n="f4_title">Progress & insights</h3>
+            <p data-i18n="f4_desc">Track what moves goals — and what quietly drains time.</p>
+            <p class="example" data-i18n="f4_ex"><span class="ex__label">Example:</span> <span class="ex__value">Focus score · weekly trend</span></p>
           </article>
 
           <article class="card">
-            <div class="card__top">
-              <h3>Goal forecasting</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>ETA + required daily effort — so you can plan with reality, not hope.</p>
-            <p class="example">Example: <span>ETA: May 12 · 30 min/day</span></p>
+            <h3 data-i18n="f5_title">Goal forecasting</h3>
+            <p data-i18n="f5_desc">ETA + required effort — before you commit.</p>
+            <p class="example" data-i18n="f5_ex"><span class="ex__label">Example:</span> <span class="ex__value">ETA: May 12 · 30 min/day</span></p>
           </article>
 
           <article class="card card--accent">
-            <div class="card__top">
-              <h3>Designed for calm execution</h3>
-              <span class="card__icon" aria-hidden="true">⟡</span>
-            </div>
-            <p>Minimal interface, serious tone, and one consistent logic everywhere.</p>
-            <p class="example">Example: <span>Less friction · more follow-through</span></p>
+            <h3 data-i18n="f6_title">Built for execution</h3>
+            <p data-i18n="f6_desc">A system that stays calm under pressure — and keeps you moving.</p>
+            <p class="example" data-i18n="f6_ex"><span class="ex__label">Example:</span> <span class="ex__value">Daily plan · weekly review · monthly reset</span></p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- FLOW / ONBOARDING -->
+    <!-- 5-Minute Flow -->
     <section id="flow" class="section">
       <div class="container">
         <div class="section__head">
-          <h2>5-Minute Flow onboarding</h2>
-          <p class="muted">
-            A guided setup that ends with a real plan for today — your first “wow” moment.
-          </p>
+          <h2 data-i18n="flow_title">5-Minute Flow onboarding</h2>
+          <p class="muted" data-i18n="flow_sub">A guided setup that ends with a real plan for today.</p>
         </div>
 
-        <ol class="steps">
-          <li class="step">
-            <span class="step__k">01</span>
-            <span class="step__t">Welcome</span>
-            <span class="step__d">Set the tone. No fluff.</span>
-          </li>
-          <li class="step">
-            <span class="step__k">02</span>
-            <span class="step__t">Define a goal</span>
-            <span class="step__d">One clear target to anchor planning.</span>
-          </li>
-          <li class="step">
-            <span class="step__k">03</span>
-            <span class="step__t">Set available time</span>
-            <span class="step__d">Reality first — schedule capacity.</span>
-          </li>
-          <li class="step">
-            <span class="step__k">04</span>
-            <span class="step__t">Choose focus style</span>
-            <span class="step__d">Deep work, mixed, or light cycles.</span>
-          </li>
-          <li class="step">
-            <span class="step__k">05</span>
-            <span class="step__t">First daily plan</span>
-            <span class="step__d">Instant time blocks + next actions.</span>
-          </li>
+        <ol class="steps" aria-label="Onboarding steps">
+          <li><span class="step__k">01</span><span data-i18n="s1">Welcome</span></li>
+          <li><span class="step__k">02</span><span data-i18n="s2">Define a goal</span></li>
+          <li><span class="step__k">03</span><span data-i18n="s3">Set available time</span></li>
+          <li><span class="step__k">04</span><span data-i18n="s4">Choose focus style</span></li>
+          <li><span class="step__k">05</span><span data-i18n="s5">Get your first daily plan</span></li>
         </ol>
 
         <div class="callout">
           <div class="callout__left">
-            <h3>Forecasting that feels grounded</h3>
-            <p class="muted">
-              Based on your available time, effort estimates, and progress — SaverIoFlow
-              calculates a realistic ETA and the daily effort needed.
+            <h3 data-i18n="callout_title">Forecasting that feels practical</h3>
+            <p class="muted" data-i18n="callout_desc">
+              See when a goal is reachable — and what it costs per day. Adjust time, scope, or priority with clarity.
             </p>
           </div>
-          <div class="callout__right">
-            <div class="callout__box">
-              <div class="callout__row">
-                <span class="muted">Goal:</span>
-                <span>Ship MVP</span>
-              </div>
-              <div class="callout__row">
-                <span class="muted">Required effort:</span>
-                <span class="gold">45 min/day</span>
-              </div>
-              <div class="callout__row">
-                <span class="muted">ETA:</span>
-                <span class="gold">6 weeks</span>
-              </div>
-              <div class="callout__hint">Example values shown</div>
-            </div>
-          </div>
+
+          <ul class="callout__list">
+            <li><span class="dot"></span><span data-i18n="c1">ETA based on your available time</span></li>
+            <li><span class="dot"></span><span data-i18n="c2">Required daily effort (minutes/day)</span></li>
+            <li><span class="dot"></span><span data-i18n="c3">Progress trend + friction signals</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- Pricing -->
     <section id="pricing" class="section">
       <div class="container">
         <div class="section__head">
-          <h2>Pricing</h2>
-          <p class="muted">Start free. Upgrade when it genuinely helps — no hard sell.</p>
+          <h2 data-i18n="pricing_title">Pricing</h2>
+          <p class="muted" data-i18n="pricing_sub">Start free. Upgrade after real usage — no pressure.</p>
         </div>
 
         <div class="grid pricing">
           <article class="card price">
             <h3>Free</h3>
             <p class="price__value">$0</p>
-            <p class="price__sub muted">For trying the system.</p>
-
+            <p class="muted price__hint" data-i18n="free_hint">For getting started.</p>
             <ul class="list">
-              <li>1 goal</li>
-              <li>Basic daily planning</li>
-              <li>Standard reminders</li>
-              <li>Basic tracking</li>
+              <li data-i18n="free_1">1 goal</li>
+              <li data-i18n="free_2">Basic daily planning</li>
+              <li data-i18n="free_3">Standard reminders</li>
+              <li data-i18n="free_4">Basic tracking</li>
             </ul>
-
-            <a class="btn btn--ghost" href="#get-started">Start free</a>
+            <a class="btn btn--ghost" href="#get-started" data-i18n="free_cta">Start free</a>
           </article>
 
           <article class="card price price--featured">
-            <p class="badge">Most popular</p>
+            <p class="badge" data-i18n="badge_popular">Most popular</p>
             <h3>Pro</h3>
             <p class="price__value">$9.99</p>
-            <p class="price__sub muted">For consistent weekly execution.</p>
-
+            <p class="muted price__hint" data-i18n="pro_hint">For consistent planning & execution.</p>
             <ul class="list">
-              <li>Unlimited goals</li>
-              <li>Daily & weekly planning</li>
-              <li>Time blocks</li>
-              <li>Advanced stats</li>
-              <li>Goal forecasting (basic)</li>
+              <li data-i18n="pro_1">Unlimited goals</li>
+              <li data-i18n="pro_2">Daily & weekly planning</li>
+              <li data-i18n="pro_3">Time blocks</li>
+              <li data-i18n="pro_4">Advanced stats</li>
+              <li data-i18n="pro_5">Goal forecasting (basic)</li>
             </ul>
-
-            <a class="btn btn--primary" href="#get-started">Go Pro</a>
-            <p class="fine muted">Recommended after 3–5 days of usage.</p>
+            <a class="btn btn--primary" href="#get-started" data-i18n="pro_cta">Go Pro</a>
           </article>
 
           <article class="card price">
             <h3>Master</h3>
             <p class="price__value">$19.99</p>
-            <p class="price__sub muted">For optimization & long-term strategy.</p>
-
+            <p class="muted price__hint" data-i18n="master_hint">For long-term strategy & optimization.</p>
             <ul class="list">
-              <li>Monthly & yearly planning</li>
-              <li>Flow mode</li>
-              <li>Optimization insights</li>
-              <li>Long-term strategies</li>
-              <li>Advanced forecasting & optimization</li>
+              <li data-i18n="master_1">Monthly & yearly planning</li>
+              <li data-i18n="master_2">Flow mode</li>
+              <li data-i18n="master_3">Optimization insights</li>
+              <li data-i18n="master_4">Long-term strategies</li>
+              <li data-i18n="master_5">Advanced forecasting & optimization</li>
             </ul>
-
-            <a class="btn btn--ghost" href="#get-started">Go Master</a>
+            <a class="btn btn--ghost" href="#get-started" data-i18n="master_cta">Go Master</a>
           </article>
         </div>
 
-        <div class="pricing-note">
-          <div class="pricing-note__card">
-            <h3>Upgrade strategy</h3>
-            <p class="muted">
-              SaverIoFlow is built to earn upgrades through usefulness: start free, feel the friction,
-              then upgrade. Never the other way around.
-            </p>
-          </div>
-          <div class="pricing-note__card">
-            <h3>No coaching, no noise</h3>
-            <p class="muted">
-              This is a system for planning and execution — not motivational content.
-              Clear structure wins over hype.
-            </p>
-          </div>
-        </div>
+        <p class="pricing__note" data-i18n="pricing_note">
+          Upgrade when you feel the friction — not before.
+        </p>
       </div>
     </section>
 
@@ -393,65 +254,68 @@
     <section id="faq" class="section">
       <div class="container">
         <div class="section__head">
-          <h2>FAQ</h2>
-          <p class="muted">Short answers. No marketing fog.</p>
+          <h2 data-i18n="faq_title">FAQ</h2>
+          <p class="muted" data-i18n="faq_sub">Short answers. No marketing fog.</p>
         </div>
 
-        <div class="faq-grid">
+        <div class="faqgrid">
           <details class="faq">
-            <summary>Is this a coaching program?</summary>
-            <p>No. SaverIoFlow is a planning system: structure, scheduling, progress tracking, and forecasting.</p>
+            <summary data-i18n="q1">Is this a coaching program?</summary>
+            <p data-i18n="a1">No. SaverIoFlow is a planning system — structure, scheduling, and progress tracking.</p>
           </details>
 
           <details class="faq">
-            <summary>When should I upgrade?</summary>
-            <p>After 3–5 days of real usage — when you want weekly planning, time blocks, and richer insights.</p>
+            <summary data-i18n="q2">When should I upgrade?</summary>
+            <p data-i18n="a2">After 3–5 days of use — when weekly planning, blocks, or forecasting starts to matter.</p>
           </details>
 
           <details class="faq">
-            <summary>What does goal forecasting do?</summary>
-            <p>It estimates a realistic ETA and the daily effort required to reach a goal based on your available time and progress.</p>
+            <summary data-i18n="q3">What does “forecasting” mean here?</summary>
+            <p data-i18n="a3">An ETA and the daily effort needed — calculated from your available time and the goal’s workload.</p>
           </details>
 
           <details class="faq">
-            <summary>Can I cancel anytime?</summary>
-            <p>Yes. Keep it simple: upgrade when helpful, cancel when not.</p>
+            <summary data-i18n="q4">Will it work for multiple projects?</summary>
+            <p data-i18n="a4">Yes. Pro and Master support unlimited goals and long-term planning layers.</p>
           </details>
 
           <details class="faq">
-            <summary>Is there a mobile version?</summary>
-            <p>The landing page is fully responsive. The app can follow later — the system is platform-agnostic.</p>
+            <summary data-i18n="q5">Is it available as an app already?</summary>
+            <p data-i18n="a5">The landing page is live — product development follows next. The system and pricing are defined.</p>
           </details>
 
           <details class="faq">
-            <summary>Does it work for teams?</summary>
-            <p>Right now it’s designed for individual execution. Team workflows can be added later without changing the core system.</p>
+            <summary data-i18n="q6">Can I cancel anytime?</summary>
+            <p data-i18n="a6">Yes. Plans are designed to be simple and transparent.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- FINAL CTA -->
+    <!-- Final CTA -->
     <section id="get-started" class="section cta">
       <div class="container">
-        <div class="cta__inner">
+        <div class="cta__panel">
           <div class="cta__copy">
-            <h2>Build momentum with a calm system.</h2>
-            <p class="muted">Start free today. Upgrade when you feel the benefit.</p>
+            <h2 data-i18n="cta_title">Build momentum with a calm system.</h2>
+            <p class="muted" data-i18n="cta_sub">Start free. Upgrade when it genuinely helps.</p>
           </div>
+
           <div class="cta__actions">
-            <a class="btn btn--primary" href="#">Start free</a>
-            <a class="btn btn--ghost" href="#pricing">Compare plans</a>
+            <a class="btn btn--primary" href="#pricing" data-i18n="cta_primary">Start free</a>
+            <a class="btn btn--ghost" href="#features" data-i18n="cta_secondary">See what’s included</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <p class="muted">© <span id="y"></span> SaverIoFlow</p>
-      <div class="footer__links">
+      <p class="muted">© <span id="year"></span> SaverIoFlow</p>
+
+      <div class="footer__links" aria-label="Footer links">
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <a href="mailto:hello@saverioflow.com">Contact</a>
@@ -459,10 +323,236 @@
     </div>
   </footer>
 
+  <!-- Minimal JS: year + optional EN/DE toggle -->
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Optional i18n (simple, static)
+    const dict = {
+      en: {
+        hero_eyebrow: "Flow-System for planning & execution",
+        hero_title: "More structure. More focus. Better results.",
+        hero_lead: "A calm planning system that connects goals, milestones, and time blocks — from hourly to yearly.",
+        hero_cta_primary: "Start free",
+        hero_cta_secondary: "Explore features",
+        hero_trust: "Not coaching. No hype. Just a system you can rely on.",
+
+        features_title: "Everything under one roof",
+        features_sub: "Plan across all time horizons — with one consistent structure.",
+
+        f1_title: "Hourly to yearly planning",
+        f1_desc: "One system for today’s blocks and next year’s strategy.",
+        f1_ex: "Example: Q3 plan → weekly execution",
+
+        f2_title: "Goal-based structure",
+        f2_desc: "Goals → milestones → actions. Always know the next step.",
+        f2_ex: "Example: Launch → 6 milestones → 18 actions",
+
+        f3_title: "Smart time blocks",
+        f3_desc: "Protect focus time while keeping the week realistic.",
+        f3_ex: "Example: 6 weeks · 45 min/day",
+
+        f4_title: "Progress & insights",
+        f4_desc: "Track what moves goals — and what quietly drains time.",
+        f4_ex: "Example: Focus score · weekly trend",
+
+        f5_title: "Goal forecasting",
+        f5_desc: "ETA + required effort — before you commit.",
+        f5_ex: "Example: ETA: May 12 · 30 min/day",
+
+        f6_title: "Built for execution",
+        f6_desc: "A system that stays calm under pressure — and keeps you moving.",
+        f6_ex: "Example: Daily plan · weekly review · monthly reset",
+
+        flow_title: "5-Minute Flow onboarding",
+        flow_sub: "A guided setup that ends with a real plan for today.",
+        s1: "Welcome",
+        s2: "Define a goal",
+        s3: "Set available time",
+        s4: "Choose focus style",
+        s5: "Get your first daily plan",
+
+        callout_title: "Forecasting that feels practical",
+        callout_desc: "See when a goal is reachable — and what it costs per day. Adjust time, scope, or priority with clarity.",
+        c1: "ETA based on your available time",
+        c2: "Required daily effort (minutes/day)",
+        c3: "Progress trend + friction signals",
+
+        pricing_title: "Pricing",
+        pricing_sub: "Start free. Upgrade after real usage — no pressure.",
+        badge_popular: "Most popular",
+
+        free_hint: "For getting started.",
+        free_1: "1 goal",
+        free_2: "Basic daily planning",
+        free_3: "Standard reminders",
+        free_4: "Basic tracking",
+        free_cta: "Start free",
+
+        pro_hint: "For consistent planning & execution.",
+        pro_1: "Unlimited goals",
+        pro_2: "Daily & weekly planning",
+        pro_3: "Time blocks",
+        pro_4: "Advanced stats",
+        pro_5: "Goal forecasting (basic)",
+        pro_cta: "Go Pro",
+
+        master_hint: "For long-term strategy & optimization.",
+        master_1: "Monthly & yearly planning",
+        master_2: "Flow mode",
+        master_3: "Optimization insights",
+        master_4: "Long-term strategies",
+        master_5: "Advanced forecasting & optimization",
+        master_cta: "Go Master",
+
+        pricing_note: "Upgrade when you feel the friction — not before.",
+
+        faq_title: "FAQ",
+        faq_sub: "Short answers. No marketing fog.",
+        q1: "Is this a coaching program?",
+        a1: "No. SaverIoFlow is a planning system — structure, scheduling, and progress tracking.",
+        q2: "When should I upgrade?",
+        a2: "After 3–5 days of use — when weekly planning, blocks, or forecasting starts to matter.",
+        q3: "What does “forecasting” mean here?",
+        a3: "An ETA and the daily effort needed — calculated from your available time and the goal’s workload.",
+        q4: "Will it work for multiple projects?",
+        a4: "Yes. Pro and Master support unlimited goals and long-term planning layers.",
+        q5: "Is it available as an app already?",
+        a5: "The landing page is live — product development follows next. The system and pricing are defined.",
+        q6: "Can I cancel anytime?",
+        a6: "Yes. Plans are designed to be simple and transparent.",
+
+        cta_title: "Build momentum with a calm system.",
+        cta_sub: "Start free. Upgrade when it genuinely helps.",
+        cta_primary: "Start free",
+        cta_secondary: "See what’s included",
+      },
+
+      de: {
+        hero_eyebrow: "Flow-System für Planung & Umsetzung",
+        hero_title: "Mehr Struktur. Mehr Fokus. Bessere Ergebnisse.",
+        hero_lead: "Ein ruhiges Planungssystem, das Ziele, Meilensteine und Zeitblöcke verbindet — von stündlich bis jährlich.",
+        hero_cta_primary: "Kostenlos starten",
+        hero_cta_secondary: "Features ansehen",
+        hero_trust: "Kein Coaching. Kein Hype. Nur ein System, auf das du dich verlassen kannst.",
+
+        features_title: "Alles unter einem Dach",
+        features_sub: "Plane über alle Zeitebenen — mit einer klaren Struktur.",
+
+        f1_title: "Stündlich bis jährlich",
+        f1_desc: "Ein System für Tagesblöcke und Jahresstrategie.",
+        f1_ex: "Beispiel: Q3-Plan → wöchentliche Umsetzung",
+
+        f2_title: "Zielbasierte Struktur",
+        f2_desc: "Ziele → Meilensteine → Aktionen. Immer der nächste Schritt.",
+        f2_ex: "Beispiel: Launch → 6 Meilensteine → 18 Aktionen",
+
+        f3_title: "Smarte Zeitblöcke",
+        f3_desc: "Schütze Fokuszeit und bleib realistisch im Wochenplan.",
+        f3_ex: "Beispiel: 6 Wochen · 45 Min/Tag",
+
+        f4_title: "Fortschritt & Insights",
+        f4_desc: "Sieh, was Ziele voranbringt — und was Zeit frisst.",
+        f4_ex: "Beispiel: Fokus-Score · Wochen-Trend",
+
+        f5_title: "Goal Forecasting",
+        f5_desc: "ETA + nötiger Aufwand — bevor du dich festlegst.",
+        f5_ex: "Beispiel: ETA: 12. Mai · 30 Min/Tag",
+
+        f6_title: "Für Umsetzung gebaut",
+        f6_desc: "Ruhig, seriös — und zuverlässig im Alltag.",
+        f6_ex: "Beispiel: Tagesplan · Wochenreview · Monatsreset",
+
+        flow_title: "5-Minuten-Flow Onboarding",
+        flow_sub: "Geführtes Setup mit echtem Tagesplan als Wow-Moment.",
+        s1: "Willkommen",
+        s2: "Ziel definieren",
+        s3: "Verfügbare Zeit setzen",
+        s4: "Fokus-Stil wählen",
+        s5: "Ersten Tagesplan erhalten",
+
+        callout_title: "Forecasting, das praktisch bleibt",
+        callout_desc: "Sieh, wann ein Ziel erreichbar ist — und was es pro Tag kostet. Passe Zeit, Umfang oder Priorität an.",
+        c1: "ETA basierend auf verfügbarer Zeit",
+        c2: "Nötiger Tagesaufwand (Min/Tag)",
+        c3: "Trend + Reibungssignale",
+
+        pricing_title: "Preise",
+        pricing_sub: "Kostenlos starten. Upgrade nach echter Nutzung — ohne Druck.",
+        badge_popular: "Am beliebtesten",
+
+        free_hint: "Für den Einstieg.",
+        free_1: "1 Ziel",
+        free_2: "Basis-Tagesplanung",
+        free_3: "Standard-Erinnerungen",
+        free_4: "Basis-Tracking",
+        free_cta: "Kostenlos starten",
+
+        pro_hint: "Für konsequente Planung & Umsetzung.",
+        pro_1: "Unbegrenzte Ziele",
+        pro_2: "Tages- & Wochenplanung",
+        pro_3: "Zeitblöcke",
+        pro_4: "Erweiterte Stats",
+        pro_5: "Goal forecasting (basic)",
+        pro_cta: "Pro wählen",
+
+        master_hint: "Für Strategie & Optimierung.",
+        master_1: "Monats- & Jahresplanung",
+        master_2: "Flow-Modus",
+        master_3: "Optimierungs-Insights",
+        master_4: "Langfristige Strategien",
+        master_5: "Advanced forecasting & optimization",
+        master_cta: "Master wählen",
+
+        pricing_note: "Upgrade, wenn du Reibung spürst — nicht vorher.",
+
+        faq_title: "FAQ",
+        faq_sub: "Kurz. Klar. Ohne Marketing-Nebel.",
+        q1: "Ist das ein Coaching-Programm?",
+        a1: "Nein. SaverIoFlow ist ein Planungssystem — Struktur, Zeitplanung und Fortschritt.",
+        q2: "Wann sollte ich upgraden?",
+        a2: "Nach 3–5 Tagen Nutzung — wenn Wochenplanung, Blöcke oder Forecasting wichtig werden.",
+        q3: "Was bedeutet „Forecasting“ hier?",
+        a3: "Eine ETA und der nötige Tagesaufwand — berechnet aus verfügbarer Zeit und Ziel-Aufwand.",
+        q4: "Funktioniert es für mehrere Projekte?",
+        a4: "Ja. Pro und Master unterstützen unbegrenzte Ziele und langfristige Ebenen.",
+        q5: "Gibt es schon eine App?",
+        a5: "Die Landingpage ist live — Produktentwicklung folgt als nächster Schritt.",
+        q6: "Kann ich jederzeit kündigen?",
+        a6: "Ja. Transparent und unkompliziert.",
+
+        cta_title: "Baue Momentum mit einem ruhigen System.",
+        cta_sub: "Kostenlos starten. Upgrade, wenn es wirklich hilft.",
+        cta_primary: "Kostenlos starten",
+        cta_secondary: "Inhalte ansehen",
+      }
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem("lang", lang);
+
+      // update toggle UI
+      document.querySelectorAll(".lang__btn").forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      // replace text
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        const value = dict[lang] && dict[lang][key];
+        if (value) el.textContent = value;
+      });
+    }
+
+    document.querySelectorAll(".lang__btn").forEach(btn => {
+      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+    });
+
+    setLang(localStorage.getItem("lang") || "en");
   </script>
 </body>
 </html>
-
-
