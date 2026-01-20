@@ -1,137 +1,468 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SaverIoFlow – More Structure. More Focus.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07070a" />
+  <title>SaverIoFlow — More structure. More focus. Better results.</title>
+  <meta name="description" content="SaverIoFlow is a calm planning system that connects goals, milestones, time blocks, and progress — from hourly to yearly." />
+
+  <!-- Social -->
+  <meta property="og:title" content="SaverIoFlow — More structure. More focus. Better results." />
+  <meta property="og:description" content="A calm planning system that connects goals, milestones, time blocks, and progress — from hourly to yearly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/tree-bg.png" />
+  <meta property="og:url" content="/" />
+
+  <link rel="preload" href="/images/tree-bg.png" as="image" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <div class="logo">SaverIoFlow</div>
-      <nav class="nav">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top" aria-label="SaverIoFlow home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">SaverIoFlow</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
         <a href="#features">Features</a>
+        <a href="#flow">5-Minute Flow</a>
         <a href="#pricing">Pricing</a>
-        <a href="#" class="nav-cta">Start for free</a>
+        <a href="#faq">FAQ</a>
       </nav>
+
+      <div class="topbar__cta">
+        <a class="btn btn--ghost btn--sm" href="#pricing">See pricing</a>
+        <a class="btn btn--primary btn--sm" href="#get-started">Get started</a>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container hero-content">
-      <h1>More structure.<br>More focus.<br>Better results.</h1>
-      <p>
-        An intelligent flow system that brings your time, goals and plans together —
-        from hours to years.
-      </p>
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">Flow-system for planning & execution</p>
+          <h1>More structure. More focus. Better results.</h1>
+          <p class="lead">
+            A calm planning system that connects goals, milestones, and time blocks —
+            from hourly to yearly. No coaching. No hype.
+          </p>
 
-      <a href="#" class="cta-primary">Start for free</a>
-      <span class="microcopy">Free forever · No credit card · Get started in 30 seconds</span>
-    </div>
-  </section>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#get-started">Start free</a>
+            <a class="btn btn--ghost" href="#features">Explore features</a>
+          </div>
 
-  <section id="features" class="section">
-    <div class="container">
-      <h2>Everything under one roof</h2>
-      <p class="section-intro">
-        SaverIoFlow connects planning and execution into one clear system.
-      </p>
+          <div class="hero__meta">
+            <div class="meta-chip" title="No credit card required">
+              <span class="dot dot--gold" aria-hidden="true"></span>
+              No credit card required
+            </div>
+            <div class="meta-chip" title="Upgrade later">
+              <span class="dot" aria-hidden="true"></span>
+              Upgrade after 3–5 days of use
+            </div>
+          </div>
 
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">🗓️</div>
-          <h3>Hourly to yearly planning</h3>
-          <p>Plan hours, days, weeks and long-term goals in one connected flow.</p>
-          <p class="feature-example">Example: Today → This week → This year</p>
+          <p class="trust">
+            Built for builders — a system you can trust when motivation is low.
+          </p>
         </div>
 
-        <div class="feature">
-          <div class="feature-icon">🎯</div>
-          <h3>Goal-based structure</h3>
-          <p>Start with goals — not endless to-do lists.</p>
-          <p class="feature-example">Example: Goal → Milestones → Daily actions</p>
-        </div>
+        <div class="hero__panel" aria-label="Preview">
+          <div class="panel">
+            <div class="panel__top">
+              <div class="panel__dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="panel__title">Today</div>
+              <div class="panel__right">Flow</div>
+            </div>
 
-        <div class="feature">
-          <div class="feature-icon">⏱️</div>
-          <h3>Smart time blocks</h3>
-          <p>Focused sessions that fit your real schedule.</p>
-          <p class="feature-example">Example: 09:00–10:30 · Deep focus</p>
-        </div>
+            <div class="panel__body">
+              <div class="kpi-grid">
+                <div class="kpi">
+                  <div class="kpi__label">Focus blocks</div>
+                  <div class="kpi__value">3</div>
+                  <div class="kpi__sub">Deep work protected</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi__label">Daily effort</div>
+                  <div class="kpi__value">45m</div>
+                  <div class="kpi__sub">For your main goal</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi__label">ETA</div>
+                  <div class="kpi__value">6w</div>
+                  <div class="kpi__sub">Forecast updated</div>
+                </div>
+              </div>
 
-        <div class="feature">
-          <div class="feature-icon">📈</div>
-          <h3>Progress & insights</h3>
-          <p>See what works, where time is lost, and how to improve.</p>
-          <p class="feature-example">Example: Week completed: 82%</p>
-        </div>
+              <div class="divider"></div>
 
-        <div class="feature">
-          <div class="feature-icon">🔮</div>
-          <h3>Goal forecasting</h3>
-          <p>Estimate when you’ll reach your goal — and how much effort it takes.</p>
-          <p class="feature-example">Example: 6 weeks · 45 min/day · High confidence</p>
+              <div class="mini">
+                <div class="mini__head">
+                  <span class="mini__title">Goal → Milestones → Actions</span>
+                  <span class="mini__tag">Active</span>
+                </div>
+
+                <ul class="mini__list">
+                  <li>
+                    <span class="pill pill--gold">Milestone</span>
+                    Draft outline + scope
+                    <span class="mini__right">Today</span>
+                  </li>
+                  <li>
+                    <span class="pill">Action</span>
+                    45 min deep work block
+                    <span class="mini__right">10:00</span>
+                  </li>
+                  <li>
+                    <span class="pill">Action</span>
+                    Admin + inbox cleanup
+                    <span class="mini__right">15:30</span>
+                  </li>
+                </ul>
+
+                <div class="mini__foot">
+                  <span class="muted">Example:</span>
+                  <span class="gold">6 weeks · 45 min/day</span>
+                </div>
+              </div>
+
+              <div class="note">
+                <span class="note__k">Forecasting</span>
+                Required daily effort & realistic ETA — before you commit.
+              </div>
+            </div>
+          </div>
+
+          <div class="panel__glow" aria-hidden="true"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="pricing" class="section pricing">
-    <div class="container">
-      <h2>Choose your flow</h2>
-      <p class="section-intro">Start free. Upgrade when you’re ready.</p>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <h3>Free</h3>
-          <div class="price">$0</div>
-          <ul>
-            <li>1 active goal</li>
-            <li>Basic daily planning</li>
-            <li>Standard reminders</li>
-            <li>Progress tracking</li>
-          </ul>
-          <a href="#" class="cta-secondary">Get started</a>
-        </div>
-
-        <div class="price-card highlight">
-          <span class="badge">Most popular</span>
-          <h3>Pro</h3>
-          <div class="price">$9.99</div>
-          <ul>
-            <li>Unlimited goals</li>
-            <li>Daily & weekly planning</li>
-            <li>Time blocks</li>
-            <li>Advanced progress stats</li>
-            <li><strong>Goal forecasting (basic)</strong></li>
-          </ul>
-          <a href="#" class="cta-primary">Upgrade to Pro</a>
-        </div>
-
-        <div class="price-card">
-          <h3>Master</h3>
-          <div class="price">$19.99</div>
-          <ul>
-            <li>Monthly & yearly planning</li>
-            <li>Focus mode</li>
-            <li>Optimization insights</li>
-            <li>Long-term strategies</li>
-            <li><strong>Advanced forecasting & optimization</strong></li>
-          </ul>
-          <a href="#" class="cta-secondary">Go Master</a>
+    <!-- LOGO / TRUST STRIP -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="strip">
+          <div class="strip__item">
+            <span class="strip__k">Planning</span>
+            Hourly → yearly
+          </div>
+          <div class="strip__sep" aria-hidden="true"></div>
+          <div class="strip__item">
+            <span class="strip__k">Structure</span>
+            Goals → actions
+          </div>
+          <div class="strip__sep" aria-hidden="true"></div>
+          <div class="strip__item">
+            <span class="strip__k">Focus</span>
+            Smart time blocks
+          </div>
+          <div class="strip__sep" aria-hidden="true"></div>
+          <div class="strip__item">
+            <span class="strip__k">Clarity</span>
+            Progress & insights
+          </div>
         </div>
       </div>
+    </section>
 
-      <p class="pricing-note">Cancel anytime · No hidden fees · GDPR compliant</p>
-    </div>
-  </section>
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Everything under one roof</h2>
+          <p class="muted">
+            A single system that scales from today’s schedule to long-term strategy —
+            without becoming a second job.
+          </p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <div class="card__top">
+              <h3>Hourly to yearly planning</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>One calm place for daily blocks, weekly momentum, and yearly direction.</p>
+            <p class="example">Example: <span>Q3 plan → weekly execution</span></p>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <h3>Goal-based structure</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>Goals → milestones → actions. Always know what “next” means.</p>
+            <p class="example">Example: <span>Launch → 6 milestones → 18 actions</span></p>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <h3>Smart time blocks</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>Protect deep work while keeping your week realistic and flexible.</p>
+            <p class="example">Example: <span>6 weeks · 45 min/day</span></p>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <h3>Progress & insights</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>Track what moves goals — and what quietly drains your time.</p>
+            <p class="example">Example: <span>Focus score · weekly trend</span></p>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <h3>Goal forecasting</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>ETA + required daily effort — so you can plan with reality, not hope.</p>
+            <p class="example">Example: <span>ETA: May 12 · 30 min/day</span></p>
+          </article>
+
+          <article class="card card--accent">
+            <div class="card__top">
+              <h3>Designed for calm execution</h3>
+              <span class="card__icon" aria-hidden="true">⟡</span>
+            </div>
+            <p>Minimal interface, serious tone, and one consistent logic everywhere.</p>
+            <p class="example">Example: <span>Less friction · more follow-through</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW / ONBOARDING -->
+    <section id="flow" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>5-Minute Flow onboarding</h2>
+          <p class="muted">
+            A guided setup that ends with a real plan for today — your first “wow” moment.
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__k">01</span>
+            <span class="step__t">Welcome</span>
+            <span class="step__d">Set the tone. No fluff.</span>
+          </li>
+          <li class="step">
+            <span class="step__k">02</span>
+            <span class="step__t">Define a goal</span>
+            <span class="step__d">One clear target to anchor planning.</span>
+          </li>
+          <li class="step">
+            <span class="step__k">03</span>
+            <span class="step__t">Set available time</span>
+            <span class="step__d">Reality first — schedule capacity.</span>
+          </li>
+          <li class="step">
+            <span class="step__k">04</span>
+            <span class="step__t">Choose focus style</span>
+            <span class="step__d">Deep work, mixed, or light cycles.</span>
+          </li>
+          <li class="step">
+            <span class="step__k">05</span>
+            <span class="step__t">First daily plan</span>
+            <span class="step__d">Instant time blocks + next actions.</span>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <div class="callout__left">
+            <h3>Forecasting that feels grounded</h3>
+            <p class="muted">
+              Based on your available time, effort estimates, and progress — SaverIoFlow
+              calculates a realistic ETA and the daily effort needed.
+            </p>
+          </div>
+          <div class="callout__right">
+            <div class="callout__box">
+              <div class="callout__row">
+                <span class="muted">Goal:</span>
+                <span>Ship MVP</span>
+              </div>
+              <div class="callout__row">
+                <span class="muted">Required effort:</span>
+                <span class="gold">45 min/day</span>
+              </div>
+              <div class="callout__row">
+                <span class="muted">ETA:</span>
+                <span class="gold">6 weeks</span>
+              </div>
+              <div class="callout__hint">Example values shown</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Pricing</h2>
+          <p class="muted">Start free. Upgrade when it genuinely helps — no hard sell.</p>
+        </div>
+
+        <div class="grid pricing">
+          <article class="card price">
+            <h3>Free</h3>
+            <p class="price__value">$0</p>
+            <p class="price__sub muted">For trying the system.</p>
+
+            <ul class="list">
+              <li>1 goal</li>
+              <li>Basic daily planning</li>
+              <li>Standard reminders</li>
+              <li>Basic tracking</li>
+            </ul>
+
+            <a class="btn btn--ghost" href="#get-started">Start free</a>
+          </article>
+
+          <article class="card price price--featured">
+            <p class="badge">Most popular</p>
+            <h3>Pro</h3>
+            <p class="price__value">$9.99</p>
+            <p class="price__sub muted">For consistent weekly execution.</p>
+
+            <ul class="list">
+              <li>Unlimited goals</li>
+              <li>Daily & weekly planning</li>
+              <li>Time blocks</li>
+              <li>Advanced stats</li>
+              <li>Goal forecasting (basic)</li>
+            </ul>
+
+            <a class="btn btn--primary" href="#get-started">Go Pro</a>
+            <p class="fine muted">Recommended after 3–5 days of usage.</p>
+          </article>
+
+          <article class="card price">
+            <h3>Master</h3>
+            <p class="price__value">$19.99</p>
+            <p class="price__sub muted">For optimization & long-term strategy.</p>
+
+            <ul class="list">
+              <li>Monthly & yearly planning</li>
+              <li>Flow mode</li>
+              <li>Optimization insights</li>
+              <li>Long-term strategies</li>
+              <li>Advanced forecasting & optimization</li>
+            </ul>
+
+            <a class="btn btn--ghost" href="#get-started">Go Master</a>
+          </article>
+        </div>
+
+        <div class="pricing-note">
+          <div class="pricing-note__card">
+            <h3>Upgrade strategy</h3>
+            <p class="muted">
+              SaverIoFlow is built to earn upgrades through usefulness: start free, feel the friction,
+              then upgrade. Never the other way around.
+            </p>
+          </div>
+          <div class="pricing-note__card">
+            <h3>No coaching, no noise</h3>
+            <p class="muted">
+              This is a system for planning and execution — not motivational content.
+              Clear structure wins over hype.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p class="muted">Short answers. No marketing fog.</p>
+        </div>
+
+        <div class="faq-grid">
+          <details class="faq">
+            <summary>Is this a coaching program?</summary>
+            <p>No. SaverIoFlow is a planning system: structure, scheduling, progress tracking, and forecasting.</p>
+          </details>
+
+          <details class="faq">
+            <summary>When should I upgrade?</summary>
+            <p>After 3–5 days of real usage — when you want weekly planning, time blocks, and richer insights.</p>
+          </details>
+
+          <details class="faq">
+            <summary>What does goal forecasting do?</summary>
+            <p>It estimates a realistic ETA and the daily effort required to reach a goal based on your available time and progress.</p>
+          </details>
+
+          <details class="faq">
+            <summary>Can I cancel anytime?</summary>
+            <p>Yes. Keep it simple: upgrade when helpful, cancel when not.</p>
+          </details>
+
+          <details class="faq">
+            <summary>Is there a mobile version?</summary>
+            <p>The landing page is fully responsive. The app can follow later — the system is platform-agnostic.</p>
+          </details>
+
+          <details class="faq">
+            <summary>Does it work for teams?</summary>
+            <p>Right now it’s designed for individual execution. Team workflows can be added later without changing the core system.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="get-started" class="section cta">
+      <div class="container">
+        <div class="cta__inner">
+          <div class="cta__copy">
+            <h2>Build momentum with a calm system.</h2>
+            <p class="muted">Start free today. Upgrade when you feel the benefit.</p>
+          </div>
+          <div class="cta__actions">
+            <a class="btn btn--primary" href="#">Start free</a>
+            <a class="btn btn--ghost" href="#pricing">Compare plans</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
-    <div class="container">
-      <p>© 2026 SaverIoFlow. All rights reserved.</p>
+    <div class="container footer__inner">
+      <p class="muted">© <span id="y"></span> SaverIoFlow</p>
+      <div class="footer__links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="mailto:hello@saverioflow.com">Contact</a>
+      </div>
     </div>
   </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
+
