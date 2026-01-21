@@ -4,95 +4,222 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>SaverIoFlow — App</title>
-  <meta name="description" content="Discover goals. Turn them into calm execution." />
-  <link rel="stylesheet" href="./app.css" />
+
+  <title>SaverIoFlow — Find your direction. Follow through.</title>
+  <meta name="description" content="A calm, intelligent system to discover meaningful goals and pursue them with clarity, structure, and focus." />
+
+  <link rel="stylesheet" href="/style.css" />
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- TOPBAR -->
   <header class="topbar">
     <div class="container topbar__inner">
-      <a class="brand" href="#/start" aria-label="SaverIoFlow App">
+      <a class="brand" href="/" aria-label="SaverIoFlow">
         <span class="brand__mark"></span>
         <span class="brand__name">SaverIoFlow</span>
-        <span class="brand__sub">App</span>
+        <span class="brand__sub">System</span>
       </a>
 
-      <nav class="nav">
-        <a class="nav__link" href="#/start" data-route="start">Start</a>
-        <a class="nav__link" href="#/discover" data-route="discover">Discover</a>
-        <a class="nav__link" href="#/goals" data-route="goals">Goals</a>
-        <a class="nav__link" href="#/today" data-route="today">Today</a>
-        <a class="nav__link" href="#/week" data-route="week">Week</a>
-        <a class="nav__link" href="#/flow" data-route="flow">Flow</a>
-        <a class="nav__link" href="#/dialogue" data-route="dialogue">Dialogue</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="#how">How it works</a>
+        <a class="nav__link" href="#features">Features</a>
+        <a class="nav__link" href="#pricing">Pricing</a>
+        <a class="nav__link" href="#faq">FAQ</a>
       </nav>
 
       <div class="topbar__right">
-        <button class="btn btn--ghost btn--sm" id="resetBtn">Reset demo</button>
-        <a class="btn btn--primary btn--sm" href="/">Landing</a>
+        <a class="btn btn--ghost btn--sm" href="/app/#/start">Open app</a>
+        <a class="btn btn--primary btn--sm" href="/app/#/discover">Start discovering</a>
       </div>
     </div>
   </header>
 
+  <!-- HERO -->
   <main id="main" class="main">
-    <div class="container">
-      <div class="shell">
-        <aside class="side">
-          <div class="side__card">
-            <p class="eyebrow">Status</p>
-            <div class="statgrid">
-              <div class="stat">
-                <div class="stat__k">Today</div>
-                <div class="stat__v" id="statToday">—</div>
-              </div>
-              <div class="stat">
-                <div class="stat__k">Goals</div>
-                <div class="stat__v" id="statGoals">—</div>
-              </div>
-              <div class="stat">
-                <div class="stat__k">Suggestion</div>
-                <div class="stat__v gold" id="statFocus">—</div>
+    <section class="hero container">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">A calm productivity system</p>
+          <h1>
+            Find your direction.<br />
+            <span class="gold">Follow through.</span>
+          </h1>
+          <p class="hero__sub">
+            SaverIoFlow helps you discover meaningful goals — and turn them into
+            clear structure, realistic plans, and focused execution.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="/app/#/discover">Discover a goal</a>
+            <a class="btn btn--ghost" href="/app/#/goals?optimize=1">Optimize an existing goal</a>
+          </div>
+
+          <div class="hero__trust">
+            <span class="pill">No accounts</span>
+            <span class="pill">Offline-first</span>
+            <span class="pill">No manipulation</span>
+            <span class="pill">Built for adults</span>
+          </div>
+        </div>
+
+        <!-- ABSTRACT PREVIEW -->
+        <div class="hero__visual">
+          <div class="glass">
+            <p class="eyebrow">Example flow</p>
+            <h3>Clarity → Structure → Focus</h3>
+
+            <div class="ring-preview">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="54" stroke="rgba(255,255,255,.12)" stroke-width="8" fill="none"/>
+                <circle cx="60" cy="60" r="54"
+                        stroke="rgba(215,180,106,.9)"
+                        stroke-width="8"
+                        fill="none"
+                        stroke-dasharray="339"
+                        stroke-dashoffset="120"/>
+              </svg>
+              <div class="ring-label">
+                <strong>Today</strong>
+                <span>45 min focus</span>
               </div>
             </div>
-          </div>
 
-          <div class="side__card">
-            <p class="eyebrow">Quick actions</p>
-            <div class="stack">
-              <a class="qbtn" href="#/discover">Find a goal</a>
-              <a class="qbtn" href="#/goals?optimize=1">Optimize existing goal</a>
-              <a class="qbtn" href="#/today">Plan today</a>
-              <a class="qbtn muted" href="#/flow">Flow mode (soon)</a>
-              <a class="qbtn muted" href="#/dialogue">Dialogue (soon)</a>
-            </div>
+            <p class="muted">
+              Goals become milestones.<br/>
+              Milestones become calm daily steps.
+            </p>
           </div>
-
-          <div class="side__hint muted">
-            <p><span class="gold">MVP:</span> local-only, no account.</p>
-          </div>
-        </aside>
-
-        <section class="content" id="view"></section>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="section container">
+      <p class="eyebrow">How it works</p>
+      <h2>A natural order — not pressure</h2>
+
+      <div class="grid3">
+        <div class="card">
+          <span class="badge">1</span>
+          <h3>Discover</h3>
+          <p class="muted">
+            Not sure what to pursue? The system helps you explore directions
+            based on focus, time, and intention.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="badge">2</span>
+          <h3>Structure</h3>
+          <p class="muted">
+            Goals are turned into milestones, actions, and realistic effort —
+            automatically and transparently.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="badge">3</span>
+          <h3>Execute</h3>
+          <p class="muted">
+            Use calm daily plans and Flow Mode to focus — without noise,
+            streak pressure, or gamification.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section container">
+      <p class="eyebrow">Core features</p>
+      <h2>Designed for long-term clarity</h2>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>Goal discovery</h3>
+          <p class="muted">Guided goal finding when you feel stuck or overloaded.</p>
+        </div>
+        <div class="card">
+          <h3>Goal optimization</h3>
+          <p class="muted">Turn existing goals into executable plans.</p>
+        </div>
+        <div class="card">
+          <h3>Milestones & actions</h3>
+          <p class="muted">Always know the next meaningful step.</p>
+        </div>
+
+        <div class="card">
+          <h3>Daily & weekly structure</h3>
+          <p class="muted">From today to the week — without overplanning.</p>
+        </div>
+        <div class="card">
+          <h3>Flow Mode</h3>
+          <p class="muted">Fullscreen focus with calm timers and task queues.</p>
+        </div>
+        <div class="card">
+          <h3>Philosophical dialogue</h3>
+          <p class="muted">Reflect with structured thinking inspired by great philosophers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section container">
+      <p class="eyebrow">Pricing</p>
+      <h2>Simple and honest</h2>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>Free</h3>
+          <p class="gold">€0</p>
+          <p class="muted">Discover goals, basic planning, offline.</p>
+        </div>
+        <div class="card">
+          <h3>Pro</h3>
+          <p class="gold">€9 / month</p>
+          <p class="muted">Flow Mode, forecasting, advanced templates.</p>
+        </div>
+        <div class="card">
+          <h3>Lifetime</h3>
+          <p class="gold">One-time</p>
+          <p class="muted">Support independent development.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section container">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common questions</h2>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>Is this a coaching app?</h3>
+          <p class="muted">No. SaverIoFlow is a system, not a motivator.</p>
+        </div>
+        <div class="card">
+          <h3>Is this AI?</h3>
+          <p class="muted">Yes — but calm, transparent, and optional.</p>
+        </div>
+        <div class="card">
+          <h3>Is my data private?</h3>
+          <p class="muted">Yes. Everything runs locally by default.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section container center">
+      <h2>Start with clarity</h2>
+      <p class="muted">You don’t need more pressure. You need direction.</p>
+      <a class="btn btn--primary btn--lg" href="/app/#/discover">Begin now</a>
+    </section>
   </main>
 
-  <dialog class="modal" id="modal">
-    <div class="modal__inner">
-      <div class="modal__top">
-        <div>
-          <p class="eyebrow" id="modalEyebrow">Modal</p>
-          <h2 id="modalTitle">Title</h2>
-          <p class="muted" id="modalSub">—</p>
-        </div>
-        <button class="iconbtn" id="modalClose">×</button>
-      </div>
-      <div id="modalBody"></div>
-    </div>
-  </dialog>
-
-  <script src="./app.js"></script>
+  <footer class="footer">
+    <p class="muted">© 2026 SaverIoFlow. Calm by design.</p>
+  </footer>
 </body>
 </html>
