@@ -2,267 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#07090c" />
-  <title>SaverIoFlow — More structure. More focus. Better results.</title>
-  <meta name="description" content="Premium flow-system (not coaching). Hourly→yearly planning, goals→milestones→actions, smart blocks, progress and forecasting." />
-  <link rel="preload" as="image" href="/images/tree-bg.png" />
-  <link rel="stylesheet" href="/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>SaverIoFlow — App</title>
+  <meta name="description" content="Discover goals. Turn them into calm execution." />
+  <link rel="stylesheet" href="./app.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <div class="bg__img"></div>
-    <div class="bg__overlay"></div>
-    <div class="bg__orbs">
-      <span class="orb o1"></span>
-      <span class="orb o2"></span>
-      <span class="orb o3"></span>
-    </div>
-    <div class="bg__grain"></div>
-  </div>
+  <a class="skip" href="#main">Skip to content</a>
 
   <header class="topbar">
-    <div class="wrap topbar__inner">
-      <a class="brand" href="/">
-        <span class="brand__mark" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M9 1.8c2.6 2.3 4 4.6 4 7.1 0 3.2-2 5.3-4 7.3-2-2-4-4.1-4-7.3 0-2.5 1.4-4.8 4-7.1Z" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M9 5.1v9.9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="brand__text">SaverIoFlow</span>
+    <div class="container topbar__inner">
+      <a class="brand" href="#/start" aria-label="SaverIoFlow App">
+        <span class="brand__mark"></span>
+        <span class="brand__name">SaverIoFlow</span>
+        <span class="brand__sub">App</span>
       </a>
 
       <nav class="nav">
-        <a class="nav__link" href="#features">Features</a>
-        <a class="nav__link" href="#pricing">Pricing</a>
-        <a class="nav__link" href="#faq">FAQ</a>
-        <a class="btn btn--ghost" href="/app">Open App</a>
+        <a class="nav__link" href="#/start" data-route="start">Start</a>
+        <a class="nav__link" href="#/discover" data-route="discover">Discover</a>
+        <a class="nav__link" href="#/goals" data-route="goals">Goals</a>
+        <a class="nav__link" href="#/today" data-route="today">Today</a>
+        <a class="nav__link" href="#/week" data-route="week">Week</a>
+        <a class="nav__link" href="#/flow" data-route="flow">Flow</a>
+        <a class="nav__link" href="#/dialogue" data-route="dialogue">Dialogue</a>
       </nav>
+
+      <div class="topbar__right">
+        <button class="btn btn--ghost btn--sm" id="resetBtn">Reset demo</button>
+        <a class="btn btn--primary btn--sm" href="/">Landing</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap hero__grid">
-        <div class="hero__copy">
-          <div class="pillrow">
-            <span class="pill">Flow-System</span>
-            <span class="pill">Minimal & premium</span>
-            <span class="pill">Offline MVP</span>
-          </div>
-
-          <h1 class="h1">
-            More structure.<br />
-            More focus.<br />
-            <span class="gold">Better results.</span>
-          </h1>
-
-          <p class="lead">
-            SaverIoFlow is a premium planning system — not coaching.
-            Build calm structure from hourly focus blocks to yearly outcomes.
-            Track progress, view insights, and forecast realistic ETAs with scenarios.
-          </p>
-
-          <div class="cta">
-            <a class="btn btn--primary" href="/app">Try the App</a>
-            <a class="btn btn--soft" href="#pricing">See pricing</a>
-          </div>
-
-          <div class="trust">
-            <div class="trust__item"><span class="trust__dot"></span> Hourly → Yearly planning</div>
-            <div class="trust__item"><span class="trust__dot"></span> Goals → Milestones → Actions</div>
-            <div class="trust__item"><span class="trust__dot"></span> Forecasting (ETA + effort + scenarios)</div>
-          </div>
-        </div>
-
-        <div class="hero__preview">
-          <div class="glass">
-            <div class="glass__top">
-              <span class="tag">Preview</span>
-              <span class="tag tag--gold">Flow Mode</span>
-            </div>
-
-            <div class="glass__mid">
-              <div class="ring" aria-hidden="true">
-                <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
-                  <circle cx="66" cy="66" r="54" stroke="rgba(255,255,255,.10)" stroke-width="10"/>
-                  <circle cx="66" cy="66" r="54" stroke="rgba(205,160,60,.85)" stroke-width="10"
-                    stroke-linecap="round" stroke-dasharray="220 339" transform="rotate(-90 66 66)"/>
-                </svg>
-                <div class="ring__label">
-                  <div class="ring__big">68%</div>
-                  <div class="ring__small">today</div>
-                </div>
+  <main id="main" class="main">
+    <div class="container">
+      <div class="shell">
+        <aside class="side">
+          <div class="side__card">
+            <p class="eyebrow">Status</p>
+            <div class="statgrid">
+              <div class="stat">
+                <div class="stat__k">Today</div>
+                <div class="stat__v" id="statToday">—</div>
               </div>
-
-              <div class="miniCards">
-                <div class="miniCard"><div class="k">Block</div><div class="v">25 min</div></div>
-                <div class="miniCard"><div class="k">Focus</div><div class="v">Deep</div></div>
-                <div class="miniCard"><div class="k">ETA</div><div class="v">6.2 w</div></div>
+              <div class="stat">
+                <div class="stat__k">Goals</div>
+                <div class="stat__v" id="statGoals">—</div>
+              </div>
+              <div class="stat">
+                <div class="stat__k">Suggestion</div>
+                <div class="stat__v gold" id="statFocus">—</div>
               </div>
             </div>
+          </div>
 
-            <div class="glass__list">
-              <div class="row">
-                <div class="row__left"><span class="dot dot--gold"></span>Write outline</div>
-                <div class="row__right">done</div>
-              </div>
-              <div class="row">
-                <div class="row__left"><span class="dot dot--blue"></span>Flow block — 25 min</div>
-                <div class="row__right">active</div>
-              </div>
-              <div class="row">
-                <div class="row__left"><span class="dot"></span>Small step — 10 min</div>
-                <div class="row__right">next</div>
-              </div>
-            </div>
-
-            <div class="glass__foot">
-              <span class="hint">No coaching. Just a system.</span>
-              <a class="link" href="/app">Open →</a>
+          <div class="side__card">
+            <p class="eyebrow">Quick actions</p>
+            <div class="stack">
+              <a class="qbtn" href="#/discover">Find a goal</a>
+              <a class="qbtn" href="#/goals?optimize=1">Optimize existing goal</a>
+              <a class="qbtn" href="#/today">Plan today</a>
+              <a class="qbtn muted" href="#/flow">Flow mode (soon)</a>
+              <a class="qbtn muted" href="#/dialogue">Dialogue (soon)</a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="features" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2 class="h2">Designed for calm execution</h2>
-          <p class="sub">Minimal interface. Clear steps. Forecastable outcomes.</p>
-        </div>
-
-        <div class="grid3">
-          <article class="card">
-            <div class="card__icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 9c2.4-3.6 9.6-3.6 12 0-2.4 3.6-9.6 3.6-12 0Z" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M9 6.2c1.6 0 2.8 1.2 2.8 2.8S10.6 11.8 9 11.8 6.2 10.6 6.2 9 7.4 6.2 9 6.2Z" stroke="currentColor" stroke-width="1.2" opacity=".8"/>
-              </svg>
-            </div>
-            <h3 class="h3">Focus blocks</h3>
-            <p>Tasks become blocks. Queue stays clean. Flow Mode executes one at a time.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M4 14.5V3.5h10v11" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                <path d="M6 6h6M6 8.6h6M6 11.2h4.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
-              </svg>
-            </div>
-            <h3 class="h3">Goals → actions</h3>
-            <p>Define effort + minutes/day. Generate milestones. Toggle actions as done.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 12c2.6-7 9.4-7 12 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M3 9c2.6-5 9.4-5 12 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>
-                <path d="M3 6c2.6-3 9.4-3 12 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
-              </svg>
-            </div>
-            <h3 class="h3">Forecasting</h3>
-            <p>ETA + scenarios (days/week, efficiency). Apply best scenario to Today.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing" class="section section--soft">
-      <div class="wrap">
-        <div class="section__head">
-          <h2 class="h2">Pricing</h2>
-          <p class="sub">Premium, minimal. No hard-sell.</p>
-        </div>
-
-        <div class="pricing">
-          <article class="tier">
-            <div class="tier__top">
-              <h3 class="tier__name">Starter</h3>
-              <div class="tier__price">$0</div>
-              <div class="tier__hint">Offline MVP</div>
-            </div>
-            <ul class="tier__list">
-              <li>Today + Week planning</li>
-              <li>Goals & actions</li>
-              <li>Flow Mode (base)</li>
-            </ul>
-            <a class="btn btn--soft w100" href="/app">Open App</a>
-          </article>
-
-          <article class="tier tier--featured">
-            <div class="tier__top">
-              <h3 class="tier__name">Pro</h3>
-              <div class="tier__price">$9</div>
-              <div class="tier__hint">per month</div>
-            </div>
-            <ul class="tier__list">
-              <li>Advanced templates</li>
-              <li>More insights & exports</li>
-              <li>Forecast history</li>
-            </ul>
-            <a class="btn btn--primary w100" href="/app">Try Pro (MVP)</a>
-          </article>
-
-          <article class="tier">
-            <div class="tier__top">
-              <h3 class="tier__name">Team</h3>
-              <div class="tier__price">—</div>
-              <div class="tier__hint">coming later</div>
-            </div>
-            <ul class="tier__list">
-              <li>Shared goals</li>
-              <li>Light alignment</li>
-              <li>Privacy-first</li>
-            </ul>
-            <a class="btn btn--ghost w100" href="#faq">FAQ</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="section">
-      <div class="wrap">
-        <div class="section__head">
-          <h2 class="h2">FAQ</h2>
-          <p class="sub">Short answers. No noise.</p>
-        </div>
-
-        <div class="faq">
-          <details class="qa"><summary>Is this coaching?</summary><p>No. It’s a planning & execution system.</p></details>
-          <details class="qa"><summary>Does it work offline?</summary><p>Yes — everything is stored in localStorage.</p></details>
-          <details class="qa"><summary>What’s Flow Mode?</summary><p>Fullscreen minimal focus: queue + timer + breaks + distraction notes.</p></details>
-          <details class="qa"><summary>Do you add accounts?</summary><p>Not in MVP. Pro/Cloud later.</p></details>
-        </div>
-
-        <div class="ctaBand">
-          <div>
-            <div class="ctaBand__t">Ready to focus with structure?</div>
-            <div class="ctaBand__d">Open the app and enter Flow Mode.</div>
+          <div class="side__hint muted">
+            <p><span class="gold">MVP:</span> local-only, no account.</p>
           </div>
-          <a class="btn btn--primary" href="/app">Open SaverIoFlow</a>
-        </div>
-      </div>
-    </section>
-  </main>
+        </aside>
 
-  <footer class="footer">
-    <div class="wrap footer__inner">
-      <div class="footer__left">
-        <span class="footer__brand">SaverIoFlow</span>
-        <span class="footer__sep">·</span>
-        <span class="footer__muted">More structure. More focus. Better results.</span>
-      </div>
-      <div class="footer__right">
-        <a class="footer__link" href="/app">App</a>
-        <a class="footer__link" href="#features">Features</a>
-        <a class="footer__link" href="#pricing">Pricing</a>
+        <section class="content" id="view"></section>
       </div>
     </div>
-  </footer>
+  </main>
+
+  <dialog class="modal" id="modal">
+    <div class="modal__inner">
+      <div class="modal__top">
+        <div>
+          <p class="eyebrow" id="modalEyebrow">Modal</p>
+          <h2 id="modalTitle">Title</h2>
+          <p class="muted" id="modalSub">—</p>
+        </div>
+        <button class="iconbtn" id="modalClose">×</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <script src="./app.js"></script>
 </body>
 </html>
