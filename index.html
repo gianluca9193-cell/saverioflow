@@ -17,11 +17,12 @@
   <!-- CINEMATIC ADDONS -->
   <link rel="stylesheet" href="/hero-art.css">
   <link rel="stylesheet" href="/motion.css">
+  <link rel="stylesheet" href="/cinema.css">
 </head>
 
 <body>
 
-  <!-- HERO (cinematic + visible artwork) -->
+  <!-- HERO -->
   <header class="hero">
     <div class="heroGlow"></div>
     <div class="heroGlow2"></div>
@@ -32,21 +33,19 @@
       <div class="heroCopy stack">
         <div class="badge badge-gold fadeUp">Offline-first • Keine Accounts • Keine Datenweitergabe</div>
 
-        <h1 class="fadeUp" style="margin:0;">
-          SaverIoFlow
-        </h1>
+        <h1 class="fadeUp" style="margin:0;">SaverIoFlow</h1>
 
-        <p class="meta fadeUp" style="font-size:16px; line-height:1.65; max-width: 62ch;">
+        <p class="meta fadeUp" style="font-size:16px; line-height:1.7; max-width: 62ch;">
           Ein ruhiges System, das Ziele in <strong>machbare Tagespläne</strong> übersetzt.
           Mit <strong>Plan B</strong>, Fortschritt ohne Druck — und optionalem Impact für Mensch, Tier & Umwelt.
         </p>
 
         <div class="row fadeUp" style="margin-top:10px; max-width:520px;">
           <a href="/app/" class="btn btn-primary">Open App</a>
-          <a href="#features" class="btn btn-ghost">Features</a>
+          <a href="#product" class="btn btn-ghost">Produkt ansehen</a>
         </div>
 
-        <div class="row fadeUp" style="margin-top:12px; max-width:620px; flex-wrap:wrap;">
+        <div class="row fadeUp" style="margin-top:12px; max-width:650px; flex-wrap:wrap;">
           <div class="badge badge-turq">Today Plan + Plan B</div>
           <div class="badge">Check-in in 30 Sekunden</div>
           <div class="badge">Impact Ledger</div>
@@ -61,174 +60,194 @@
     </div>
   </header>
 
-  <div class="container"><hr class="hr"/></div>
+  <div class="container"><hr class="neon-divider"/></div>
+
+  <!-- PRODUCT -->
+  <section id="product" class="container" style="padding:76px 0 16px;">
+    <div class="stack">
+      <h2 class="fadeUp">So sieht es aus. So fühlt es sich an.</h2>
+
+      <!-- Cinematic Slider -->
+      <div class="slider fadeUp">
+        <div class="sliderTop">
+          <div class="caption">Feature Preview</div>
+          <div class="tabs">
+            <button class="tab active" data-tab="today">Today Plan</button>
+            <button class="tab" data-tab="planb">Plan B</button>
+            <button class="tab" data-tab="impact">Impact</button>
+          </div>
+        </div>
+
+        <div class="sliderBody">
+          <!-- Screen: Today -->
+          <div class="screen active" data-screen="today">
+            <div class="screenHdr">
+              <div class="screenTitle">Heute</div>
+              <span class="badge badge-turq">30 min</span>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi"><div class="k">Energie</div><div class="v">Medium</div></div>
+              <div class="kpi"><div class="k">Fokus</div><div class="v">1 Ziel</div></div>
+              <div class="kpi"><div class="k">Plan</div><div class="v">3 Aufgaben</div></div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">25 Min Fokus-Session</div><span class="badge">25m</span></div>
+              <div class="taskRowSub">Plan B: 5 Minuten nur starten</div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">10 Min Ordnung & Klarheit</div><span class="badge">10m</span></div>
+              <div class="taskRowSub">Plan B: 1 Satz „Heute zählt nur…“</div>
+            </div>
+          </div>
+
+          <!-- Screen: Plan B -->
+          <div class="screen" data-screen="planb">
+            <div class="screenHdr">
+              <div class="screenTitle">Plan B aktiv</div>
+              <span class="badge badge-gold">Minimum-Day</span>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi"><div class="k">Ziel</div><div class="v">Weitergehen</div></div>
+              <div class="kpi"><div class="k">Heute</div><div class="v">1 Schritt</div></div>
+              <div class="kpi"><div class="k">Dauer</div><div class="v">8–12 Min</div></div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">2 Minuten: nur anfangen</div><span class="badge">2m</span></div>
+              <div class="taskRowSub">Kein Druck — nur Bewegung.</div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">6 Minuten: kleinste ehrliche Version</div><span class="badge">6m</span></div>
+              <div class="taskRowSub">Die App macht den Plan kleiner, nicht dich.</div>
+            </div>
+          </div>
+
+          <!-- Screen: Impact -->
+          <div class="screen" data-screen="impact">
+            <div class="screenHdr">
+              <div class="screenTitle">Impact</div>
+              <span class="badge badge-gold">Ledger</span>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi"><div class="k">Impact Units</div><div class="v">12</div></div>
+              <div class="kpi"><div class="k">€ Anteil (Beispiel)</div><div class="v">0,90 €</div></div>
+              <div class="kpi"><div class="k">Kategorie</div><div class="v">Erde & Tiere</div></div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">Micro-Impact</div><span class="badge badge-turq">+1</span></div>
+              <div class="taskRowSub">Heute: 1 unnötigen Kauf vermeiden</div>
+            </div>
+
+            <div class="taskRow">
+              <div class="taskRowTop"><div class="t">Transparenz</div><span class="badge">Report</span></div>
+              <div class="taskRowSub">€ → Projekt → Zeitraum (ohne Greenwashing)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row fadeUp" style="max-width:520px;">
+        <a href="/app/" class="btn btn-primary">Jetzt testen</a>
+        <a href="#features" class="btn btn-ghost">Warum es hilft</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><hr class="neon-divider"/></div>
 
   <!-- FEATURES -->
-  <section id="features" class="container" style="padding:76px 0 10px;">
+  <section id="features" class="container" style="padding:76px 0 78px;">
     <div class="stack">
-      <h2 class="fadeUp">Was die App für dich macht</h2>
+      <h2 class="fadeUp">Was die App für dich löst</h2>
 
       <div class="row">
-        <!-- Today Plan -->
+        <!-- Feature 1 -->
         <div class="card fadeUp">
-          <div class="badge badge-turq" style="width:max-content;">Core</div>
-          <h2 style="margin-top:10px;">Today Plan</h2>
-
-          <!-- Illustration (inline SVG) -->
-          <div style="margin:12px 0 8px;">
-            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
-              <path d="M28 76 C78 34, 148 104, 212 58 C276 12, 330 116, 402 52 C440 18, 472 30, 492 44" stroke="rgba(56,224,211,.55)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M28 92 C86 64, 144 112, 210 82 C276 52, 332 110, 402 70 C444 46, 474 56, 492 66" stroke="rgba(215,184,92,.45)" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="212" cy="58" r="6" fill="rgba(56,224,211,.75)"/>
-              <circle cx="402" cy="52" r="6" fill="rgba(215,184,92,.7)"/>
-            </svg>
+          <div class="featureHead">
+            <div class="icon">
+              <!-- Compass icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" stroke="rgba(56,224,211,.85)" stroke-width="2"/>
+                <path d="M14.7 9.3 13 13l-3.7 1.7L11 11l3.7-1.7Z" stroke="rgba(215,184,92,.85)" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="badge badge-turq" style="width:max-content;">Klarheit</div>
+              <h2 style="margin:8px 0 0;">Today Plan</h2>
+            </div>
           </div>
-
-          <p class="meta">
-            3–5 Aufgaben, realistisch nach Energie & Zeitbudget. Kein Overplanning. Kein Stress.
-          </p>
-          <div class="row" style="margin-top:12px;">
-            <span class="badge">Zeitbudget</span>
-            <span class="badge">Energie-Level</span>
-            <span class="badge">Prioritäten</span>
-          </div>
+          <p class="meta">Ein machbarer Tagesplan aus Zeitbudget + Energie. Keine Überforderung.</p>
         </div>
 
-        <!-- Plan B -->
+        <!-- Feature 2 -->
         <div class="card fadeUp">
-          <div class="badge badge-gold" style="width:max-content;">Safety Net</div>
-          <h2 style="margin-top:10px;">Plan B</h2>
-
-          <div style="margin:12px 0 8px;">
-            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
-              <path d="M110 92 C150 36, 226 24, 260 68 C290 108, 356 100, 390 54" stroke="rgba(215,184,92,.55)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M78 78 C122 40, 178 56, 210 86 C250 124, 328 118, 372 78" stroke="rgba(56,224,211,.40)" stroke-width="3" stroke-linecap="round"/>
-              <path d="M260 18 L260 104" stroke="rgba(255,255,255,.10)" stroke-width="2" stroke-dasharray="6 8"/>
-              <circle cx="260" cy="68" r="7" fill="rgba(215,184,92,.75)"/>
-            </svg>
+          <div class="featureHead">
+            <div class="icon">
+              <!-- Parachute icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3c-4.97 0-9 4.03-9 9h18c0-4.97-4.03-9-9-9Z" stroke="rgba(215,184,92,.85)" stroke-width="2"/>
+                <path d="M3 12l6 6m12-6-6 6" stroke="rgba(56,224,211,.75)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 12v9" stroke="rgba(255,255,255,.18)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="badge badge-gold" style="width:max-content;">Safety Net</div>
+              <h2 style="margin:8px 0 0;">Plan B</h2>
+            </div>
           </div>
-
-          <p class="meta">
-            Jede Aufgabe hat eine kleinere Version — damit du auch an schweren Tagen weiterkommst.
-          </p>
-          <div class="badge" style="margin-top:12px; width:max-content;">Minimum-Day in 1 Tap</div>
+          <p class="meta">Wenn der Tag schwer ist: jede Aufgabe hat eine kleinere Version.</p>
         </div>
 
-        <!-- Check-in -->
+        <!-- Feature 3 -->
         <div class="card fadeUp">
-          <div class="badge" style="width:max-content;">Calm Loop</div>
-          <h2 style="margin-top:10px;">Ruhiger Check-in</h2>
-
-          <div style="margin:12px 0 8px;">
-            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
-              <path d="M88 86 C120 44, 168 44, 200 86 C232 128, 280 128, 312 86 C344 44, 392 44, 424 86" stroke="rgba(255,255,255,.16)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M88 86 C120 44, 168 44, 200 86" stroke="rgba(56,224,211,.55)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M312 86 C344 44, 392 44, 424 86" stroke="rgba(215,184,92,.55)" stroke-width="4" stroke-linecap="round"/>
-            </svg>
+          <div class="featureHead">
+            <div class="icon">
+              <!-- Loop icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 7h10a4 4 0 0 1 0 8H9" stroke="rgba(56,224,211,.85)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9 11 7 13l2 2" stroke="rgba(215,184,92,.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="badge" style="width:max-content;">Calm Loop</div>
+              <h2 style="margin:8px 0 0;">30s Check-in</h2>
+            </div>
           </div>
+          <p class="meta">Eine Frage. Eine Anpassung. Morgen wird kleiner – statt du.</p>
+        </div>
+      </div>
 
+      <div class="row" style="margin-top:14px;">
+        <div class="card fadeUp">
+          <h2>3 Ziel-Welten</h2>
           <p class="meta">
-            30 Sekunden am Abend: Was war schwer? Was wird morgen kleiner? Ohne Schuldgefühl.
+            <strong>A Persönlich</strong> (Health/Lernen/Karriere) •
+            <strong>B Gemeinwohl</strong> (Hilfe/Community/Peace Praxis) •
+            <strong>C Erde & Tiere</strong> (Nachhaltigkeit/Tierschutz)
           </p>
-          <div class="row" style="margin-top:12px;">
-            <span class="badge">1 Frage</span>
-            <span class="badge">1 Anpassung</span>
-          </div>
+        </div>
+
+        <div class="card fadeUp">
+          <h2>Impact ohne Greenwashing</h2>
+          <p class="meta">
+            Transparenz statt Versprechen: € → Projekt → Zeitraum. Optional über Premium.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- APP PREVIEW + CATEGORIES -->
-  <section class="container" style="padding:22px 0 78px;">
-    <div class="row">
-      <div class="card fadeUp">
-        <h2>App Preview</h2>
-        <p class="meta">So fühlt sich SaverIoFlow an: ruhig, klar, minimal.</p>
-
-        <!-- Mini UI mock (no image needed) -->
-        <div class="item" style="margin-top:12px;">
-          <div class="itemTop">
-            <div class="itemTitle">Heute</div>
-            <span class="badge badge-turq">30 min</span>
-          </div>
-          <div class="itemSub">3 Aufgaben • Energie: Medium • Plan B verfügbar</div>
-        </div>
-
-        <div class="item">
-          <div class="itemTop">
-            <div class="itemTitle">Task</div>
-            <span class="badge">12 min</span>
-          </div>
-          <div class="itemSub">Plan B: 3 Minuten nur anfangen</div>
-        </div>
-
-        <div class="row" style="margin-top:12px;">
-          <a class="btn btn-primary" href="/app/">Jetzt testen</a>
-          <a class="btn btn-ghost" href="#impact">Impact Prinzip</a>
-        </div>
-      </div>
-
-      <div class="card fadeUp">
-        <h2>3 Ziel-Welten (dein Twist)</h2>
-        <p class="meta">Damit Ziele nicht nur dich, sondern auch die Welt verbessern.</p>
-
-        <div class="item" style="margin-top:12px;">
-          <div class="itemTop">
-            <div class="itemTitle">A — Persönlich</div>
-            <span class="badge">Health • Lernen • Karriere</span>
-          </div>
-          <div class="itemSub">Du baust Stabilität: Energie, Skills, Fokus.</div>
-        </div>
-
-        <div class="item">
-          <div class="itemTop">
-            <div class="itemTitle">B — Gemeinwohl</div>
-            <span class="badge badge-gold">Community • Hilfe</span>
-          </div>
-          <div class="itemSub">Leise Beiträge: Kontakte, Ehrenamt, Mikro-Hilfe.</div>
-        </div>
-
-        <div class="item">
-          <div class="itemTop">
-            <div class="itemTitle">C — Erde & Tiere</div>
-            <span class="badge badge-turq">Nachhaltigkeit • Tierschutz</span>
-          </div>
-          <div class="itemSub">Machbare Schritte statt Moral & Druck.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IMPACT -->
-  <section id="impact" class="container" style="padding:10px 0 88px;">
-    <div class="row">
-      <div class="card fadeUp">
-        <h2>Impact ohne Greenwashing</h2>
-        <p class="meta">
-          Keine fake CO₂-Zahlen. Stattdessen harte Transparenz:
-          <strong>€ gespendet</strong>, <strong>Projekte</strong>, <strong>Zeiträume</strong>.
-        </p>
-        <div class="row" style="margin-top:12px;">
-          <span class="badge badge-gold">Ledger</span>
-          <span class="badge">Quellen/Partner</span>
-          <span class="badge">Zeitraum</span>
-        </div>
-      </div>
-
-      <div class="card fadeUp">
-        <h2>Frieden als Praxis (optional)</h2>
-        <p class="meta">
-          Kein politischer Feed. Keine Debatten.
-          Nur Mikro-Handlungen: Deeskalation, Zuhören, Hilfe im Kleinen.
-        </p>
-        <div class="badge badge-turq" style="margin-top:12px; width:max-content;">leise • real • machbar</div>
-      </div>
-    </div>
-  </section>
+  <div class="container"><hr class="neon-divider"/></div>
 
   <!-- CTA -->
-  <section class="container" style="padding:0 0 96px;">
+  <section class="container" style="padding:76px 0 96px;">
     <div class="card fadeUp" style="text-align:center;">
       <h2>Beginne heute. Nicht perfekt. Nur ehrlich.</h2>
       <p class="meta" style="margin:14px 0 22px;">
@@ -246,5 +265,6 @@
   </footer>
 
   <script src="/motion.js"></script>
+  <script src="/slider.js"></script>
 </body>
 </html>
