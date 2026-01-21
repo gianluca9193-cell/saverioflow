@@ -1,19 +1,138 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SaverIoFlow — App</title>
-  <link rel="stylesheet" href="/app/app.css" />
+
+  <link rel="stylesheet" href="./app.css" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <meta name="theme-color" content="#0b0f14" />
 </head>
 <body>
-  <div id="app"></div>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>SaverIoFlow</h1>
+        <p class="sub">Quiet plan • real steps • optional impact</p>
+      </div>
+      <button id="installBtn" class="btn ghost" style="display:none;">Installieren</button>
+    </header>
 
-  <!-- Your existing app -->
-  <script src="/app/app.js"></script>
+    <main class="grid">
+      <!-- LEFT: Goal + Settings -->
+      <section class="card">
+        <h2>Neues Ziel</h2>
+        <label class="lbl">Ziel (1 Satz)</label>
+        <input id="goalTitle" class="inp" placeholder="z.B. fitter werden / lernen / helfen / nachhaltiger leben" />
 
-  <!-- Premium + Ledger layer -->
-  <script src="/app/premium.js"></script>
+        <div class="row">
+          <div>
+            <label class="lbl">Kategorie</label>
+            <select id="goalCat" class="inp">
+              <option value="A">A — Persönlich</option>
+              <option value="B">B — Gemeinwohl</option>
+              <option value="C">C — Erde & Tiere</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl">Energie heute</label>
+            <select id="energy" class="inp">
+              <option value="low">Low</option>
+              <option value="med" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label class="lbl">Zeitbudget heute</label>
+            <select id="timeBudget" class="inp">
+              <option value="15">15 Min</option>
+              <option value="30" selected>30 Min</option>
+              <option value="60">60 Min</option>
+              <option value="90">90 Min</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl">Stil</label>
+            <select id="styleMode" class="inp">
+              <option value="calm" selected>Calm</option>
+              <option value="normal">Normal</option>
+              <option value="push">Push</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="genPlanBtn" class="btn primary">Today-Plan erzeugen</button>
+          <button id="saveGoalBtn" class="btn">Ziel speichern</button>
+        </div>
+
+        <div class="hint">
+          <strong>Tip:</strong> Das System erzeugt immer eine <em>Plan-B</em> Version für stressige Tage.
+        </div>
+      </section>
+
+      <!-- RIGHT: Today -->
+      <section class="card">
+        <div class="row space">
+          <h2>Heute</h2>
+          <button id="minDayBtn" class="btn ghost">Minimum-Day</button>
+        </div>
+
+        <div id="todayMeta" class="meta"></div>
+
+        <ol id="taskList" class="tasks"></ol>
+
+        <div class="row">
+          <button id="checkinBtn" class="btn">Check-in</button>
+          <button id="resetBtn" class="btn ghost">Reset</button>
+        </div>
+      </section>
+
+      <!-- BOTTOM: Impact + Reflection -->
+      <section class="card">
+        <div class="row space">
+          <h2>Impact & Ruhe</h2>
+          <button id="addImpactBtn" class="btn ghost">+ Micro-Impact</button>
+        </div>
+
+        <div class="impact">
+          <div class="pill">
+            <div class="k">Impact Units</div>
+            <div class="v" id="impactUnits">0</div>
+          </div>
+          <div class="pill">
+            <div class="k">Streak</div>
+            <div class="v" id="streak">0</div>
+          </div>
+          <div class="pill">
+            <div class="k">Letzter Check-in</div>
+            <div class="v" id="lastCheckin">—</div>
+          </div>
+        </div>
+
+        <div class="reflect">
+          <div class="lbl">1 Frage für heute</div>
+          <div id="question" class="q"></div>
+          <textarea id="answer" class="ta" placeholder="1–2 Sätze reichen…"></textarea>
+          <div class="row">
+            <button id="saveReflectionBtn" class="btn">Speichern</button>
+            <button id="newQuestionBtn" class="btn ghost">Neue Frage</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Offline-first • Daten bleiben auf deinem Gerät</span>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>
+
