@@ -1,17 +1,96 @@
 /* SaverIoFlow App — Vanilla SPA + localStorage
    Drop 3: Dialogue (offline philosophical dialogue engine)
+
+   NOTE:
+   This file is "self-bootstrapping": it creates the required app shell
+   inside #app if the HTML shell is minimal.
 */
 
-const $ = (q, el=document) => el.querySelector(q);
-const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+const $ = (q, el = document) => el.querySelector(q);
+const $$ = (q, el = document) => Array.from(el.querySelectorAll(q));
 
 const STORE_KEY = "saverioflow_final_v1";
 const LEGACY_KEYS = ["saverioflow_mvp_v1"];
 
-function uid(){ return Math.random().toString(16).slice(2) + Date.now().toString(16); }
-function clampInt(n, a, b){ n = Math.round(Number(n||0)); return Math.max(a, Math.min(b, n)); }
-function escapeHtml(s=""){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-function escapeAttr(s=""){ return escapeHtml(s).replace(/"/g,"&quot;"); }
+function uid() { return Math.random().toString(16).slice(2) + Date.now().toString(16); }
+function clampInt(n, a, b) { n = Math.round(Number(n || 0)); return Math.max(a, Math.min(b, n)); }
+function escapeHtml(s = "") { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
+function escapeAttr(s = "") { return escapeHtml(s).replace(/"/g, "&quot;"); }
+
+/* =========================
+   Shell bootstrap
+   ========================= */
+
+function ensureAppShell() {
+  // Supports minimal /app/index.html that only has <main id="app"></main>
+  const mount = document.getElementById("app");
+  if (!mount) return;
+
+  // If a full shell already exists (e.g. you kept your original HTML), do nothing.
+  if (document.getElementById("view")) return;
+
+  mount.innerHTML = `
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar__top">
+          <div class="brand">
+            <div class="brand__mark" aria-hidden="true"></div>
+            <div class="brand__name">SaverIoFlow</div>
+          </div>
+
+          <nav class="nav" aria-label="App navigation">
+            <a class="nav__link" href="#/start" data-route="start">Start</a>
+            <a class="nav__link" href="#/discover" data-route="discover">Discover</a>
+            <a class="nav__link" href="#/goals" data-route="goals">Goals</a>
+            <a class="nav__link" href="#/today" data-route="today">Today</a>
+            <a class="nav__link" href="#/dialogue" data-route="dialogue">Dialogue</a>
+            <a class="nav__link" href="#/week" data-route="week">Week</a>
+            <a class="nav__link" href="#/flow" data-route="flow">Flow</a>
+          </nav>
+        </div>
+
+        <div class="sidebar__stats">
+          <div class="stat">
+            <div class="stat__label">Today</div>
+            <div class="stat__value" id="statToday">0/0</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Goals</div>
+            <div class="stat__value" id="statGoals">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Focus</div>
+            <div class="stat__value" id="statFocus">—</div>
+          </div>
+        </div>
+
+        <div class="sidebar__bottom">
+          <button class="btn btn--ghost btn--sm" id="resetBtn" type="button">Reset</button>
+        </div>
+      </aside>
+
+      <section class="main">
+        <div id="view" class="view" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <dialog class="modal" id="modal">
+      <div class="modal__inner">
+        <div class="modal__head">
+          <div class="modal__eyebrow" id="modalEyebrow">Modal</div>
+          <button class="iconbtn2" id="modalClose" type="button" aria-label="Close">✕</button>
+        </div>
+        <h3 class="modal__title" id="modalTitle">Title</h3>
+        <p class="muted" id="modalSub"></p>
+        <div class="modal__body" id="modalBody"></div>
+      </div>
+    </dialog>
+  `;
+}
+
+/* =========================
+   State
+   ========================= */
 
 const defaultState = () => ({
   today: {
@@ -22,7 +101,7 @@ const defaultState = () => ({
   goals: [],
   week: {
     // minimal placeholder for later drops
-    days: { mon:[], tue:[], wed:[], thu:[], fri:[], sat:[], sun:[] }
+    days: { mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] }
   },
   ui: {
     lastDiscover: { focus: "clarity", timePerDay: 30 },
@@ -32,17 +111,17 @@ const defaultState = () => ({
       depth: 2,
       // messages are per-session; stored to resume
       messages: [
-        { role:"ai", ts: Date.now(), text: "Dialogue is a space for examination. What are you trying to understand right now?" }
+        { role: "ai", ts: Date.now(), text: "Dialogue is a space for examination. What are you trying to understand right now?" }
       ],
       // internal pointer per topic to avoid repetition
-      cursor: { meaning:0, control:0, desire:0, principles:0, effort:0 },
+      cursor: { meaning: 0, control: 0, desire: 0, principles: 0, effort: 0 },
       // lightweight saved insights
       saved: []
     }
   }
 });
 
-function hydrateState(raw){
+function hydrateState(raw) {
   const base = defaultState();
   const s = (raw && typeof raw === "object") ? raw : {};
   s.today = s.today || base.today;
@@ -70,115 +149,115 @@ function hydrateState(raw){
   return s;
 }
 
-function loadState(){
-  try{
+function loadState() {
+  try {
     const raw = localStorage.getItem(STORE_KEY);
-    if(raw) return hydrateState(JSON.parse(raw));
-    for(const k of LEGACY_KEYS){
+    if (raw) return hydrateState(JSON.parse(raw));
+    for (const k of LEGACY_KEYS) {
       const legacy = localStorage.getItem(k);
-      if(legacy){
+      if (legacy) {
         const s = hydrateState(JSON.parse(legacy));
         localStorage.setItem(STORE_KEY, JSON.stringify(s));
         return s;
       }
     }
     return defaultState();
-  }catch{
+  } catch {
     return defaultState();
   }
 }
 
 let state = loadState();
 
-function saveState(){
+function saveState() {
   localStorage.setItem(STORE_KEY, JSON.stringify(state));
   updateSidebarStats();
 }
 
-const view = $("#view");
-const resetBtn = $("#resetBtn");
+/* =========================
+   Modal
+   ========================= */
 
-const modal = $("#modal");
-const modalClose = $("#modalClose");
-const modalEyebrow = $("#modalEyebrow");
-const modalTitle = $("#modalTitle");
-const modalSub = $("#modalSub");
-const modalBody = $("#modalBody");
-
-resetBtn?.addEventListener("click", () => {
-  state = defaultState();
-  saveState();
-  route();
-});
-
-modalClose?.addEventListener("click", closeModal);
-modal?.addEventListener("click", (e) => {
-  const inner = $(".modal__inner", modal);
-  if(inner && !inner.contains(e.target)) closeModal();
-});
-
-function openModal({eyebrow="Modal", title="Title", sub="", bodyHTML=""}){
-  if(!modal) return;
-  modalEyebrow.textContent = eyebrow;
-  modalTitle.textContent = title;
-  modalSub.textContent = sub;
-  modalBody.innerHTML = bodyHTML;
+function openModal({ eyebrow = "Modal", title = "Title", sub = "", bodyHTML = "" }) {
+  const modal = $("#modal");
+  if (!modal) return;
+  $("#modalEyebrow").textContent = eyebrow;
+  $("#modalTitle").textContent = title;
+  $("#modalSub").textContent = sub;
+  $("#modalBody").innerHTML = bodyHTML;
   modal.showModal();
   document.body.classList.add("is-modal");
 }
-function closeModal(){
-  if(!modal) return;
+function closeModal() {
+  const modal = $("#modal");
+  if (!modal) return;
   modal.close();
   document.body.classList.remove("is-modal");
 }
 
-/* ---------- Navigation ---------- */
+/* =========================
+   Navigation / routing
+   ========================= */
 
-window.addEventListener("hashchange", route);
-
-function setActiveNav(routeName){
+function setActiveNav(routeName) {
   $$(".nav__link").forEach(a => a.classList.toggle("is-active", a.dataset.route === routeName));
 }
 
-function route(){
+function route() {
+  const view = $("#view");
+  if (!view) return;
+
   const hash = location.hash || "#/start";
-  const [path, query] = hash.replace("#","").split("?");
+  const [path, query] = hash.replace("#", "").split("?");
   const qs = new URLSearchParams(query || "");
 
-  if(path === "/start"){ setActiveNav("start"); renderStart(); return; }
-  if(path === "/discover"){ setActiveNav("discover"); renderDiscover(); return; }
-  if(path === "/goals"){ setActiveNav("goals"); renderGoals({ optimize: qs.get("optimize")==="1" }); return; }
-  if(path === "/today"){ setActiveNav("today"); renderToday(); return; }
-  if(path === "/week"){ setActiveNav("week"); renderWeek(); return; }
+  if (path === "/start") { setActiveNav("start"); renderStart(); return; }
+  if (path === "/discover") { setActiveNav("discover"); renderDiscover(); return; }
+  if (path === "/goals") { setActiveNav("goals"); renderGoals({ optimize: qs.get("optimize") === "1" }); return; }
+  if (path === "/today") { setActiveNav("today"); renderToday(); return; }
+  if (path === "/week") { setActiveNav("week"); renderWeek(); return; }
 
   // Flow comes in Drop 2
-  if(path === "/flow"){ setActiveNav("flow"); renderComingSoon("Flow mode", "Fullscreen focus execution arrives next."); return; }
+  if (path === "/flow") { setActiveNav("flow"); renderComingSoon("Flow mode", "Fullscreen focus execution arrives next."); return; }
 
   // Dialogue (Drop 3)
-  if(path === "/dialogue"){ setActiveNav("dialogue"); renderDialogue(); return; }
+  if (path === "/dialogue") { setActiveNav("dialogue"); renderDialogue(); return; }
 
   location.hash = "#/start";
 }
 
-function updateSidebarStats(){
-  const todayTasks = state.today.tasks.length;
-  const todayDone = state.today.tasks.filter(t => t.done).length;
-  $("#statToday").textContent = `${todayDone}/${todayTasks}`;
-  $("#statGoals").textContent = String(state.goals.length);
-  $("#statFocus").textContent = sidebarSuggestion();
-}
+window.addEventListener("hashchange", route);
 
-function sidebarSuggestion(){
-  if(state.goals.length === 0) return "Start in Discover";
+/* =========================
+   Sidebar stats
+   ========================= */
+
+function sidebarSuggestion() {
+  if (state.goals.length === 0) return "Start in Discover";
   const open = state.today.tasks.filter(t => !t.done).length;
-  if(open === 0) return "Add one step";
-  if(open >= 3) return "Protect one block";
+  if (open === 0) return "Add one step";
+  if (open >= 3) return "Protect one block";
   return "Keep it small";
 }
 
-/* ---------- Common UI helpers ---------- */
+function updateSidebarStats() {
+  const a = $("#statToday");
+  const b = $("#statGoals");
+  const c = $("#statFocus");
+  if (!a || !b || !c) return;
 
-function header(title, sub, actionsHTML=""){
+  const todayTasks = state.today.tasks.length;
+  const todayDone = state.today.tasks.filter(t => t.done).length;
+  a.textContent = `${todayDone}/${todayTasks}`;
+  b.textContent = String(state.goals.length);
+  c.textContent = sidebarSuggestion();
+}
+
+/* =========================
+   Common UI helpers
+   ========================= */
+
+function header(title, sub, actionsHTML = "") {
   return `
     <div class="view__head">
       <div class="view__title">
@@ -190,7 +269,7 @@ function header(title, sub, actionsHTML=""){
   `;
 }
 
-function cardNav(title, sub, href, tag=""){
+function cardNav(title, sub, href, tag = "") {
   return `
     <div class="card card--click" role="button" tabindex="0" data-go="${escapeAttr(href)}">
       <div class="row">
@@ -202,18 +281,22 @@ function cardNav(title, sub, href, tag=""){
   `;
 }
 
-function mountCardNav(){
+function mountCardNav() {
+  const view = $("#view");
   $$("[data-go]", view).forEach(card => {
     card.addEventListener("click", () => location.hash = card.dataset.go);
     card.addEventListener("keydown", (e) => {
-      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); location.hash = card.dataset.go; }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); location.hash = card.dataset.go; }
     });
   });
 }
 
-/* ---------- Start ---------- */
+/* =========================
+   Start
+   ========================= */
 
-function renderStart(){
+function renderStart() {
+  const view = $("#view");
   view.innerHTML = `
     ${header("Where do you want to begin?", "Choose what feels most relevant. You can change this anytime.", "")}
     <div class="grid3">
@@ -234,10 +317,13 @@ function renderStart(){
   updateSidebarStats();
 }
 
-/* ---------- Discover ---------- */
+/* =========================
+   Discover
+   ========================= */
 
-function renderDiscover(){
-  const last = state.ui.lastDiscover || { focus:"clarity", timePerDay:30 };
+function renderDiscover() {
+  const view = $("#view");
+  const last = state.ui.lastDiscover || { focus: "clarity", timePerDay: 30 };
   view.innerHTML = `
     ${header(
       "Explore meaningful directions",
@@ -312,7 +398,7 @@ function renderDiscover(){
       const id = b.dataset.preview;
       const opt = opts.find(x => x.id === id);
       openModal({
-        eyebrow:"Discover",
+        eyebrow: "Discover",
         title: opt.title,
         sub: "A calm direction you can test for 14 days.",
         bodyHTML: `
@@ -322,7 +408,7 @@ function renderDiscover(){
             <div class="hr"></div>
             <p style="font-weight:700;">First steps</p>
             <ul class="bullets">
-              ${opt.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join("")}
+              ${opt.steps.map(s => `<li>${escapeHtml(s)}</li>`).join("")}
             </ul>
           </div>
           <div class="row" style="margin-top:12px;">
@@ -348,7 +434,7 @@ function renderDiscover(){
   updateSidebarStats();
 }
 
-function discoverOptions(focus, mpd){
+function discoverOptions(focus, mpd) {
   const m = clampInt(mpd, 10, 120);
   const id = () => uid();
 
@@ -441,7 +527,7 @@ function discoverOptions(focus, mpd){
     ]
   };
 
-  const chosen = (bank[focus] || bank.clarity).slice(0,3).map((o, i) => ({
+  const chosen = (bank[focus] || bank.clarity).slice(0, 3).map(o => ({
     id: id(),
     title: o.title,
     preview: o.preview,
@@ -452,7 +538,7 @@ function discoverOptions(focus, mpd){
   return chosen;
 }
 
-function commitDiscoverOption(opt, mpd){
+function commitDiscoverOption(opt, mpd) {
   const minutes = clampInt(mpd, 10, 120);
   const goal = {
     id: uid(),
@@ -474,7 +560,7 @@ function commitDiscoverOption(opt, mpd){
   });
 
   const firstAction = goal.milestones?.[0]?.actions?.[0];
-  if(firstAction){
+  if (firstAction) {
     state.today.tasks.unshift({
       id: uid(),
       title: `Next step: ${firstAction.title}`,
@@ -487,14 +573,18 @@ function commitDiscoverOption(opt, mpd){
   location.hash = "#/goals";
 }
 
-/* ---------- Goals (minimal placeholder, optimizer works) ---------- */
+/* =========================
+   Goals
+   ========================= */
 
-function renderGoals(opts = {}){
+function renderGoals(opts = {}) {
+  const view = $("#view");
+
   const list = state.goals.map(g => `
     <div class="item item--row">
       <div>
         <div class="item__title">${escapeHtml(g.title)}</div>
-        <div class="item__meta">${escapeHtml(`${g.minutesPerDay||30} min/day · effort ~${g.totalEffortHours||0}h`)}</div>
+        <div class="item__meta">${escapeHtml(`${g.minutesPerDay || 30} min/day · effort ~${g.totalEffortHours || 0}h`)}</div>
       </div>
       <div class="row">
         <button class="btn btn--ghost btn--sm" data-open="${escapeAttr(g.id)}" type="button">Open</button>
@@ -516,7 +606,7 @@ function renderGoals(opts = {}){
   $("#optGoalBtn").addEventListener("click", optimizeExistingGoalModal);
   $("#newGoalBtn").addEventListener("click", addGoalModal);
 
-  if(opts.optimize) optimizeExistingGoalModal();
+  if (opts.optimize) optimizeExistingGoalModal();
 
   $$("[data-del]").forEach(b => b.addEventListener("click", () => {
     const id = b.dataset.del;
@@ -528,18 +618,18 @@ function renderGoals(opts = {}){
   $$("[data-open]").forEach(b => b.addEventListener("click", () => {
     const id = b.dataset.open;
     const g = state.goals.find(x => x.id === id);
-    if(!g) return;
+    if (!g) return;
     openModal({
-      eyebrow:"Goal",
-      title:g.title,
-      sub:"This is a lightweight preview (full goals suite is already planned).",
+      eyebrow: "Goal",
+      title: g.title,
+      sub: "This is a lightweight preview (full goals suite is already planned).",
       bodyHTML: `
         <div class="card" style="margin-top:10px;">
           <p class="muted">${escapeHtml(g.notes || "")}</p>
           <div class="hr"></div>
           <p style="font-weight:700;">Milestones</p>
           <ul class="bullets">
-            ${(g.milestones||[]).map(m=>`<li>${escapeHtml(m.title)} (${(m.actions||[]).length} actions)</li>`).join("") || "<li>—</li>"}
+            ${(g.milestones || []).map(m => `<li>${escapeHtml(m.title)} (${(m.actions || []).length} actions)</li>`).join("") || "<li>—</li>"}
           </ul>
         </div>
         <div class="row" style="margin-top:12px;">
@@ -550,7 +640,7 @@ function renderGoals(opts = {}){
     });
     $("#closeGoal").addEventListener("click", closeModal);
     $("#addGoalFocusToToday").addEventListener("click", () => {
-      state.today.tasks.unshift({ id: uid(), title:`Goal focus: ${g.title}`, minutes: clampInt(g.minutesPerDay||30, 15, 90), done:false });
+      state.today.tasks.unshift({ id: uid(), title: `Goal focus: ${g.title}`, minutes: clampInt(g.minutesPerDay || 30, 15, 90), done: false });
       saveState();
       closeModal();
       location.hash = "#/today";
@@ -560,11 +650,11 @@ function renderGoals(opts = {}){
   updateSidebarStats();
 }
 
-function addGoalModal(){
+function addGoalModal() {
   openModal({
-    eyebrow:"Goals",
-    title:"Add a goal",
-    sub:"Keep it honest. You can refine later.",
+    eyebrow: "Goals",
+    title: "Add a goal",
+    sub: "Keep it honest. You can refine later.",
     bodyHTML: `
       <div class="field">
         <div class="label">Goal title</div>
@@ -597,14 +687,14 @@ function addGoalModal(){
   $("#goalCancel").addEventListener("click", closeModal);
   $("#goalCreate").addEventListener("click", () => {
     const title = $("#goalTitle").value.trim();
-    if(!title) return;
+    if (!title) return;
     const mpd = Number($("#goalMpd").value || 30);
     const focus = $("#goalFocus").value;
 
     const goal = {
       id: uid(),
       title,
-      notes:"Created manually.",
+      notes: "Created manually.",
       totalEffortHours: Math.max(6, Math.round((mpd * 21) / 60)),
       minutesPerDay: mpd,
       milestones: autoMilestonesForFocus(focus, mpd, title)
@@ -616,11 +706,11 @@ function addGoalModal(){
   });
 }
 
-function optimizeExistingGoalModal(){
+function optimizeExistingGoalModal() {
   openModal({
-    eyebrow:"Optimize",
-    title:"Make an existing goal executable",
-    sub:"We translate your goal into milestones, actions, and a calm rhythm.",
+    eyebrow: "Optimize",
+    title: "Make an existing goal executable",
+    sub: "We translate your goal into milestones, actions, and a calm rhythm.",
     bodyHTML: `
       <div class="field">
         <div class="label">Your goal</div>
@@ -672,7 +762,7 @@ function optimizeExistingGoalModal(){
   $("#ogCancel").addEventListener("click", closeModal);
   $("#ogCreate").addEventListener("click", () => {
     const title = $("#ogTitle").value.trim();
-    if(!title) return;
+    if (!title) return;
     const focus = $("#ogFocus").value;
     const mpd = Number($("#ogMpd").value || 30);
     const style = $("#ogStyle").value;
@@ -691,11 +781,11 @@ function optimizeExistingGoalModal(){
     goal.milestones = (style === "append") ? (goal.milestones.concat(generated)) : generated;
 
     state.goals.unshift(goal);
-    state.today.tasks.unshift({ id: uid(), title:`Goal focus: ${title}`, minutes: clampInt(mpd, 15, 90), done:false });
+    state.today.tasks.unshift({ id: uid(), title: `Goal focus: ${title}`, minutes: clampInt(mpd, 15, 90), done: false });
 
     const firstAction = goal.milestones?.[0]?.actions?.[0];
-    if(firstAction){
-      state.today.tasks.unshift({ id: uid(), title:`Next step: ${firstAction.title}`, minutes: clampInt(firstAction.minutes||20, 10, 60), done:false });
+    if (firstAction) {
+      state.today.tasks.unshift({ id: uid(), title: `Next step: ${firstAction.title}`, minutes: clampInt(firstAction.minutes || 20, 10, 60), done: false });
     }
 
     saveState();
@@ -704,11 +794,28 @@ function optimizeExistingGoalModal(){
   });
 }
 
-/* ---------- Today (clearer text, simple tasks) ---------- */
+/* =========================
+   Today
+   ========================= */
 
-function renderToday(){
+function taskRow(t) {
+  const meta = t.minutes ? `${t.minutes} min` : "—";
+  return `
+    <li class="item item--row" data-task="${escapeAttr(t.id)}">
+      <div class="chk ${t.done ? "is-done" : ""}" role="button" aria-label="toggle done"></div>
+      <div>
+        <div class="item__title">${escapeHtml(t.title)}</div>
+        <div class="item__meta">${escapeHtml(meta)}</div>
+      </div>
+      <button class="iconbtn2" type="button" data-del="${escapeAttr(t.id)}" aria-label="Delete">✕</button>
+    </li>
+  `;
+}
+
+function renderToday() {
+  const view = $("#view");
   const t = state.today;
-  const totalMin = t.tasks.reduce((s,x)=>s+(Number(x.minutes)||0),0);
+  const totalMin = t.tasks.reduce((s, x) => s + (Number(x.minutes) || 0), 0);
 
   view.innerHTML = `
     ${header("Today’s focus", "A realistic plan for a meaningful day.", `
@@ -753,14 +860,14 @@ function renderToday(){
     </div>
   `;
 
-  $("#priorityInput").addEventListener("input", (e)=>{ state.today.priority = e.target.value; saveState(); });
-  $("#doneByInput").addEventListener("input", (e)=>{ state.today.doneBy = e.target.value; saveState(); });
+  $("#priorityInput").addEventListener("input", (e) => { state.today.priority = e.target.value; saveState(); });
+  $("#doneByInput").addEventListener("input", (e) => { state.today.doneBy = e.target.value; saveState(); });
 
   $("#addStepBtn").addEventListener("click", () => {
     openModal({
-      eyebrow:"Today",
-      title:"Add a step",
-      sub:"Small and clear beats ambitious and vague.",
+      eyebrow: "Today",
+      title: "Add a step",
+      sub: "Small and clear beats ambitious and vague.",
       bodyHTML: `
         <div class="field">
           <div class="label">Step</div>
@@ -780,8 +887,8 @@ function renderToday(){
     $("#createTaskBtn").addEventListener("click", () => {
       const title = $("#newTaskTitle").value.trim();
       const minutes = Number($("#newTaskMin").value || 0);
-      if(!title) return;
-      state.today.tasks.unshift({ id: uid(), title, minutes: minutes || 0, done:false });
+      if (!title) return;
+      state.today.tasks.unshift({ id: uid(), title, minutes: minutes || 0, done: false });
       saveState();
       closeModal();
       renderToday();
@@ -789,16 +896,16 @@ function renderToday(){
   });
 
   $("#recBtn").addEventListener("click", () => {
-    const open = t.tasks.filter(x=>!x.done).length;
+    const open = t.tasks.filter(x => !x.done).length;
     const msg =
       open === 0 ? "Add one step that matters — nothing else."
-      : open >= 4 ? "Your plan is heavy. Protect one focus block, then remove one non-essential task."
-      : "Protect one uninterrupted block for your priority.";
+        : open >= 4 ? "Your plan is heavy. Protect one focus block, then remove one non-essential task."
+          : "Protect one uninterrupted block for your priority.";
 
     openModal({
-      eyebrow:"Recommendation",
-      title:"A calm improvement",
-      sub:"Optional. No pressure.",
+      eyebrow: "Recommendation",
+      title: "A calm improvement",
+      sub: "Optional. No pressure.",
       bodyHTML: `
         <div class="card" style="margin-top:10px;">
           <p style="font-weight:750;">${escapeHtml(msg)}</p>
@@ -812,7 +919,7 @@ function renderToday(){
     });
     $("#closeRec").addEventListener("click", closeModal);
     $("#addFocus").addEventListener("click", () => {
-      state.today.tasks.unshift({ id: uid(), title:"Focus block (protected)", minutes:45, done:false });
+      state.today.tasks.unshift({ id: uid(), title: "Focus block (protected)", minutes: 45, done: false });
       saveState();
       closeModal();
       renderToday();
@@ -822,7 +929,7 @@ function renderToday(){
   // toggle / delete
   t.tasks.forEach(task => {
     const rowEl = $(`[data-task="${task.id}"]`, view);
-    if(!rowEl) return;
+    if (!rowEl) return;
     $(".chk", rowEl).addEventListener("click", () => {
       task.done = !task.done;
       saveState();
@@ -838,23 +945,12 @@ function renderToday(){
   updateSidebarStats();
 }
 
-function taskRow(t){
-  const meta = t.minutes ? `${t.minutes} min` : "—";
-  return `
-    <li class="item item--row" data-task="${escapeAttr(t.id)}">
-      <div class="chk ${t.done ? "is-done":""}" role="button" aria-label="toggle done"></div>
-      <div>
-        <div class="item__title">${escapeHtml(t.title)}</div>
-        <div class="item__meta">${escapeHtml(meta)}</div>
-      </div>
-      <button class="iconbtn2" type="button" data-del="${escapeAttr(t.id)}" aria-label="Delete">✕</button>
-    </li>
-  `;
-}
+/* =========================
+   Week / Coming soon
+   ========================= */
 
-/* ---------- Week (placeholder) ---------- */
-
-function renderWeek(){
+function renderWeek() {
+  const view = $("#view");
   view.innerHTML = `
     ${header("The week in context", "This view exists to support balance — not to fill every hour.", "")}
     <div class="card">
@@ -867,7 +963,8 @@ function renderWeek(){
   updateSidebarStats();
 }
 
-function renderComingSoon(title, sub){
+function renderComingSoon(title, sub) {
+  const view = $("#view");
   view.innerHTML = `
     ${header(title, sub, "")}
     <div class="card">
@@ -882,35 +979,35 @@ function renderComingSoon(title, sub){
    ========================= */
 
 const DIALOGUE_TOPICS = [
-  { key:"meaning", title:"Meaning & direction", hint:"What is worth pursuing — and why?", school:"Socrates · Aristotle · Nietzsche" },
-  { key:"control", title:"Control & acceptance", hint:"What can I influence — and what should I stop fighting?", school:"Stoicism" },
-  { key:"desire", title:"Desire & simplicity", hint:"Do I really need this — or am I chasing it?", school:"Epicurus · Schopenhauer" },
-  { key:"principles", title:"Principles & integrity", hint:"Can I stand behind this action?", school:"Kant" },
-  { key:"effort", title:"Effort & resistance", hint:"What am I avoiding — and what would honest effort look like?", school:"Stoics · Kierkegaard · Camus" },
+  { key: "meaning", title: "Meaning & direction", hint: "What is worth pursuing — and why?", school: "Socrates · Aristotle · Nietzsche" },
+  { key: "control", title: "Control & acceptance", hint: "What can I influence — and what should I stop fighting?", school: "Stoicism" },
+  { key: "desire", title: "Desire & simplicity", hint: "Do I really need this — or am I chasing it?", school: "Epicurus · Schopenhauer" },
+  { key: "principles", title: "Principles & integrity", hint: "Can I stand behind this action?", school: "Kant" },
+  { key: "effort", title: "Effort & resistance", hint: "What am I avoiding — and what would honest effort look like?", school: "Stoics · Kierkegaard · Camus" },
 ];
 
 // 20 names (for credibility + scope)
 const PHILOSOPHER_OPTIONS = [
-  { key:"socratic", name:"Socrates (method)", line:"Define terms. Test assumptions. Ask better questions." },
-  { key:"plato", name:"Plato", line:"Look beyond appearances. What is the form of the good here?" },
-  { key:"aristotle", name:"Aristotle", line:"Purpose, virtue, habit. What is excellence in action?" },
-  { key:"epictetus", name:"Epictetus", line:"Control vs. not. Return to what depends on you." },
-  { key:"marcus", name:"Marcus Aurelius", line:"Act well. Accept what cannot be changed." },
-  { key:"seneca", name:"Seneca", line:"Time is life. Avoid false urgency." },
-  { key:"epicurus", name:"Epicurus", line:"Tranquility through simple, necessary desires." },
-  { key:"montaigne", name:"Montaigne", line:"Human, imperfect, honest. Live without performance." },
-  { key:"kant", name:"Immanuel Kant", line:"Principles you can will universally. Respect persons." },
-  { key:"mill", name:"J. S. Mill", line:"Consider consequences while protecting individuality." },
-  { key:"arendt", name:"Hannah Arendt", line:"Think before acting within systems." },
-  { key:"schopenhauer", name:"Schopenhauer", line:"Desire drives suffering. See the pattern clearly." },
-  { key:"nietzsche", name:"Nietzsche", line:"Create values. Choose your becoming consciously." },
-  { key:"pascal", name:"Pascal", line:"Distraction hides deeper questions." },
-  { key:"weil", name:"Simone Weil", line:"Attention is a moral act." },
-  { key:"confucius", name:"Confucius", line:"Cultivate character through right relationships and ritual." },
-  { key:"laozi", name:"Laozi", line:"Less forcing, more alignment. Do what fits." },
-  { key:"buddha", name:"Buddha", line:"Suffering and attachment. Notice, loosen, return." },
-  { key:"kierkegaard", name:"Kierkegaard", line:"Choose with inwardness. Anxiety signals freedom." },
-  { key:"camus", name:"Camus", line:"Face the absurd, still choose lucid action." },
+  { key: "socratic", name: "Socrates (method)", line: "Define terms. Test assumptions. Ask better questions." },
+  { key: "plato", name: "Plato", line: "Look beyond appearances. What is the form of the good here?" },
+  { key: "aristotle", name: "Aristotle", line: "Purpose, virtue, habit. What is excellence in action?" },
+  { key: "epictetus", name: "Epictetus", line: "Control vs. not. Return to what depends on you." },
+  { key: "marcus", name: "Marcus Aurelius", line: "Act well. Accept what cannot be changed." },
+  { key: "seneca", name: "Seneca", line: "Time is life. Avoid false urgency." },
+  { key: "epicurus", name: "Epicurus", line: "Tranquility through simple, necessary desires." },
+  { key: "montaigne", name: "Montaigne", line: "Human, imperfect, honest. Live without performance." },
+  { key: "kant", name: "Immanuel Kant", line: "Principles you can will universally. Respect persons." },
+  { key: "mill", name: "J. S. Mill", line: "Consider consequences while protecting individuality." },
+  { key: "arendt", name: "Hannah Arendt", line: "Think before acting within systems." },
+  { key: "schopenhauer", name: "Schopenhauer", line: "Desire drives suffering. See the pattern clearly." },
+  { key: "nietzsche", name: "Nietzsche", line: "Create values. Choose your becoming consciously." },
+  { key: "pascal", name: "Pascal", line: "Distraction hides deeper questions." },
+  { key: "weil", name: "Simone Weil", line: "Attention is a moral act." },
+  { key: "confucius", name: "Confucius", line: "Cultivate character through right relationships and ritual." },
+  { key: "laozi", name: "Laozi", line: "Less forcing, more alignment. Do what fits." },
+  { key: "buddha", name: "Buddha", line: "Suffering and attachment. Notice, loosen, return." },
+  { key: "kierkegaard", name: "Kierkegaard", line: "Choose with inwardness. Anxiety signals freedom." },
+  { key: "camus", name: "Camus", line: "Face the absurd, still choose lucid action." },
 ];
 
 const DIALOGUE_QUESTIONS = {
@@ -958,39 +1055,127 @@ const DIALOGUE_QUESTIONS = {
 };
 
 const PHILOSOPHER_LENSES = {
-  socratic: { tone:"inquisitive", opener:"Let’s clarify terms before we move.", close:"What assumption is hidden here?" },
-  plato: { tone:"ideal", opener:"Let’s separate appearance from what is real.", close:"What is the true good in this?" },
-  aristotle: { tone:"practical", opener:"Let’s think in terms of purpose and habit.", close:"What would excellence look like here?" },
-  epictetus: { tone:"stoic", opener:"Return to control: what depends on you?", close:"What is yours to do, today?" },
-  marcus: { tone:"stoic", opener:"Act well, accept the rest.", close:"What is the virtuous action now?" },
-  seneca: { tone:"stoic", opener:"Your time is your life. Spend it deliberately.", close:"What is false urgency here?" },
-  epicurus: { tone:"calm", opener:"Let’s seek tranquility rather than more.", close:"Which desire can you simplify?" },
-  montaigne: { tone:"human", opener:"Let’s be honest, not impressive.", close:"What is true for you, without performance?" },
-  kant: { tone:"principled", opener:"Name your maxim as a rule.", close:"Can you stand behind it universally?" },
-  mill: { tone:"consequences", opener:"Consider outcomes without losing yourself.", close:"Who is affected, and how?" },
-  arendt: { tone:"responsibility", opener:"Let’s think before we act within systems.", close:"What are you enabling by acting or not acting?" },
-  schopenhauer: { tone:"realist", opener:"Notice how desire pulls you into suffering.", close:"What does the will demand here?" },
-  nietzsche: { tone:"values", opener:"What values are you choosing to live by?", close:"Is this your goal — or theirs?" },
-  pascal: { tone:"lucid", opener:"Distraction is often a symptom.", close:"What are you not wanting to face?" },
-  weil: { tone:"attention", opener:"Let’s return to attention.", close:"What deserves your attention, precisely?" },
-  confucius: { tone:"cultivation", opener:"Let’s think character and relationships.", close:"What is the right practice here?" },
-  laozi: { tone:"alignment", opener:"Where are you forcing what doesn’t fit?", close:"What happens if you stop pushing?" },
-  buddha: { tone:"nonattachment", opener:"Let’s observe attachment without judgment.", close:"What happens if you let it loosen?" },
-  kierkegaard: { tone:"inward", opener:"Anxiety can signal freedom.", close:"What choice are you avoiding?" },
-  camus: { tone:"courage", opener:"Even without certainty, we can act lucidly.", close:"What is your honest next act?" },
+  socratic: { tone: "inquisitive", opener: "Let’s clarify terms before we move.", close: "What assumption is hidden here?" },
+  plato: { tone: "ideal", opener: "Let’s separate appearance from what is real.", close: "What is the true good in this?" },
+  aristotle: { tone: "practical", opener: "Let’s think in terms of purpose and habit.", close: "What would excellence look like here?" },
+  epictetus: { tone: "stoic", opener: "Return to control: what depends on you?", close: "What is yours to do, today?" },
+  marcus: { tone: "stoic", opener: "Act well, accept the rest.", close: "What is the virtuous action now?" },
+  seneca: { tone: "stoic", opener: "Your time is your life. Spend it deliberately.", close: "What is false urgency here?" },
+  epicurus: { tone: "calm", opener: "Let’s seek tranquility rather than more.", close: "Which desire can you simplify?" },
+  montaigne: { tone: "human", opener: "Let’s be honest, not impressive.", close: "What is true for you, without performance?" },
+  kant: { tone: "principled", opener: "Name your maxim as a rule.", close: "Can you stand behind it universally?" },
+  mill: { tone: "consequences", opener: "Consider outcomes without losing yourself.", close: "Who is affected, and how?" },
+  arendt: { tone: "responsibility", opener: "Let’s think before we act within systems.", close: "What are you enabling by acting or not acting?" },
+  schopenhauer: { tone: "realist", opener: "Notice how desire pulls you into suffering.", close: "What does the will demand here?" },
+  nietzsche: { tone: "values", opener: "What values are you choosing to live by?", close: "Is this your goal — or theirs?" },
+  pascal: { tone: "lucid", opener: "Distraction is often a symptom.", close: "What are you not wanting to face?" },
+  weil: { tone: "attention", opener: "Let’s return to attention.", close: "What deserves your attention, precisely?" },
+  confucius: { tone: "cultivation", opener: "Let’s think character and relationships.", close: "What is the right practice here?" },
+  laozi: { tone: "alignment", opener: "Where are you forcing what doesn’t fit?", close: "What happens if you stop pushing?" },
+  buddha: { tone: "nonattachment", opener: "Let’s observe attachment without judgment.", close: "What happens if you let it loosen?" },
+  kierkegaard: { tone: "inward", opener: "Anxiety can signal freedom.", close: "What choice are you avoiding?" },
+  camus: { tone: "courage", opener: "Even without certainty, we can act lucidly.", close: "What is your honest next act?" },
 };
 
-function ensureDialogue(){
+function ensureDialogue() {
   state = hydrateState(state);
   const d = state.ui.dialogue;
-  if(!d.messages.length){
-    d.messages.push({ role:"ai", ts: Date.now(), text:"Dialogue is a space for examination. What are you trying to understand right now?" });
+  if (!d.messages.length) {
+    d.messages.push({ role: "ai", ts: Date.now(), text: "Dialogue is a space for examination. What are you trying to understand right now?" });
   }
 }
 
-function renderDialogue(){
+function renderMsg(m) {
+  const role = m.role === "you" ? "You" : "Dialogue";
+  const cls = m.role === "you" ? "msg msg--you" : "msg msg--ai";
+  return `
+    <div class="${cls}">
+      <div class="msg__role">${escapeHtml(role)}</div>
+      <div class="msg__text">${escapeHtml(m.text)}</div>
+    </div>
+  `;
+}
+
+function exportDialogueText() {
+  const d = state.ui.dialogue;
+  const topic = DIALOGUE_TOPICS.find(t => t.key === d.topic)?.title || d.topic;
+  const phil = PHILOSOPHER_OPTIONS.find(p => p.key === d.philosopher)?.name || d.philosopher;
+  const lines = [];
+  lines.push(`SaverIoFlow Dialogue`);
+  lines.push(`Topic: ${topic}`);
+  lines.push(`Lens: ${phil}`);
+  lines.push(`—`);
+  for (const m of d.messages) {
+    lines.push(`${m.role === "you" ? "You" : "Dialogue"}: ${m.text}`);
+  }
+  return lines.join("\n");
+}
+
+function buildLead(userText, lens, depth, topicKey) {
+  const topicNames = {
+    meaning: "meaning and direction",
+    control: "control and acceptance",
+    desire: "desire and simplicity",
+    principles: "principles and integrity",
+    effort: "effort and resistance"
+  };
+  const t = topicNames[topicKey] || "clarity";
+  if (depth === 1) return `${lens.opener} We’re looking at ${t}.`;
+  if (depth === 2) return `${lens.opener} We’re looking at ${t}. Let’s make the question precise.`;
+  return `${lens.opener} We’re looking at ${t}. We’ll aim for precision, then one concrete implication.`;
+}
+
+function buildFollow(depth, lens, topicKey) {
+  if (depth === 1) return "";
+  if (depth === 2) return `${lens.close}`;
+  const exercises = {
+    meaning: "Mini-exercise: define “done” in one sentence. What would prove the goal is real?",
+    control: "Mini-exercise: list two things you control today, and one you explicitly release.",
+    desire: "Mini-exercise: name one desire you can simplify this week. What replaces it?",
+    principles: "Mini-exercise: write your rule as one maxim. Where does it break under universality?",
+    effort: "Mini-exercise: describe the first 10 minutes. What friction can you remove beforehand?"
+  };
+  return `${lens.close}\n\n${exercises[topicKey] || ""}`.trim();
+}
+
+function generateDialogueReply(lastUserText) {
+  const d = state.ui.dialogue;
+  const topicKey = d.topic;
+  const depth = clampInt(d.depth, 1, 3);
+  const lens = PHILOSOPHER_LENSES[d.philosopher] || PHILOSOPHER_LENSES.socratic;
+
+  const pool = DIALOGUE_QUESTIONS[topicKey] || DIALOGUE_QUESTIONS.meaning;
+  const c = d.cursor || (d.cursor = { meaning: 0, control: 0, desire: 0, principles: 0, effort: 0 });
+  const idx = c[topicKey] ?? 0;
+  const q = pool[idx % pool.length];
+  c[topicKey] = (idx + 1);
+
+  const lead = buildLead(lastUserText, lens, depth, topicKey);
+  const follow = buildFollow(depth, lens, topicKey);
+
+  return `${lead}\n\n${q}${follow ? `\n\n${follow}` : ""}`;
+}
+
+function sendDialogueMessage(rawText) {
   ensureDialogue();
   const d = state.ui.dialogue;
+  const text = String(rawText || "").trim();
+  if (!text) return;
+
+  d.messages.push({ role: "you", ts: Date.now(), text });
+
+  const reply = generateDialogueReply(text);
+  d.messages.push({ role: "ai", ts: Date.now(), text: reply });
+
+  saveState();
+  renderDialogue();
+}
+
+function renderDialogue() {
+  ensureDialogue();
+  const view = $("#view");
+  const d = state.ui.dialogue;
+
   const topic = DIALOGUE_TOPICS.find(t => t.key === d.topic) || DIALOGUE_TOPICS[0];
   const phil = PHILOSOPHER_OPTIONS.find(p => p.key === d.philosopher) || PHILOSOPHER_OPTIONS[0];
   const lens = PHILOSOPHER_LENSES[d.philosopher] || PHILOSOPHER_LENSES.socratic;
@@ -1007,7 +1192,7 @@ function renderDialogue(){
           <div class="field">
             <div class="label">Topic</div>
             <select class="select" id="dlgTopic">
-              ${DIALOGUE_TOPICS.map(t=>`<option value="${escapeAttr(t.key)}"${t.key===topic.key?" selected":""}>${escapeHtml(t.title)}</option>`).join("")}
+              ${DIALOGUE_TOPICS.map(t => `<option value="${escapeAttr(t.key)}"${t.key === topic.key ? " selected" : ""}>${escapeHtml(t.title)}</option>`).join("")}
             </select>
             <div class="help">${escapeHtml(topic.hint)} · <span class="gold">${escapeHtml(topic.school)}</span></div>
           </div>
@@ -1015,7 +1200,7 @@ function renderDialogue(){
           <div class="field">
             <div class="label">Lens</div>
             <select class="select" id="dlgPhil">
-              ${PHILOSOPHER_OPTIONS.map(p=>`<option value="${escapeAttr(p.key)}"${p.key===phil.key?" selected":""}>${escapeHtml(p.name)}</option>`).join("")}
+              ${PHILOSOPHER_OPTIONS.map(p => `<option value="${escapeAttr(p.key)}"${p.key === phil.key ? " selected" : ""}>${escapeHtml(p.name)}</option>`).join("")}
             </select>
             <div class="help">${escapeHtml(phil.line)}</div>
           </div>
@@ -1023,9 +1208,9 @@ function renderDialogue(){
           <div class="field">
             <div class="label">Depth</div>
             <div class="seg" role="group" aria-label="Depth">
-              <button class="seg__btn ${d.depth===1?"is-on":""}" data-depth="1" type="button">Light</button>
-              <button class="seg__btn ${d.depth===2?"is-on":""}" data-depth="2" type="button">Standard</button>
-              <button class="seg__btn ${d.depth===3?"is-on":""}" data-depth="3" type="button">Deep</button>
+              <button class="seg__btn ${d.depth === 1 ? "is-on" : ""}" data-depth="1" type="button">Light</button>
+              <button class="seg__btn ${d.depth === 2 ? "is-on" : ""}" data-depth="2" type="button">Standard</button>
+              <button class="seg__btn ${d.depth === 3 ? "is-on" : ""}" data-depth="3" type="button">Deep</button>
             </div>
             <div class="help">No advice. No prescriptions. Only clearer questions.</div>
           </div>
@@ -1066,7 +1251,6 @@ function renderDialogue(){
     </div>
   `;
 
-  // handlers
   $("#dlgTopic").addEventListener("change", (e) => {
     d.topic = e.target.value;
     saveState();
@@ -1087,9 +1271,9 @@ function renderDialogue(){
 
   $("#dlgReset").addEventListener("click", () => {
     openModal({
-      eyebrow:"Dialogue",
-      title:"Reset this dialogue?",
-      sub:"This clears the current conversation, not your goals.",
+      eyebrow: "Dialogue",
+      title: "Reset this dialogue?",
+      sub: "This clears the current conversation, not your goals.",
       bodyHTML: `
         <div class="row" style="margin-top:12px;">
           <button class="btn btn--primary" id="dlgResetYes" type="button">Reset</button>
@@ -1099,7 +1283,7 @@ function renderDialogue(){
     });
     $("#dlgResetNo").addEventListener("click", closeModal);
     $("#dlgResetYes").addEventListener("click", () => {
-      d.messages = [{ role:"ai", ts:Date.now(), text:"Dialogue is a space for examination. What are you trying to understand right now?" }];
+      d.messages = [{ role: "ai", ts: Date.now(), text: "Dialogue is a space for examination. What are you trying to understand right now?" }];
       saveState();
       closeModal();
       renderDialogue();
@@ -1109,9 +1293,9 @@ function renderDialogue(){
   $("#dlgExport").addEventListener("click", () => {
     const txt = exportDialogueText();
     openModal({
-      eyebrow:"Dialogue",
-      title:"Export",
-      sub:"Copy your conversation as text.",
+      eyebrow: "Dialogue",
+      title: "Export",
+      sub: "Copy your conversation as text.",
       bodyHTML: `
         <div class="field">
           <div class="label">Text</div>
@@ -1125,10 +1309,10 @@ function renderDialogue(){
     });
     $("#dlgCloseExport").addEventListener("click", closeModal);
     $("#dlgCopy").addEventListener("click", async () => {
-      try{
+      try {
         await navigator.clipboard.writeText(txt);
         closeModal();
-      }catch{
+      } catch {
         // ignore
       }
     });
@@ -1138,9 +1322,9 @@ function renderDialogue(){
 
   $("#dlgSaveInsight").addEventListener("click", () => {
     openModal({
-      eyebrow:"Dialogue",
-      title:"Save an insight",
-      sub:"A short sentence you want to remember.",
+      eyebrow: "Dialogue",
+      title: "Save an insight",
+      sub: "A short sentence you want to remember.",
       bodyHTML: `
         <div class="field">
           <div class="label">Insight</div>
@@ -1155,10 +1339,10 @@ function renderDialogue(){
     $("#cancelInsightBtn").addEventListener("click", closeModal);
     $("#saveInsightBtn").addEventListener("click", () => {
       const text = $("#insightText").value.trim();
-      if(!text) return;
-      d.saved.unshift({ id:uid(), ts:Date.now(), topic:d.topic, philosopher:d.philosopher, text });
-      // also offer to add to Today as a note-task
-      state.today.tasks.unshift({ id:uid(), title:`Reflection: ${text}`, minutes:0, done:false });
+      if (!text) return;
+      d.saved.unshift({ id: uid(), ts: Date.now(), topic: d.topic, philosopher: d.philosopher, text });
+      // also add to Today as a note-task
+      state.today.tasks.unshift({ id: uid(), title: `Reflection: ${text}`, minutes: 0, done: false });
       saveState();
       closeModal();
       renderDialogue();
@@ -1168,188 +1352,95 @@ function renderDialogue(){
   const input = $("#dlgInput");
   $("#dlgSend").addEventListener("click", () => sendDialogueMessage(input.value));
   input.addEventListener("keydown", (e) => {
-    if(e.key === "Enter" && !e.shiftKey){
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendDialogueMessage(input.value);
     }
   });
 
-  // scroll log to bottom
   const log = $("#dlgLog");
-  if(log) log.scrollTop = log.scrollHeight;
+  if (log) log.scrollTop = log.scrollHeight;
 
   updateSidebarStats();
 }
 
-function renderMsg(m){
-  const role = m.role === "you" ? "You" : "Dialogue";
-  const cls = m.role === "you" ? "msg msg--you" : "msg msg--ai";
-  return `
-    <div class="${cls}">
-      <div class="msg__role">${escapeHtml(role)}</div>
-      <div class="msg__text">${escapeHtml(m.text)}</div>
-    </div>
-  `;
-}
+/* =========================
+   Offline milestone templates
+   ========================= */
 
-function sendDialogueMessage(rawText){
-  ensureDialogue();
-  const d = state.ui.dialogue;
-  const text = String(rawText || "").trim();
-  if(!text) return;
-
-  d.messages.push({ role:"you", ts:Date.now(), text });
-
-  const reply = generateDialogueReply(text);
-  d.messages.push({ role:"ai", ts:Date.now(), text: reply });
-
-  saveState();
-  renderDialogue();
-}
-
-function exportDialogueText(){
-  const d = state.ui.dialogue;
-  const topic = DIALOGUE_TOPICS.find(t=>t.key===d.topic)?.title || d.topic;
-  const phil = PHILOSOPHER_OPTIONS.find(p=>p.key===d.philosopher)?.name || d.philosopher;
-  const lines = [];
-  lines.push(`SaverIoFlow Dialogue`);
-  lines.push(`Topic: ${topic}`);
-  lines.push(`Lens: ${phil}`);
-  lines.push(`—`);
-  for(const m of d.messages){
-    lines.push(`${m.role === "you" ? "You" : "Dialogue"}: ${m.text}`);
-  }
-  return lines.join("\n");
-}
-
-function generateDialogueReply(lastUserText){
-  const d = state.ui.dialogue;
-  const topicKey = d.topic;
-  const depth = clampInt(d.depth, 1, 3);
-  const lens = PHILOSOPHER_LENSES[d.philosopher] || PHILOSOPHER_LENSES.socratic;
-
-  const pool = DIALOGUE_QUESTIONS[topicKey] || DIALOGUE_QUESTIONS.meaning;
-  const c = d.cursor || (d.cursor = { meaning:0, control:0, desire:0, principles:0, effort:0 });
-  const idx = c[topicKey] ?? 0;
-  const q = pool[idx % pool.length];
-  c[topicKey] = (idx + 1);
-
-  // Minimal reflective lead-in (no advice)
-  const lead = buildLead(lastUserText, lens, depth, topicKey);
-  const follow = buildFollow(depth, lens, topicKey);
-
-  // End with question (core of Socratic style)
-  return `${lead}\n\n${q}${follow ? `\n\n${follow}` : ""}`;
-}
-
-function buildLead(userText, lens, depth, topicKey){
-  // Keep it calm and non-judgmental; avoid quoting user verbatim
-  const topicNames = {
-    meaning:"meaning and direction",
-    control:"control and acceptance",
-    desire:"desire and simplicity",
-    principles:"principles and integrity",
-    effort:"effort and resistance"
-  };
-  const t = topicNames[topicKey] || "clarity";
-  if(depth === 1){
-    return `${lens.opener} We’re looking at ${t}.`;
-  }
-  if(depth === 2){
-    return `${lens.opener} We’re looking at ${t}. Let’s make the question precise.`;
-  }
-  return `${lens.opener} We’re looking at ${t}. We’ll aim for precision, then one concrete implication.`;
-}
-
-function buildFollow(depth, lens, topicKey){
-  if(depth === 1) return "";
-  if(depth === 2) return `${lens.close}`;
-  // depth 3: tiny exercise prompt
-  const exercises = {
-    meaning: "Mini-exercise: define “done” in one sentence. What would prove the goal is real?",
-    control: "Mini-exercise: list two things you control today, and one you explicitly release.",
-    desire: "Mini-exercise: name one desire you can simplify this week. What replaces it?",
-    principles: "Mini-exercise: write your rule as one maxim. Where does it break under universality?",
-    effort: "Mini-exercise: describe the first 10 minutes. What friction can you remove beforehand?"
-  };
-  return `${lens.close}\n\n${exercises[topicKey] || ""}`.trim();
-}
-
-/* ---------- Offline milestone templates (used by Discover/Optimize) ---------- */
-
-function autoMilestonesForFocus(focus, mpd, goalTitle){
+function autoMilestonesForFocus(focus, mpd, goalTitle) {
   const m = clampInt(mpd || 30, 10, 120);
-  const scale = (baseMin) => clampInt(Math.round(baseMin * (m/30)), 10, 120);
+  const scale = (baseMin) => clampInt(Math.round(baseMin * (m / 30)), 10, 120);
 
   const lib = {
     clarity: [
-      { title:"Define the outcome", actions:[
-        { title:"Write a 1-page definition of done", minutes: scale(30), done:false },
-        { title:"List constraints + non-goals", minutes: scale(25), done:false },
+      { title: "Define the outcome", actions: [
+        { title: "Write a 1-page definition of done", minutes: scale(30), done: false },
+        { title: "List constraints + non-goals", minutes: scale(25), done: false },
       ]},
-      { title:"Design a calm rhythm", actions:[
-        { title:"Choose 3 weekly focus sessions", minutes: scale(20), done:false },
-        { title:"Write a weekly review checklist", minutes: scale(20), done:false },
+      { title: "Design a calm rhythm", actions: [
+        { title: "Choose 3 weekly focus sessions", minutes: scale(20), done: false },
+        { title: "Write a weekly review checklist", minutes: scale(20), done: false },
       ]},
-      { title:"Execute the first 7 days", actions:[
-        { title:"Prepare your first 3 steps", minutes: scale(20), done:false },
-        { title:"Do one protected focus block", minutes: scale(45), done:false },
+      { title: "Execute the first 7 days", actions: [
+        { title: "Prepare your first 3 steps", minutes: scale(20), done: false },
+        { title: "Do one protected focus block", minutes: scale(45), done: false },
       ]},
     ],
     skill: [
-      { title:"Build the learning ladder", actions:[
-        { title:"Define the core sub-skill", minutes: scale(25), done:false },
-        { title:"Pick one practice format", minutes: scale(20), done:false },
+      { title: "Build the learning ladder", actions: [
+        { title: "Define the core sub-skill", minutes: scale(25), done: false },
+        { title: "Pick one practice format", minutes: scale(20), done: false },
       ]},
-      { title:"Deliberate practice", actions:[
-        { title:"Do 5 sessions with feedback notes", minutes: scale(45), done:false },
-        { title:"Create an error list + fix plan", minutes: scale(25), done:false },
+      { title: "Deliberate practice", actions: [
+        { title: "Do 5 sessions with feedback notes", minutes: scale(45), done: false },
+        { title: "Create an error list + fix plan", minutes: scale(25), done: false },
       ]},
-      { title:"Ship proof of skill", actions:[
-        { title:"Produce a small artifact", minutes: scale(60), done:false },
-        { title:"Review / publish / share", minutes: scale(30), done:false },
+      { title: "Ship proof of skill", actions: [
+        { title: "Produce a small artifact", minutes: scale(60), done: false },
+        { title: "Review / publish / share", minutes: scale(30), done: false },
       ]},
     ],
     build: [
-      { title:"Scope & architecture", actions:[
-        { title:"Define MVP boundary in 10 bullets", minutes: scale(25), done:false },
-        { title:"Sketch the main flow (screens → data)", minutes: scale(35), done:false },
+      { title: "Scope & architecture", actions: [
+        { title: "Define MVP boundary in 10 bullets", minutes: scale(25), done: false },
+        { title: "Sketch the main flow (screens → data)", minutes: scale(35), done: false },
       ]},
-      { title:"First working version", actions:[
-        { title:"Implement core path end-to-end", minutes: scale(60), done:false },
-        { title:"Add a minimal QA checklist", minutes: scale(20), done:false },
+      { title: "First working version", actions: [
+        { title: "Implement core path end-to-end", minutes: scale(60), done: false },
+        { title: "Add a minimal QA checklist", minutes: scale(20), done: false },
       ]},
-      { title:"Polish & ship", actions:[
-        { title:"Fix friction points (top 3)", minutes: scale(30), done:false },
-        { title:"Ship a first release", minutes: scale(30), done:false },
+      { title: "Polish & ship", actions: [
+        { title: "Fix friction points (top 3)", minutes: scale(30), done: false },
+        { title: "Ship a first release", minutes: scale(30), done: false },
       ]},
     ],
     health: [
-      { title:"Stabilize baseline", actions:[
-        { title:"Set a sleep anchor time", minutes: scale(15), done:false },
-        { title:"Plan movement 3×/week", minutes: scale(20), done:false },
+      { title: "Stabilize baseline", actions: [
+        { title: "Set a sleep anchor time", minutes: scale(15), done: false },
+        { title: "Plan movement 3×/week", minutes: scale(20), done: false },
       ]},
-      { title:"Reduce friction", actions:[
-        { title:"Prepare environment (clothes / food / space)", minutes: scale(20), done:false },
-        { title:"Define a recovery ritual", minutes: scale(15), done:false },
+      { title: "Reduce friction", actions: [
+        { title: "Prepare environment (clothes / food / space)", minutes: scale(20), done: false },
+        { title: "Define a recovery ritual", minutes: scale(15), done: false },
       ]},
-      { title:"Review and adjust", actions:[
-        { title:"Track lightly for 7 days", minutes: scale(10), done:false },
-        { title:"Adjust one thing, not everything", minutes: scale(15), done:false },
+      { title: "Review and adjust", actions: [
+        { title: "Track lightly for 7 days", minutes: scale(10), done: false },
+        { title: "Adjust one thing, not everything", minutes: scale(15), done: false },
       ]},
     ],
     income: [
-      { title:"Choose one lever", actions:[
-        { title:"Pick one lever (skills/offer/network)", minutes: scale(20), done:false },
-        { title:"Define a weekly delivery rhythm", minutes: scale(20), done:false },
+      { title: "Choose one lever", actions: [
+        { title: "Pick one lever (skills/offer/network)", minutes: scale(20), done: false },
+        { title: "Define a weekly delivery rhythm", minutes: scale(20), done: false },
       ]},
-      { title:"Build & test", actions:[
-        { title:"Create a simple offer draft", minutes: scale(35), done:false },
-        { title:"Test with 5 conversations", minutes: scale(45), done:false },
+      { title: "Build & test", actions: [
+        { title: "Create a simple offer draft", minutes: scale(35), done: false },
+        { title: "Test with 5 conversations", minutes: scale(45), done: false },
       ]},
-      { title:"Refine", actions:[
-        { title:"Review feedback; refine one thing", minutes: scale(25), done:false },
-        { title:"Repeat weekly", minutes: scale(20), done:false },
+      { title: "Refine", actions: [
+        { title: "Review feedback; refine one thing", minutes: scale(25), done: false },
+        { title: "Repeat weekly", minutes: scale(20), done: false },
       ]},
     ]
   };
@@ -1361,6 +1452,34 @@ function autoMilestonesForFocus(focus, mpd, goalTitle){
   }));
 }
 
-// init
-route();
-updateSidebarStats();
+/* =========================
+   Boot
+   ========================= */
+
+(function boot() {
+  ensureAppShell();
+
+  // Modal wiring (works whether shell was pre-existing or injected)
+  $("#modalClose")?.addEventListener("click", closeModal);
+  $("#modal")?.addEventListener("click", (e) => {
+    const inner = $(".modal__inner", $("#modal"));
+    if (inner && !inner.contains(e.target)) closeModal();
+  });
+
+  // Reset wiring
+  $("#resetBtn")?.addEventListener("click", () => {
+    state = defaultState();
+    saveState();
+    location.hash = "#/start";
+    route();
+  });
+
+  // Ensure canonical entry route on first load
+  if (!location.hash || location.hash === "#" || location.hash === "#/") {
+    location.replace("#/start");
+  }
+
+  // Initial render
+  route();
+  updateSidebarStats();
+})();
