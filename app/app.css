@@ -640,3 +640,184 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .btn, .nav__link, .iconbtn2, .appBackLink{transition:none}
   .btn:hover{transform:none}
 }
+/* =========================================================
+   SaverIoFlow Premium Layer UI (pricing/unlock + modal)
+   ========================================================= */
+
+.svf-view{
+  padding: 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.svf-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom: 14px;
+}
+
+.svf-head h1{ margin:0; }
+.svf-head p{ margin:6px 0 0; }
+
+.svf-head-actions{ display:flex; gap:10px; }
+
+.svf-cards{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 980px){
+  .svf-cards{ grid-template-columns: 1fr; }
+}
+
+.svf-card{
+  position:relative;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.10));
+  backdrop-filter: blur(6px);
+}
+
+.svf-card-gold{
+  border-color: rgba(212,175,55,0.35);
+  background: linear-gradient(180deg, rgba(212,175,55,0.10), rgba(0,0,0,0.10));
+}
+
+.svf-card-subtle{
+  margin-top: 14px;
+  border-color: rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.10));
+}
+
+.svf-badge{
+  position:absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,55,0.35);
+  color: rgba(212,175,55,0.95);
+  background: rgba(212,175,55,0.08);
+}
+
+.svf-hr{
+  height:1px;
+  background: rgba(255,255,255,0.08);
+  margin: 12px 0;
+}
+
+.svf-list{
+  margin: 10px 0 14px;
+  padding-left: 18px;
+}
+
+.svf-price-row{
+  display:flex;
+  align-items:baseline;
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+
+.svf-price{
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.svf-details{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.svf-details summary{
+  cursor:pointer;
+  user-select:none;
+  opacity: 0.85;
+}
+
+.svf-pill{
+  display:inline-block;
+  margin-left: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  opacity: 0.9;
+}
+
+.svf-label{
+  display:block;
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 8px;
+}
+
+.svf-textarea{
+  width: 100%;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.18);
+  color: inherit;
+  padding: 12px;
+  outline: none;
+}
+
+.svf-row{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.svf-code{
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.18);
+  margin-top: 10px;
+}
+
+.svf-small{ font-size: 12px; }
+
+/* Minimal fallback modal (if app modal not available) */
+.svf-modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.60);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.svf-modal{
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.20));
+  padding: 16px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+}
+
+.svf-modal-title{
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.svf-modal-actions{
+  display:flex;
+  gap: 10px;
+  justify-content:flex-end;
+  margin-top: 14px;
+}
+
