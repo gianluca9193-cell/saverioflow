@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
   <title>SaverIoFlow — More structure. More focus. Better results.</title>
-  <meta name="description" content="A calm execution system for daily plans and goal achievement — from hourly to yearly. Forecasting included." />
+  <meta name="description" content="A calm execution system for daily plans and goal achievement — from hourly to yearly. Includes goal discovery and forecasting." />
 
   <meta property="og:title" content="SaverIoFlow — More structure. More focus. Better results." />
-  <meta property="og:description" content="A calm execution system for daily plans and goal achievement — from hourly to yearly. Forecasting included." />
+  <meta property="og:description" content="A calm execution system for daily plans and goal achievement — from hourly to yearly. Includes goal discovery and forecasting." />
   <meta property="og:type" content="website" />
 
   <link rel="stylesheet" href="/style.css" />
@@ -27,6 +27,7 @@
 
       <nav class="nav" aria-label="Primary navigation">
         <a href="#features">Features</a>
+        <a href="#discover">Discover</a>
         <a href="#flow">Onboarding</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
@@ -86,9 +87,9 @@
             <div class="subcard">
               <div class="subcard__top">
                 <span class="spark spark--alt" aria-hidden="true"></span>
-                <span class="subcard__title" data-i18n="mini2_title">Recommendation</span>
+                <span class="subcard__title" data-i18n="mini2_title">Goal discovery</span>
               </div>
-              <p class="subcard__text" data-i18n="mini2_text">Add one 45-min focus block today.</p>
+              <p class="subcard__text" data-i18n="mini2_text">Not sure what to pursue? We’ll help you pick a direction.</p>
             </div>
           </div>
         </div>
@@ -125,12 +126,12 @@
                 <span class="v">Best hours: 09–11</span>
               </div>
               <div class="pane__row">
-                <span class="k">Friction</span>
-                <span class="v">Meetings fragment focus</span>
+                <span class="k">Suggestion</span>
+                <span class="v">Protect 1 focus block/day</span>
               </div>
               <div class="pane__row">
-                <span class="k">Suggestion</span>
-                <span class="v">Protect 1 block/day</span>
+                <span class="k">Next</span>
+                <span class="v">Write outline (30 min)</span>
               </div>
             </div>
 
@@ -175,7 +176,6 @@
         <div class="grid cards">
           <article class="card">
             <div class="card__icon" aria-hidden="true">
-              <!-- calendar -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M7 3v3M17 3v3M4 7h16M6 10h4M6 14h6M6 18h5" />
                 <path d="M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
@@ -188,7 +188,6 @@
 
           <article class="card">
             <div class="card__icon" aria-hidden="true">
-              <!-- goal graph -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M6 18V6" />
                 <path d="M6 16c3-4 5-5 8-3s4 1 4-3" />
@@ -204,7 +203,6 @@
 
           <article class="card">
             <div class="card__icon" aria-hidden="true">
-              <!-- blocks -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M5 6h14M5 12h10M5 18h12" />
                 <path d="M18 12v6M15 12v6" />
@@ -217,7 +215,6 @@
 
           <article class="card">
             <div class="card__icon" aria-hidden="true">
-              <!-- insights -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M4 19h16" />
                 <path d="M7 16V9M12 16V6M17 16v-4" />
@@ -233,7 +230,6 @@
 
           <article class="card">
             <div class="card__icon" aria-hidden="true">
-              <!-- forecasting -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M4 17c3-6 6-8 10-5s4 1 6-5" />
                 <path d="M19 7h1v5h-5" />
@@ -249,7 +245,6 @@
 
           <article class="card card--accent">
             <div class="card__icon" aria-hidden="true">
-              <!-- spark -->
               <svg class="icon icon--draw" viewBox="0 0 24 24">
                 <path d="M12 2l1.6 6.2L20 10l-6.4 1.8L12 18l-1.6-6.2L4 10l6.4-1.8L12 2z" />
                 <path d="M19 14l.8 3L23 18l-3.2 1-.8 3-.8-3L15 18l3.2-1 .8-3z" />
@@ -259,6 +254,83 @@
             <p data-i18n="f6_desc">Small improvements and new goal ideas — calm, optional, and practical.</p>
             <p class="example" data-i18n="f6_ex">Example: “Add one 45-min focus block today.”</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCOVER GOALS (NEW) -->
+    <section id="discover" class="section">
+      <div class="container">
+        <div class="discover">
+          <div class="discover__left">
+            <p class="eyebrow" data-i18n="discover_eyebrow">No goals yet?</p>
+            <h2 data-i18n="discover_title">Let’s find one worth pursuing.</h2>
+            <p class="muted discover__sub" data-i18n="discover_sub">
+              A short, calm flow that turns your situation into a clear next goal — and creates a first plan.
+            </p>
+
+            <div class="discover__actions">
+              <button class="btn btn--primary" type="button" id="openDiscovery" data-i18n="discover_cta_primary">
+                Discover a goal
+              </button>
+              <a class="btn btn--ghost" href="#flow" data-i18n="discover_cta_secondary">See onboarding</a>
+            </div>
+
+            <ul class="discover__bullets" aria-label="What you get">
+              <li><span class="dot dot--blue"></span><span data-i18n="discover_b1">3 tailored goal options</span></li>
+              <li><span class="dot"></span><span data-i18n="discover_b2">a realistic time plan</span></li>
+              <li><span class="dot dot--soft"></span><span data-i18n="discover_b3">a first daily plan (wow moment)</span></li>
+            </ul>
+          </div>
+
+          <div class="discover__right" aria-hidden="true">
+            <!-- Minimal artistic illustration (SVG) -->
+            <svg class="discoverArt" viewBox="0 0 520 420">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="rgba(215,180,106,0.55)"/>
+                  <stop offset="1" stop-color="rgba(160,210,255,0.35)"/>
+                </linearGradient>
+                <filter id="blurGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <path class="da__line" d="M70 310c70-110 140-160 220-160s140 55 160 125" />
+              <path class="da__line da__line--alt" d="M90 325c80-120 160-180 250-180s140 60 150 150" />
+              <path class="da__line da__line--soft" d="M60 280c100-80 175-110 250-95s120 60 150 120" />
+
+              <g filter="url(#blurGlow)">
+                <circle class="da__node" cx="170" cy="190" r="6"/>
+                <circle class="da__node da__node--alt" cx="260" cy="160" r="7"/>
+                <circle class="da__node" cx="340" cy="210" r="6"/>
+                <circle class="da__node da__node--soft" cx="410" cy="255" r="5"/>
+                <circle class="da__node" cx="130" cy="250" r="5"/>
+              </g>
+
+              <path class="da__halo" d="M120 360c90-60 180-90 280-80s130 35 150 70" />
+              <circle class="da__pulse" cx="260" cy="160" r="14"/>
+            </svg>
+
+            <div class="discoverCard">
+              <div class="discoverCard__row">
+                <span class="k">Direction</span>
+                <span class="v">Skill growth</span>
+              </div>
+              <div class="discoverCard__row">
+                <span class="k">Time</span>
+                <span class="v">30 min/day</span>
+              </div>
+              <div class="discoverCard__row">
+                <span class="k">First plan</span>
+                <span class="v gold">Today: 1 focus block</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -372,8 +444,8 @@
           </details>
 
           <details class="faq">
-            <summary data-i18n="q3">How do recommendations work?</summary>
-            <p data-i18n="a3">They are small, optional suggestions based on your schedule and progress — never pushy.</p>
+            <summary data-i18n="q3">How does goal discovery work?</summary>
+            <p data-i18n="a3">A short guided flow suggests a few realistic directions. You pick one — and get a first plan.</p>
           </details>
 
           <details class="faq">
@@ -412,6 +484,60 @@
     </section>
   </main>
 
+  <!-- Goal Discovery Modal (NEW) -->
+  <dialog class="modal" id="discoveryModal" aria-label="Goal discovery">
+    <div class="modal__inner">
+      <div class="modal__top">
+        <div>
+          <p class="eyebrow" data-i18n="m_eyebrow">Goal discovery</p>
+          <h2 class="modal__title" data-i18n="m_title">Pick a direction — we build the plan.</h2>
+          <p class="muted modal__sub" data-i18n="m_sub">This is a calm 60-second preview. In the app it becomes your first plan.</p>
+        </div>
+        <button class="iconbtn" type="button" id="closeDiscovery" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal__grid">
+        <div class="modal__step">
+          <p class="modal__k" data-i18n="m_s1k">1) What do you want most right now?</p>
+          <div class="pills">
+            <button class="pillbtn is-active" type="button" data-pick="clarity" data-i18n="m_s1a">Clarity</button>
+            <button class="pillbtn" type="button" data-pick="energy" data-i18n="m_s1b">Energy</button>
+            <button class="pillbtn" type="button" data-pick="money" data-i18n="m_s1c">Income</button>
+            <button class="pillbtn" type="button" data-pick="skill" data-i18n="m_s1d">Skill</button>
+          </div>
+        </div>
+
+        <div class="modal__step">
+          <p class="modal__k" data-i18n="m_s2k">2) How much time can you invest daily?</p>
+          <div class="pills">
+            <button class="pillbtn" type="button" data-time="10">10 min</button>
+            <button class="pillbtn is-active" type="button" data-time="20">20 min</button>
+            <button class="pillbtn" type="button" data-time="45">45 min</button>
+            <button class="pillbtn" type="button" data-time="60">60 min</button>
+          </div>
+        </div>
+
+        <div class="modal__result">
+          <div class="result__head">
+            <p class="modal__k" data-i18n="m_resk">3) Your options (example)</p>
+            <span class="tag">Preview</span>
+          </div>
+
+          <div class="result__cards" id="resultCards">
+            <!-- injected by JS -->
+          </div>
+
+          <div class="result__cta">
+            <a class="btn btn--primary" href="#pricing" data-i18n="m_cta">Start free in the app</a>
+            <p class="muted small" data-i18n="m_note">In the real app, this generates milestones, actions and a first daily plan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
@@ -427,7 +553,91 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Simple EN/DE
+    // --- Goal Discovery modal logic (static preview) ---
+    const modal = document.getElementById("discoveryModal");
+    const openBtn = document.getElementById("openDiscovery");
+    const closeBtn = document.getElementById("closeDiscovery");
+    const resultCards = document.getElementById("resultCards");
+
+    let state = { pick: "clarity", time: 20 };
+
+    const options = {
+      clarity: [
+        { title: "12-week reset", desc: "Clean week structure + daily execution.", ex: "Plan: 3 blocks/day · weekly review" },
+        { title: "Project focus", desc: "Pick one project and finish step-by-step.", ex: "ETA: 6 weeks · 45 min/day" },
+        { title: "Declutter & simplify", desc: "Reduce noise → increase clarity.", ex: "15 min/day · 10-day sprint" },
+      ],
+      energy: [
+        { title: "Energy routine", desc: "A small routine that compounds.", ex: "20 min/day · 4 weeks" },
+        { title: "Sleep & focus", desc: "Stabilize schedule, improve deep work.", ex: "ETA: 14 days · 15 min/day" },
+        { title: "Movement plan", desc: "Low-friction habit with tracking.", ex: "10 min/day · 30 days" },
+      ],
+      money: [
+        { title: "Skill → income", desc: "Pick one skill and ship weekly output.", ex: "45 min/day · 8 weeks" },
+        { title: "Side project", desc: "Build a small offer with milestones.", ex: "ETA: 10 weeks · 60 min/day" },
+        { title: "Improve finances", desc: "Simple system: overview + weekly check.", ex: "20 min/week · monthly insight" },
+      ],
+      skill: [
+        { title: "Learn a skill fast", desc: "A structured ladder with daily practice.", ex: "30 min/day · 6 weeks" },
+        { title: "Portfolio sprint", desc: "Publish small pieces consistently.", ex: "20 min/day · 30 days" },
+        { title: "Deep work upgrade", desc: "Protect focus time and measure it.", ex: "1 block/day · weekly trend" },
+      ]
+    };
+
+    function renderResults() {
+      const list = options[state.pick] || options.clarity;
+      // adjust examples based on time a bit
+      const t = state.time;
+      const factor = t >= 45 ? "faster" : (t <= 10 ? "slower" : "balanced");
+
+      resultCards.innerHTML = list.map((o, i) => `
+        <button class="rcard ${i===0 ? "is-active" : ""}" type="button">
+          <div class="rcard__top">
+            <span class="rcard__dot"></span>
+            <span class="rcard__title">${o.title}</span>
+            <span class="rcard__tag">${factor}</span>
+          </div>
+          <p class="rcard__desc">${o.desc}</p>
+          <p class="rcard__ex">${o.ex}</p>
+        </button>
+      `).join("");
+    }
+
+    function setPick(p) { state.pick = p; renderResults(); }
+    function setTime(t) { state.time = Number(t); renderResults(); }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".pillbtn");
+      if (!btn) return;
+
+      // toggle active within its container
+      const wrap = btn.closest(".pills");
+      if (wrap) wrap.querySelectorAll(".pillbtn").forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      if (btn.dataset.pick) setPick(btn.dataset.pick);
+      if (btn.dataset.time) setTime(btn.dataset.time);
+    });
+
+    openBtn.addEventListener("click", () => {
+      renderResults();
+      modal.showModal();
+      document.body.classList.add("is-modal");
+    });
+
+    function closeModal() {
+      modal.close();
+      document.body.classList.remove("is-modal");
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      // click outside closes
+      const inner = modal.querySelector(".modal__inner");
+      if (!inner.contains(e.target)) closeModal();
+    });
+
+    // --- EN/DE simple i18n (minimal: new keys added for discover + modal headings) ---
     const dict = {
       en: {
         hero_eyebrow: "Flow-System for planning & execution",
@@ -438,8 +648,8 @@
         hero_trust: "Not coaching. No hype. A calm system that improves your execution.",
         mini1_title: "Today plan",
         mini1_text: "3 blocks · 1 priority · done-by 18:00",
-        mini2_title: "Recommendation",
-        mini2_text: "Add one 45-min focus block today.",
+        mini2_title: "Goal discovery",
+        mini2_text: "Not sure what to pursue? We’ll help you pick a direction.",
 
         features_title: "Everything under one roof",
         features_sub: "Daily plans when you want it simple. Goal systems when you want it serious.",
@@ -467,6 +677,15 @@
         f6_title: "Recommendations & ideas",
         f6_desc: "Small improvements and new goal ideas — calm, optional, and practical.",
         f6_ex: "Example: “Add one 45-min focus block today.”",
+
+        discover_eyebrow: "No goals yet?",
+        discover_title: "Let’s find one worth pursuing.",
+        discover_sub: "A short, calm flow that turns your situation into a clear next goal — and creates a first plan.",
+        discover_cta_primary: "Discover a goal",
+        discover_cta_secondary: "See onboarding",
+        discover_b1: "3 tailored goal options",
+        discover_b2: "a realistic time plan",
+        discover_b3: "a first daily plan (wow moment)",
 
         flow_title: "5-Minute Flow onboarding",
         flow_sub: "A guided setup that ends with a real plan for today.",
@@ -513,8 +732,8 @@
         a1: "No. SaverIoFlow is a system for planning, execution, and progress tracking.",
         q2: "Can I use it only for daily plans?",
         a2: "Yes. Daily planning works standalone. Goals and long-term layers are optional.",
-        q3: "How do recommendations work?",
-        a3: "They are small, optional suggestions based on your schedule and progress — never pushy.",
+        q3: "How does goal discovery work?",
+        a3: "A short guided flow suggests a few realistic directions. You pick one — and get a first plan.",
         q4: "What is forecasting?",
         a4: "An ETA plus the daily effort needed — based on your available time and estimated workload.",
         q5: "When should I upgrade?",
@@ -525,7 +744,20 @@
         cta_title: "A calmer way to become successful.",
         cta_sub: "Start with a daily plan. Grow into a full system.",
         cta_primary: "Start free",
-        cta_secondary: "See what’s included"
+        cta_secondary: "See what’s included",
+
+        m_eyebrow: "Goal discovery",
+        m_title: "Pick a direction — we build the plan.",
+        m_sub: "This is a calm 60-second preview. In the app it becomes your first plan.",
+        m_s1k: "1) What do you want most right now?",
+        m_s1a: "Clarity",
+        m_s1b: "Energy",
+        m_s1c: "Income",
+        m_s1d: "Skill",
+        m_s2k: "2) How much time can you invest daily?",
+        m_resk: "3) Your options (example)",
+        m_cta: "Start free in the app",
+        m_note: "In the real app, this generates milestones, actions and a first daily plan."
       },
       de: {
         hero_eyebrow: "Flow-System für Planung & Umsetzung",
@@ -536,8 +768,8 @@
         hero_trust: "Kein Coaching. Kein Hype. Ein ruhiges System, das deine Umsetzung verbessert.",
         mini1_title: "Tagesplan",
         mini1_text: "3 Blöcke · 1 Priorität · fertig bis 18:00",
-        mini2_title: "Empfehlung",
-        mini2_text: "Heute einen 45-Minuten Fokusblock einplanen.",
+        mini2_title: "Ziel-Finder",
+        mini2_text: "Noch unsicher? Wir helfen dir, eine Richtung zu wählen.",
 
         features_title: "Alles unter einem Dach",
         features_sub: "Tagespläne, wenn es simpel sein soll. Zielsystem, wenn es ernst wird.",
@@ -565,6 +797,15 @@
         f6_title: "Empfehlungen & Ideen",
         f6_desc: "Kleine Verbesserungen und neue Ziel-Ideen — ruhig, optional, praktisch.",
         f6_ex: "Beispiel: „Heute 45-Minuten Fokusblock einplanen.“",
+
+        discover_eyebrow: "Noch kein Ziel?",
+        discover_title: "Finde eine Richtung, die sich lohnt.",
+        discover_sub: "Ein kurzer, ruhiger Flow: aus deiner Situation wird ein klares nächstes Ziel — plus erster Plan.",
+        discover_cta_primary: "Ziel finden",
+        discover_cta_secondary: "Onboarding ansehen",
+        discover_b1: "3 passende Ziel-Optionen",
+        discover_b2: "ein realistischer Zeitplan",
+        discover_b3: "ein erster Tagesplan (Wow-Moment)",
 
         flow_title: "5-Minuten-Flow Onboarding",
         flow_sub: "Geführtes Setup mit echtem Tagesplan als Ergebnis.",
@@ -611,8 +852,8 @@
         a1: "Nein. SaverIoFlow ist ein System für Planung, Umsetzung und Fortschritt.",
         q2: "Kann ich es nur für Tagespläne nutzen?",
         a2: "Ja. Tagesplanung funktioniert allein. Ziele und Langfrist-Ebenen sind optional.",
-        q3: "Wie funktionieren Empfehlungen?",
-        a3: "Kleine, optionale Vorschläge aus deinem Plan und Fortschritt — nie aufdringlich.",
+        q3: "Wie funktioniert der Ziel-Finder?",
+        a3: "Ein kurzer Flow schlägt realistische Richtungen vor. Du wählst — und bekommst einen ersten Plan.",
         q4: "Was ist Forecasting?",
         a4: "ETA plus nötiger Tagesaufwand — basierend auf verfügbarer Zeit und geschätztem Aufwand.",
         q5: "Wann sollte ich upgraden?",
@@ -623,7 +864,20 @@
         cta_title: "Ein ruhiger Weg zu Erfolg.",
         cta_sub: "Starte mit einem Tagesplan. Wachse zum System.",
         cta_primary: "Kostenlos starten",
-        cta_secondary: "Inhalte ansehen"
+        cta_secondary: "Inhalte ansehen",
+
+        m_eyebrow: "Ziel-Finder",
+        m_title: "Wähle eine Richtung — wir bauen den Plan.",
+        m_sub: "Das ist eine ruhige 60-Sekunden-Vorschau. In der App wird daraus dein erster Plan.",
+        m_s1k: "1) Was willst du gerade am meisten?",
+        m_s1a: "Klarheit",
+        m_s1b: "Energie",
+        m_s1c: "Einkommen",
+        m_s1d: "Skill",
+        m_s2k: "2) Wie viel Zeit pro Tag ist realistisch?",
+        m_resk: "3) Optionen (Beispiel)",
+        m_cta: "Kostenlos starten",
+        m_note: "In der echten App entstehen daraus Meilensteine, Aktionen und dein erster Tagesplan."
       }
     };
 
