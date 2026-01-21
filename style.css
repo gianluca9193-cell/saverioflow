@@ -469,3 +469,40 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
   .btn{transition:none}
   .btn:hover{transform:none}
 }
++/* =========================
++   Micro-interactions
++   ========================= */
++
++/* Active nav (scroll spy) */
++.nav__link.is-active{
++  color: var(--text);
++  border-color: rgba(215,181,109,.22);
++  background: rgba(215,181,109,.06);
++}
++
++/* details: subtle open animation */
++details .details__body,
++details .canon__grid{
++  opacity: 0;
++  transform: translateY(-4px);
++  transition: opacity .18s ease, transform .18s ease;
++}
++details[open] .details__body,
++details[open] .canon__grid{
++  opacity: 1;
++  transform: translateY(0);
++}
++
++/* Make details feel click-targeted */
++details > summary{
++  user-select: none;
++}
++
++@media (prefers-reduced-motion: reduce){
++  details .details__body,
++  details .canon__grid{
++    transition: none;
++    transform: none;
++  }
++}
+
