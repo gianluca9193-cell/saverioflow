@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { "source": "/app", "destination": "/app/index.html" },
-    { "source": "/app/:path*", "destination": "/app/:path*" },
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/app/(.*)", "destination": "/app/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
