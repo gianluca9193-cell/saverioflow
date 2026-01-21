@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SaverIoFlow — A quiet operating system for a meaningful life</title>
+  <title>SaverIoFlow — Quiet planning, real progress, real impact</title>
 
-  <meta name="description" content="SaverIoFlow hilft dir, deinen Tag ruhig, machbar und sinnvoll zu planen — mit optionalem Impact für Mensch, Tier und Umwelt."/>
+  <meta name="description" content="SaverIoFlow übersetzt Ziele in machbare Tagespläne — ruhig, realistisch, mit Plan B. Optionaler Impact für Mensch, Tiere und Umwelt."/>
   <meta name="theme-color" content="#070b10"/>
 
   <!-- DESIGN SYSTEM -->
@@ -14,17 +14,22 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/landing-override.css">
 
-  <!-- PREMIUM ADDONS -->
+  <!-- CINEMATIC ADDONS -->
   <link rel="stylesheet" href="/hero-art.css">
   <link rel="stylesheet" href="/motion.css">
 </head>
 
 <body>
 
-  <!-- HERO -->
+  <!-- HERO (cinematic + visible artwork) -->
   <header class="hero">
+    <div class="heroGlow"></div>
+    <div class="heroGlow2"></div>
+    <div class="heroFilm"></div>
+    <div class="heroVignette"></div>
+
     <div class="container heroInner">
-      <div class="stack">
+      <div class="heroCopy stack">
         <div class="badge badge-gold fadeUp">Offline-first • Keine Accounts • Keine Datenweitergabe</div>
 
         <h1 class="fadeUp" style="margin:0;">
@@ -41,11 +46,17 @@
           <a href="#features" class="btn btn-ghost">Features</a>
         </div>
 
-        <div class="row fadeUp" style="margin-top:12px; max-width:520px;">
+        <div class="row fadeUp" style="margin-top:12px; max-width:620px; flex-wrap:wrap;">
           <div class="badge badge-turq">Today Plan + Plan B</div>
           <div class="badge">Check-in in 30 Sekunden</div>
           <div class="badge">Impact Ledger</div>
         </div>
+      </div>
+
+      <!-- Visible artwork -->
+      <div class="heroArtWrap fadeUp">
+        <div class="heroFrame"></div>
+        <img class="heroArt" src="/images/statue.png" alt="SaverIoFlow Artwork">
       </div>
     </div>
   </header>
@@ -53,91 +64,156 @@
   <div class="container"><hr class="hr"/></div>
 
   <!-- FEATURES -->
-  <section id="features" class="container" style="padding:70px 0;">
+  <section id="features" class="container" style="padding:76px 0 10px;">
     <div class="stack">
-      <h2 class="fadeUp">Was du sofort bekommst</h2>
+      <h2 class="fadeUp">Was die App für dich macht</h2>
 
       <div class="row">
+        <!-- Today Plan -->
         <div class="card fadeUp">
-          <h2>🧭 Today-Plan</h2>
-          <p class="meta">
-            3–5 Aufgaben, realistisch nach Energie & Zeitbudget. Kein Overplanning.
-          </p>
-          <div class="badge badge-turq" style="margin-top:10px;">Energie-basiert</div>
-        </div>
+          <div class="badge badge-turq" style="width:max-content;">Core</div>
+          <h2 style="margin-top:10px;">Today Plan</h2>
 
-        <div class="card fadeUp">
-          <h2>🪂 Plan B</h2>
-          <p class="meta">
-            Wenn der Tag schwer ist: jede Aufgabe hat eine kleinere Version.
-          </p>
-          <div class="badge badge-gold" style="margin-top:10px;">Minimum-Day möglich</div>
-        </div>
+          <!-- Illustration (inline SVG) -->
+          <div style="margin:12px 0 8px;">
+            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
+              <path d="M28 76 C78 34, 148 104, 212 58 C276 12, 330 116, 402 52 C440 18, 472 30, 492 44" stroke="rgba(56,224,211,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M28 92 C86 64, 144 112, 210 82 C276 52, 332 110, 402 70 C444 46, 474 56, 492 66" stroke="rgba(215,184,92,.45)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="212" cy="58" r="6" fill="rgba(56,224,211,.75)"/>
+              <circle cx="402" cy="52" r="6" fill="rgba(215,184,92,.7)"/>
+            </svg>
+          </div>
 
-        <div class="card fadeUp">
-          <h2>🧠 Ruhiger Check-in</h2>
           <p class="meta">
-            30 Sekunden am Abend: Was war schwer? Was wird morgen kleiner?
-          </p>
-          <div class="badge" style="margin-top:10px;">ohne Schuldgefühl</div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top:14px;">
-        <div class="card fadeUp">
-          <h2>🌱 Impact</h2>
-          <p class="meta">
-            Ziele in 3 Kategorien: Persönlich, Gemeinwohl, Erde & Tiere.
-            Optional: transparenter Anteil aus Premium fließt in Projekte.
-          </p>
-        </div>
-
-        <div class="card fadeUp">
-          <h2>📱 Läuft wie eine App</h2>
-          <p class="meta">
-            Direkt im Browser. Auf dem Handy „Zum Homescreen hinzufügen“ — fertig.
+            3–5 Aufgaben, realistisch nach Energie & Zeitbudget. Kein Overplanning. Kein Stress.
           </p>
           <div class="row" style="margin-top:12px;">
-            <a class="btn btn-primary" href="/app/">Jetzt testen</a>
-            <a class="btn btn-ghost" href="#impact">Impact Prinzip</a>
+            <span class="badge">Zeitbudget</span>
+            <span class="badge">Energie-Level</span>
+            <span class="badge">Prioritäten</span>
+          </div>
+        </div>
+
+        <!-- Plan B -->
+        <div class="card fadeUp">
+          <div class="badge badge-gold" style="width:max-content;">Safety Net</div>
+          <h2 style="margin-top:10px;">Plan B</h2>
+
+          <div style="margin:12px 0 8px;">
+            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
+              <path d="M110 92 C150 36, 226 24, 260 68 C290 108, 356 100, 390 54" stroke="rgba(215,184,92,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M78 78 C122 40, 178 56, 210 86 C250 124, 328 118, 372 78" stroke="rgba(56,224,211,.40)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M260 18 L260 104" stroke="rgba(255,255,255,.10)" stroke-width="2" stroke-dasharray="6 8"/>
+              <circle cx="260" cy="68" r="7" fill="rgba(215,184,92,.75)"/>
+            </svg>
+          </div>
+
+          <p class="meta">
+            Jede Aufgabe hat eine kleinere Version — damit du auch an schweren Tagen weiterkommst.
+          </p>
+          <div class="badge" style="margin-top:12px; width:max-content;">Minimum-Day in 1 Tap</div>
+        </div>
+
+        <!-- Check-in -->
+        <div class="card fadeUp">
+          <div class="badge" style="width:max-content;">Calm Loop</div>
+          <h2 style="margin-top:10px;">Ruhiger Check-in</h2>
+
+          <div style="margin:12px 0 8px;">
+            <svg width="100%" height="96" viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.95">
+              <path d="M88 86 C120 44, 168 44, 200 86 C232 128, 280 128, 312 86 C344 44, 392 44, 424 86" stroke="rgba(255,255,255,.16)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M88 86 C120 44, 168 44, 200 86" stroke="rgba(56,224,211,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M312 86 C344 44, 392 44, 424 86" stroke="rgba(215,184,92,.55)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <p class="meta">
+            30 Sekunden am Abend: Was war schwer? Was wird morgen kleiner? Ohne Schuldgefühl.
+          </p>
+          <div class="row" style="margin-top:12px;">
+            <span class="badge">1 Frage</span>
+            <span class="badge">1 Anpassung</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CATEGORIES -->
-  <section class="container" style="padding:10px 0 70px;">
-    <div class="stack">
-      <h2 class="fadeUp">Deine Ziele — in 3 Welten</h2>
+  <!-- APP PREVIEW + CATEGORIES -->
+  <section class="container" style="padding:22px 0 78px;">
+    <div class="row">
+      <div class="card fadeUp">
+        <h2>App Preview</h2>
+        <p class="meta">So fühlt sich SaverIoFlow an: ruhig, klar, minimal.</p>
 
-      <div class="row">
-        <div class="card fadeUp">
-          <h2>A — Persönlich</h2>
-          <p class="meta">Health • Lernen • Karriere • Kreativität • Mindfulness</p>
+        <!-- Mini UI mock (no image needed) -->
+        <div class="item" style="margin-top:12px;">
+          <div class="itemTop">
+            <div class="itemTitle">Heute</div>
+            <span class="badge badge-turq">30 min</span>
+          </div>
+          <div class="itemSub">3 Aufgaben • Energie: Medium • Plan B verfügbar</div>
         </div>
-        <div class="card fadeUp">
-          <h2>B — Gemeinwohl</h2>
-          <p class="meta">Community • Ehrenamt • Hilfe • (leise Peace Practices)</p>
+
+        <div class="item">
+          <div class="itemTop">
+            <div class="itemTitle">Task</div>
+            <span class="badge">12 min</span>
+          </div>
+          <div class="itemSub">Plan B: 3 Minuten nur anfangen</div>
         </div>
-        <div class="card fadeUp">
-          <h2>C — Erde & Tiere</h2>
-          <p class="meta">Nachhaltigkeit • Bäume • Tierschutz • bewusster Alltag</p>
+
+        <div class="row" style="margin-top:12px;">
+          <a class="btn btn-primary" href="/app/">Jetzt testen</a>
+          <a class="btn btn-ghost" href="#impact">Impact Prinzip</a>
+        </div>
+      </div>
+
+      <div class="card fadeUp">
+        <h2>3 Ziel-Welten (dein Twist)</h2>
+        <p class="meta">Damit Ziele nicht nur dich, sondern auch die Welt verbessern.</p>
+
+        <div class="item" style="margin-top:12px;">
+          <div class="itemTop">
+            <div class="itemTitle">A — Persönlich</div>
+            <span class="badge">Health • Lernen • Karriere</span>
+          </div>
+          <div class="itemSub">Du baust Stabilität: Energie, Skills, Fokus.</div>
+        </div>
+
+        <div class="item">
+          <div class="itemTop">
+            <div class="itemTitle">B — Gemeinwohl</div>
+            <span class="badge badge-gold">Community • Hilfe</span>
+          </div>
+          <div class="itemSub">Leise Beiträge: Kontakte, Ehrenamt, Mikro-Hilfe.</div>
+        </div>
+
+        <div class="item">
+          <div class="itemTop">
+            <div class="itemTitle">C — Erde & Tiere</div>
+            <span class="badge badge-turq">Nachhaltigkeit • Tierschutz</span>
+          </div>
+          <div class="itemSub">Machbare Schritte statt Moral & Druck.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- IMPACT -->
-  <section id="impact" class="container" style="padding:10px 0 80px;">
+  <section id="impact" class="container" style="padding:10px 0 88px;">
     <div class="row">
       <div class="card fadeUp">
         <h2>Impact ohne Greenwashing</h2>
         <p class="meta">
-          Wir versprechen keine exakten CO₂-Märchen. Wir zeigen harte Zahlen:
+          Keine fake CO₂-Zahlen. Stattdessen harte Transparenz:
           <strong>€ gespendet</strong>, <strong>Projekte</strong>, <strong>Zeiträume</strong>.
         </p>
-        <div class="badge badge-gold" style="margin-top:10px;">Transparenz zuerst</div>
+        <div class="row" style="margin-top:12px;">
+          <span class="badge badge-gold">Ledger</span>
+          <span class="badge">Quellen/Partner</span>
+          <span class="badge">Zeitraum</span>
+        </div>
       </div>
 
       <div class="card fadeUp">
@@ -146,13 +222,13 @@
           Kein politischer Feed. Keine Debatten.
           Nur Mikro-Handlungen: Deeskalation, Zuhören, Hilfe im Kleinen.
         </p>
-        <div class="badge badge-turq" style="margin-top:10px;">leise • real • machbar</div>
+        <div class="badge badge-turq" style="margin-top:12px; width:max-content;">leise • real • machbar</div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="container" style="padding:0 0 90px;">
+  <section class="container" style="padding:0 0 96px;">
     <div class="card fadeUp" style="text-align:center;">
       <h2>Beginne heute. Nicht perfekt. Nur ehrlich.</h2>
       <p class="meta" style="margin:14px 0 22px;">
