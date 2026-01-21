@@ -1,56 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Core -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0f14" />
-  <meta name="color-scheme" content="dark" />
-
-  <!-- Meta -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0d10" />
   <title>SaverIoFlow — App</title>
-  <meta
-    name="description"
-    content="SaverIoFlow App — offline-first system for goal discovery, philosophical dialogue, and focused execution."
-  />
-
-  <!-- App Styles -->
   <link rel="stylesheet" href="/app/app.css" />
 </head>
-
 <body>
-  <!-- Back to Landing (persistent, minimal) -->
-  <a
-    href="/"
-    class="appBackLink"
-    aria-label="Back to Landing Page"
-  >
-    ← Landing
-  </a>
+  <div id="app"></div>
 
-  <!-- App Root (SPA Mount Point) -->
-  <main
-    id="app"
-    role="application"
-    aria-label="SaverIoFlow Application"
-  ></main>
+  <!-- Crypto verifier (offline) -->
+  <script src="/app/tweetnacl.min.js"></script>
 
-  <!-- App Script -->
+  <!-- Your existing app -->
   <script src="/app/app.js"></script>
 
-  <!-- Fallback -->
-  <noscript>
-    <div style="
-      padding:16px;
-      margin:16px;
-      border-radius:12px;
-      background:#0b0f14;
-      color:#e9eef6;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      border:1px solid rgba(255,255,255,.08);
-    ">
-      SaverIoFlow requires JavaScript to run.
-    </div>
-  </noscript>
+  <!-- Premium layer (adds #/pricing + #/unlock, and global premium helpers) -->
+  <script src="/app/premium.js"></script>
 </body>
 </html>
