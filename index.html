@@ -367,9 +367,19 @@
 <footer class="footer">
   <p class="muted">© 2026 SaverIoFlow. Calm by design.</p>
 </footer>
+<script>
+  // Backward-compatible redirect: old "#app" links go to the real app route
+  (function () {
+    const h = (location.hash || "").toLowerCase();
+    if (h === "#app" || h.startsWith("#app/") || h.startsWith("#app?")) {
+      location.replace("/app/#/start");
+    }
+  })();
+</script>
 
 </body>
 </html>
+
 
 
 
