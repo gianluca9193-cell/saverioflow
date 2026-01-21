@@ -1,0 +1,48 @@
+/* hero-art.css — premium hero artwork using existing /images/statue.png */
+
+.hero{
+  position: relative;
+  padding: 96px 0 74px;
+  overflow: hidden;
+}
+
+.hero::before{
+  /* statue artwork */
+  content:"";
+  position:absolute;
+  inset: -40px -40px -40px -40px;
+  background:
+    radial-gradient(900px 420px at 20% 20%, rgba(56,224,211,.10), transparent 60%),
+    radial-gradient(900px 420px at 80% 30%, rgba(215,184,92,.10), transparent 60%),
+    url("/images/statue.png");
+  background-repeat: no-repeat;
+  background-size: clamp(340px, 42vw, 560px);
+  background-position: right 10% center;
+  opacity: .26;
+  filter: saturate(0.9) contrast(1.05);
+  transform: translateZ(0);
+  pointer-events:none;
+}
+
+.hero::after{
+  /* soft vignette to blend artwork */
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(1200px 700px at 70% 40%, rgba(0,0,0,.0), rgba(0,0,0,.45));
+  pointer-events:none;
+}
+
+.heroInner{
+  position: relative;
+  max-width: 720px;
+}
+
+/* mobile: reduce artwork */
+@media (max-width: 820px){
+  .hero{ padding: 74px 0 54px; }
+  .hero::before{
+    background-position: right -10% top 40%;
+    opacity: .18;
+    background-size: 420px;
+  }
+}
