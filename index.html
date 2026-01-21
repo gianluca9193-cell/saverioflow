@@ -1,379 +1,170 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/components.css">
-<link rel="stylesheet" href="/style.css">
-<a href="/app/" class="btn btn-primary">Open App</a>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SaverIoFlow — A quiet operating system for a meaningful life</title>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>SaverIoFlow — More structure. More focus. Better results.</title>
-  <meta name="description" content="SaverIoFlow is a premium, minimalist system for clear goals, philosophical reflection, and focused execution. Offline-first. No coaching. No hard-sell." />
-  <link rel="stylesheet" href="/style.css" />
+  <!-- SEO -->
+  <meta name="description" content="SaverIoFlow hilft dir, deinen Tag ruhig, machbar und sinnvoll zu planen — mit optionalem Impact für Mensch, Tier und Umwelt."/>
+  <meta name="theme-color" content="#070b10"/>
+
+  <!-- DESIGN SYSTEM (WICHTIGE REIHENFOLGE) -->
+  <link rel="stylesheet" href="/theme.css">
+  <link rel="stylesheet" href="/components.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/landing-override.css">
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true"></div>
 
-  <header class="top">
-    <a class="brand" href="/" aria-label="SaverIoFlow home">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__name">SaverIoFlow</span>
-    </a>
+  <!-- HERO -->
+  <header class="container" style="padding: 90px 0 70px;">
+    <div class="stack" style="max-width:680px;">
+      <h1>
+        SaverIoFlow
+      </h1>
 
-    <nav class="nav">
-      <a class="nav__link" href="#philosophy">Philosophy</a>
-      <a class="nav__link" href="#product">Product</a>
-      <a class="nav__link" href="#canon">Canon</a>
-      <a class="nav__cta" href="/app/#/start">Open App</a>
-    </nav>
+      <p class="meta" style="font-size:16px; line-height:1.6;">
+        A quiet operating system for a meaningful life.<br>
+        Plane deinen Tag ruhig. Handle realistisch. Wirke – ohne Lärm.
+      </p>
+
+      <div class="row" style="margin-top:22px;">
+        <a href="/app/" class="btn btn-primary">
+          Open App
+        </a>
+        <a href="#how" class="btn btn-ghost">
+          Wie es funktioniert
+        </a>
+      </div>
+
+      <div class="badge badge-gold" style="margin-top:18px; width:max-content;">
+        Offline-first • Keine Accounts • Keine Datenweitergabe
+      </div>
+    </div>
   </header>
 
-  <main class="wrap">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow">Premium • Minimal • Offline-first</p>
-          <h1 class="hero__h1">More structure.<br/>More focus.<br/>Better results.</h1>
+  <hr class="hr"/>
 
-          <p class="hero__sub">
-            A calm system for goal-finding, reflection, and daily execution.
-            No coaching. No hard-sell. Just a clear interface for serious work.
+  <!-- HOW IT WORKS -->
+  <section id="how" class="container" style="padding:70px 0;">
+    <div class="stack">
+
+      <h2>Wie SaverIoFlow funktioniert</h2>
+
+      <div class="row">
+        <div class="card">
+          <h2>1. Klar denken</h2>
+          <p class="meta">
+            Statt dich zu überfordern, stellt dir SaverIoFlow die richtigen Fragen.
+            Nicht mehr. Nicht weniger.
           </p>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="/app/#/start">Start</a>
-            <a class="btn btn--ghost" href="/app/#/dialogue">Dialogue</a>
-            <a class="btn btn--quiet" href="#learn">Learn more</a>
-          </div>
-
-          <div class="hero__meta" id="learn">
-            <a class="meta__link" href="#philosophy">How it works</a>
-            <span class="dot" aria-hidden="true">•</span>
-            <a class="meta__link" href="#product">What’s inside</a>
-            <span class="dot" aria-hidden="true">•</span>
-            <a class="meta__link" href="#canon">Philosophical canon</a>
-          </div>
         </div>
 
-        <div class="hero__panel" aria-label="Product highlights">
-          <div class="panel">
-            <div class="panel__top">
-              <div class="panel__badge">Offline-first</div>
-              <div class="panel__badge panel__badge--gold">LocalStorage only</div>
-            </div>
-
-            <div class="panel__rows">
-              <div class="row">
-                <div class="ico" aria-hidden="true">
-                <a href="/app/" class="your-button-class">Open App</a>
-
-                  <!-- Minimal compass -->
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" stroke="currentColor" stroke-width="1.4"/>
-                    <path d="M14.8 9.2 13 13l-3.8 1.8L11 11l3.8-1.8Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="row__title">Discover-first</div>
-                  <div class="row__sub">Find a goal worth doing before planning.</div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="ico" aria-hidden="true">
-                  <!-- Minimal path -->
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 18c4-8 8 2 16-10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                    <path d="M18.5 8.5h2.5V6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="row__title">Goals → Milestones → Actions</div>
-                  <div class="row__sub">Clarity without excess complexity.</div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="ico" aria-hidden="true">
-                  <!-- Minimal dialog -->
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M7 17.5 4 20V6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v9a3.5 3.5 0 0 1-3.5 3.5H7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-                    <path d="M8 9h8M8 12h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="row__title">Philosophical Dialogue</div>
-                  <div class="row__sub">Only questions. No advice. No hype.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel__bottom">
-              <a class="panel__link" href="/app/#/today">Go to Today</a>
-              <span class="dot" aria-hidden="true">•</span>
-              <a class="panel__link" href="/app/#/goals">Go to Goals</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- THREE PILLARS (VERY LITTLE TEXT) -->
-    <section class="pillars" id="product">
-      <div class="sectionHead">
-        <h2>Minimal surface. Serious depth.</h2>
-        <p>Short, deliberate modules — each expandable if you want the details.</p>
-      </div>
-
-      <div class="cards">
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">
-            <!-- Abstract “seed” -->
-            <svg viewBox="0 0 48 48" fill="none">
-              <path d="M24 6c8 8 12 16 12 22a12 12 0 1 1-24 0c0-6 4-14 12-22Z" stroke="currentColor" stroke-width="1.4"/>
-              <path d="M24 14v20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card__title">Discover</div>
-          <div class="card__sub">Templates that sharpen intent.</div>
-          <details class="card__details">
-            <summary>Read</summary>
-            <div class="details__body">
-              Discover is not motivation. It is structure: prompts that reduce vagueness,
-              reveal trade-offs, and force a concrete target you can actually execute.
-            </div>
-            <a class="details__link" href="/app/#/discover">Open Discover</a>
-          </details>
-        </article>
-
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">
-            <!-- Abstract “grid” -->
-            <svg viewBox="0 0 48 48" fill="none">
-              <path d="M10 12h28M10 24h28M10 36h28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              <path d="M16 10v28M24 10v28M32 10v28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-            </svg>
-          </div>
-          <div class="card__title">Goals</div>
-          <div class="card__sub">Milestones and actions, kept clean.</div>
-          <details class="card__details">
-            <summary>Read</summary>
-            <div class="details__body">
-              Goals are written for clarity, not for display. Milestones exist to compress complexity.
-              Actions exist to remove friction from the next day.
-            </div>
-            <a class="details__link" href="/app/#/goals">Open Goals</a>
-          </details>
-        </article>
-
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">
-            <!-- Abstract “hourglass” -->
-            <svg viewBox="0 0 48 48" fill="none">
-              <path d="M16 10h16M16 38h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              <path d="M18 12c0 8 12 8 12 12s-12 4-12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              <path d="M30 12c0 8-12 8-12 12s12 4 12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
-            </svg>
-          </div>
-          <div class="card__title">Today</div>
-          <div class="card__sub">A calm execution layer.</div>
-          <details class="card__details">
-            <summary>Read</summary>
-            <div class="details__body">
-              Today keeps the horizon short. You choose the next concrete task, maintain a quiet focus,
-              and export insights from Dialogue directly into execution.
-            </div>
-            <a class="details__link" href="/app/#/today">Open Today</a>
-          </details>
-        </article>
-      </div>
-    </section>
-
-    <!-- PHILOSOPHY (LINKS INSTEAD OF BIG TEXT) -->
-    <section class="philo" id="philosophy">
-      <div class="sectionHead">
-        <h2>Philosophy, used correctly.</h2>
-        <p>Not quotes. Not cosplay. A dialogue that turns ideas into attention.</p>
-      </div>
-
-      <div class="philo__grid">
-        <div class="philo__card">
-          <div class="philo__kicker">Core rule</div>
-          <div class="philo__line">Only questions. No advice.</div>
-          <div class="philo__links">
-            <a href="/app/#/dialogue" class="link">Open Dialogue</a>
-            <span class="dot" aria-hidden="true">•</span>
-            <a href="#canon" class="link">See the canon</a>
-          </div>
+        <div class="card">
+          <h2>2. Machbar planen</h2>
+          <p class="meta">
+            Deine Ziele werden in kleine, realistische Schritte übersetzt —
+            angepasst an Energie und Zeit.
+          </p>
         </div>
 
-        <div class="philo__card philo__card--soft">
-          <div class="philo__kicker">Details (optional)</div>
-
-          <details class="compact">
-            <summary>Why questions, not answers?</summary>
-            <div class="details__body">
-              Because execution fails from self-deception, not from lack of information.
-              Questions expose assumptions and create clean commitments.
-            </div>
-          </details>
-
-          <details class="compact">
-            <summary>What it is not</summary>
-            <div class="details__body">
-              Not coaching. Not therapy. Not motivational rhetoric.
-              No “10x”. No hustle language. No forced positivity.
-            </div>
-          </details>
-
-          <details class="compact">
-            <summary>Depth levels</summary>
-            <div class="details__body">
-              Light for quick clarity, Standard for steady thinking, Deep for real examination.
-              The tone stays calm either way.
-            </div>
-          </details>
+        <div class="card">
+          <h2>3. Ruhig handeln</h2>
+          <p class="meta">
+            Ein Today-Plan. Immer mit Plan B.
+            Kein Scheitern. Kein Druck.
+          </p>
         </div>
       </div>
-    </section>
 
-    <!-- CANON (COLLAPSED) -->
-    <section class="canon" id="canon">
-      <div class="sectionHead">
-        <h2>Philosophical canon</h2>
-        <p>Used as lenses — not as authority.</p>
-      </div>
+    </div>
+  </section>
 
-      <details class="canon__details">
-        <summary>Open list</summary>
-        <div class="canon__grid">
-          <span class="tag">Socrates</span>
-          <span class="tag">Plato</span>
-          <span class="tag">Aristotle</span>
-          <span class="tag">Epicurus</span>
-          <span class="tag">Stoics</span>
-          <span class="tag">Marcus Aurelius</span>
-          <span class="tag">Epictetus</span>
-          <span class="tag">Seneca</span>
-          <span class="tag">Montaigne</span>
-          <span class="tag">Spinoza</span>
-          <span class="tag">Hume</span>
-          <span class="tag">Kant</span>
-          <span class="tag">Schopenhauer</span>
-          <span class="tag">Kierkegaard</span>
-          <span class="tag">Nietzsche</span>
-          <span class="tag">Simone Weil</span>
-          <span class="tag">Camus</span>
-          <span class="tag">Arendt</span>
-          <span class="tag">Wittgenstein</span>
-          <span class="tag">Buddhist lenses</span>
-        </div>
-      </details>
-    </section>
-<section class="section" id="pricing">
-  <div class="section-head">
-    <h2>Pricing</h2>
-    <p class="muted">Quiet, transparent, offline-first.</p>
-  </div>
-
-  <div class="pricing-grid">
-    <article class="price-card">
-      <div class="price-top">
-        <h3>Free</h3>
-        <div class="price">€0</div>
-      </div>
-      <p class="muted">Core structure for goals, execution, and reflection.</p>
-      <a class="btn" href="/app/#/start">Open app</a>
-
-      <details class="details">
-        <summary>What’s included</summary>
-        <ul class="list">
-          <li>Discover journey</li>
-          <li>Goals, milestones, actions</li>
-          <li>Today focus + tasks</li>
-          <li>Dialogue (Light/Standard)</li>
-        </ul>
-      </details>
-    </article>
-
-    <article class="price-card featured">
-      <div class="badge">Most chosen</div>
-      <div class="price-top">
-        <h3>Premium Annual</h3>
-        <div class="price">€49<span class="per">/year</span></div>
-      </div>
-      <p class="muted">Full depth + exports + premium drops.</p>
-      <a class="btn gold" href="/app/#/unlock">Unlock Premium</a>
-
-      <details class="details">
-        <summary>Premium features</summary>
-        <ul class="list">
-          <li>Dialogue: Deep + extended lenses</li>
-          <li>Export sessions (Markdown/Text)</li>
-          <li>More capacity (goals/tasks)</li>
-          <li>Backup/Restore (local file)</li>
-          <li>Week + Flow drops</li>
-        </ul>
-      </details>
-    </article>
-
-    <article class="price-card">
-      <div class="price-top">
-        <h3>Premium Lifetime</h3>
-        <div class="price">€149</div>
-      </div>
-      <p class="muted">One-time purchase. Own the system.</p>
-      <a class="btn" href="/app/#/unlock">Unlock Premium</a>
-
-      <details class="details">
-        <summary>Notes</summary>
-        <p class="muted">
-          Offline-first. No accounts. Your data stays on your device.
+  <!-- PHILOSOPHY -->
+  <section class="container" style="padding:70px 0;">
+    <div class="row">
+      <div class="card">
+        <h2>Philosophie</h2>
+        <p class="meta">
+          Menschen scheitern nicht an Disziplin,<br>
+          sondern an Überforderung.
         </p>
-      </details>
-    </article>
-  </div>
-
-  <div class="fineprint">
-    <a class="link" href="/app/#/pricing">View comparison</a>
-    <span class="dot">•</span>
-    <a class="link" href="/app/#/unlock">Enter license</a>
-  </div>
-</section>
-
-    <!-- FOOTER CTA (MINIMAL) -->
-    <section class="final">
-      <div class="final__card">
-        <div class="final__left">
-          <div class="final__title">A quiet system for serious work.</div>
-          <div class="final__sub">Offline-first. Minimal. Built for clarity.</div>
-        </div>
-        <div class="final__right">
-          <a class="btn btn--primary" href="/app/#/start">Open App</a>
-          <a class="btn btn--ghost" href="/app/#/today">Today</a>
-        </div>
+        <p class="meta">
+          SaverIoFlow ist kein Motivationstool.<br>
+          Es ist ein Ordnungsraum für Denken, Handeln und Verantwortung.
+        </p>
       </div>
 
-      <footer class="footer">
-        <div class="footer__left">© <span id="y"></span> SaverIoFlow</div>
-        <div class="footer__right">
-          <a class="footer__link" href="/app/#/start">App</a>
-          <span class="dot" aria-hidden="true">•</span>
-          <a class="footer__link" href="#top">Top</a>
-        </div>
-      </footer>
-    </section>
-  </main>
+      <div class="card">
+        <h2>Wirkung ohne Moral</h2>
+        <p class="meta">
+          Wenn dein Leben ruhiger und klarer wird,
+          entsteht Wirkung nach außen.
+        </p>
+        <p class="meta">
+          Ein Teil unserer Einnahmen fließt transparent
+          in Umwelt-, Tier- und humanitäre Projekte.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    document.getElementById("y").textContent = String(new Date().getFullYear());
-  </script>
+  <!-- FEATURES -->
+  <section class="container" style="padding:70px 0;">
+    <h2>Was die App dir gibt</h2>
+
+    <div class="row" style="margin-top:18px;">
+      <div class="card">
+        <h2>Today-Plan</h2>
+        <p class="meta">
+          3–5 Aufgaben. Energie-basiert. Mit Plan B.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>KI-Unterstützung</h2>
+        <p class="meta">
+          Ziele werden automatisch in Schritte übersetzt.
+          Ruhig. Realistisch.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Impact-Tracking</h2>
+        <p class="meta">
+          Sichtbare Wirkung – ohne Greenwashing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container" style="padding:80px 0;">
+    <div class="card" style="text-align:center;">
+      <h2>Beginne heute. Nicht perfekt. Nur ehrlich.</h2>
+      <p class="meta" style="margin:14px 0 22px;">
+        SaverIoFlow läuft direkt im Browser.<br>
+        Keine Registrierung. Kein Risiko.
+      </p>
+      <a href="/app/" class="btn btn-primary">
+        App öffnen
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="container footer">
+    <div class="row">
+      <div>
+        SaverIoFlow © 2026
+      </div>
+      <div style="text-align:right;">
+        Built for calm focus & real impact
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
-
-
-
