@@ -68,3 +68,100 @@ a{color:inherit}
 .chk.is-done{background:rgba(215,180,106,.16);border-color:rgba(215,180,106,.30)}
 .modal{border-radius:20px;border:1px solid rgba(215,180,106,.22);background:rgba(10,10,14,.92)}
 .modal::backdrop{background:rgba(0,0,0,.62)}
+/* ---------- App text helpers ---------- */
+h2{margin:0 0 6px 0; font-size:1.35rem; letter-spacing:-.01em}
+h3{margin:0 0 8px 0; font-size:1.08rem; letter-spacing:-.01em}
+label{display:block; font-size:.85rem; color:rgba(255,255,255,.68); margin:10px 0 6px}
+.muted{color:rgba(255,255,255,.68)}
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.03);
+  color:rgba(255,255,255,.72);
+  font-size:.82rem;
+}
+.badge--gold{
+  border-color:rgba(215,180,106,.24);
+  background:rgba(215,180,106,.10);
+  color:rgba(215,180,106,.92);
+}
+
+.input, .select, .textarea{
+  width:100%;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.22);
+  color:rgba(255,255,255,.92);
+  padding:12px 12px;
+  outline:none;
+}
+.textarea{min-height:110px; resize:vertical}
+.select{appearance:none}
+.row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.hr{height:1px; background:rgba(255,255,255,.08); margin:14px 0}
+
+/* ---------- Dialogue ---------- */
+.dialogue{
+  display:grid;
+  gap:12px;
+}
+.dialogue__top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.dialogue__grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+@media (max-width:980px){
+  .dialogue__grid{grid-template-columns:1fr}
+}
+.dialogue__log{
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.14);
+  box-shadow:var(--shadow2);
+  padding:12px;
+  max-height:54vh;
+  overflow:auto;
+}
+.msg{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.02);
+  border-radius:16px;
+  padding:10px;
+  margin-bottom:10px;
+}
+.msg:last-child{margin-bottom:0}
+.msg__role{
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:rgba(255,255,255,.60);
+}
+.msg--you .msg__role{color:rgba(215,180,106,.90)}
+.msg--guide .msg__role{color:rgba(160,210,255,.82)}
+.msg__text{margin-top:6px; color:rgba(255,255,255,.92); line-height:1.35}
+.dialogue__composer{
+  display:grid;
+  gap:10px;
+}
+.dialogue__hint{
+  border-radius:18px;
+  border:1px solid rgba(215,180,106,.18);
+  background:rgba(215,180,106,.06);
+  padding:12px;
+}
+.kbd{
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.04);
+  padding:2px 8px;
+  border-radius:10px;
+  font-size:.86rem;
+}
+
