@@ -217,3 +217,31 @@ p{margin:0}
 .msg__text{ margin-top:6px; color:rgba(255,255,255,.90); white-space:pre-wrap; line-height:1.45; }
 
 .dialogue__composer{display:grid;gap:10px}
++/* Back to landing (premium, unobtrusive) */
++.appBackLink{
++  position: fixed;
++  top: 14px;
++  left: 14px;
++  z-index: 9999;
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++  padding: 10px 12px;
++  border-radius: 14px;
++  border: 1px solid rgba(255,255,255,.10);
++  background: rgba(8,10,14,.60);
++  backdrop-filter: blur(10px);
++  color: rgba(233,238,246,.78);
++  text-decoration: none;
++  font-weight: 650;
++  letter-spacing: .12px;
++}
++.appBackLink:hover{
++  color: rgba(233,238,246,.92);
++  border-color: rgba(215,181,109,.28);
++  background: rgba(215,181,109,.06);
++}
++@media (prefers-reduced-motion: reduce){
++  .appBackLink{transition:none}
++}
+
