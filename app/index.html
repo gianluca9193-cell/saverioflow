@@ -2,107 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0f14" />
   <title>SaverIoFlow — App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="description" content="A calm system for thinking clearly and acting deliberately." />
-  <link rel="stylesheet" href="./app.css" />
+  <meta name="description" content="SaverIoFlow App — offline-first, minimalist goal finding, dialogue, and execution." />
+  <link rel="stylesheet" href="/app/app.css" />
 </head>
 
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <!-- Back to Landing (persistent) -->
+  <a class="appBackLink" href="/" aria-label="Back to Landing Page">← Landing</a>
 
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="#/start" aria-label="SaverIoFlow">
-        <span class="brand__mark"></span>
-        <span class="brand__name">SaverIoFlow</span>
-        <span class="brand__sub">App</span>
-      </a>
+  <!-- App root -->
+  <div id="app" role="application" aria-label="SaverIoFlow App"></div>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav__link" href="#/start" data-route="start">Start</a>
-        <a class="nav__link" href="#/discover" data-route="discover">Discover</a>
-        <a class="nav__link" href="#/goals" data-route="goals">Goals</a>
-        <a class="nav__link" href="#/today" data-route="today">Today</a>
-        <a class="nav__link" href="#/flow" data-route="flow">Flow</a>
-        <a class="nav__link" href="#/week" data-route="week">Week</a>
-        <a class="nav__link" href="#/dialogue" data-route="dialogue">Dialogue</a>
-      </nav>
+  <!-- App script -->
+  <script src="/app/app.js"></script>
 
-      <div class="topbar__right">
-        <button class="iconbtn" id="resetBtn" title="Reset all data" aria-label="Reset">
-          ⟳
-        </button>
-      </div>
+  <noscript>
+    <div style="padding:16px;color:#e9eef6;background:#0b0f14;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial">
+      This app requires JavaScript enabled.
     </div>
-  </header>
-
-  <!-- Main -->
-  <main id="main" class="main">
-    <div class="container shell">
-      <!-- Sidebar -->
-      <aside class="side">
-        <div class="side__card">
-          <p class="eyebrow">Status</p>
-
-          <div class="stack" style="margin-top:10px;">
-            <div class="row row--between">
-              <span class="muted">Today</span>
-              <strong id="statToday">0/0</strong>
-            </div>
-            <div class="row row--between">
-              <span class="muted">Goals</span>
-              <strong id="statGoals">0</strong>
-            </div>
-            <div class="row row--between">
-              <span class="muted">Suggestion</span>
-              <strong id="statFocus">—</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="side__card">
-          <p class="eyebrow">Quick access</p>
-
-          <div class="stack" style="margin-top:10px;">
-            <a class="qbtn" href="#/discover">Discover direction</a>
-            <a class="qbtn" href="#/dialogue">Dialogue</a>
-            <a class="qbtn" href="#/today">Today’s focus</a>
-            <a class="qbtn" href="#/goals">Goals</a>
-          </div>
-        </div>
-
-        <div class="side__hint muted">
-          SaverIoFlow is a system for thinking clearly —
-          before committing to action.
-        </div>
-      </aside>
-
-      <!-- Content -->
-      <section class="content" id="view">
-        <!-- SPA renders here -->
-      </section>
-    </div>
-  </main>
-
-  <!-- Modal -->
-  <dialog class="modal" id="modal">
-    <div class="modal__inner">
-      <div class="modal__top">
-        <div>
-          <p class="eyebrow" id="modalEyebrow">Modal</p>
-          <h2 id="modalTitle">Title</h2>
-          <p class="muted" id="modalSub"></p>
-        </div>
-        <button class="iconbtn" id="modalClose" aria-label="Close">✕</button>
-      </div>
-
-      <div id="modalBody"></div>
-    </div>
-  </dialog>
-
-  <script src="./app.js"></script>
+  </noscript>
 </body>
 </html>
