@@ -1,6 +1,3 @@
-// SaverIoFlow — Offline-first mini app (no external services)
-// Data stays in LocalStorage.
-
 const LS_KEY = "saverioflow_v1";
 
 const $ = (id) => document.getElementById(id);
@@ -20,12 +17,12 @@ function loadState(){
 
 function freshState(){
   return {
-    goals: [],            // {id,title,cat,createdAt}
+    goals: [],
     today: { date: isoDate(), tasks: [], meta: {} },
     impactUnits: 0,
     streak: 0,
     lastCheckin: null,
-    reflections: []       // {date, question, answer}
+    reflections: []
   };
 }
 
@@ -41,25 +38,41 @@ function isoDate(d = new Date()){
   return `${y}-${m}-${day}`;
 }
 
+function escapeHtml(s){
+  return String(s||"").replace(/[&<>"']/g, (c) => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
 // ---------- "AI-feeling" engine (templates + rules) ----------
 
 function genPlan({goalTitle, cat, energy, minutes, styleMode}){
   const base = normalize(goalTitle);
-
   const focus = pickFocus(base, cat);
   const intensity = energyToIntensity(energy, styleMode);
 
-  // number of tasks based on budget & energy
   const taskCount = minutes <= 15 ? 2 : minutes <= 30 ? 3 : minutes <= 60 ? 4 : 5;
+  const perTask = Math.max(5, Math.round(minutes / taskCount));
 
-  const tasks = [];
-  const total = minutes;
-  const perTask = Math.max(5, Math.round(total / taskCount));
+  const templates = getTemplates(focus, cat);
 
-  for(let i=0;i<taskCount;i++){
-    const t = makeTask(focus, cat, intensity, perTask, i);
-    tasks.push(t);
-  }
+  const tasks = Array.from({length: taskCount}).map((_, idx) => {
+    const temp = templates[idx % templates.length];
+
+    const min = clamp(Math.round(perTask * intensity), 5, 60);
+    const planBMinutes = clamp(Math.round(min * 0.45), 3, 20);
+
+    return {
+      id: crypto.randomUUID(),
+      title: temp.title,
+      minutes: min,
+      planB: temp.planB,
+      planBMinutes,
+      done: false
+    };
+  });
 
   return {
     meta: { goalTitle, cat, energy, minutes, styleMode, focus },
@@ -79,13 +92,11 @@ function energyToIntensity(energy, styleMode){
 }
 
 function pickFocus(base, cat){
-  // Lightweight heuristic
   if(cat === "C") return "earth";
   if(cat === "B"){
     if(base.includes("frieden") || base.includes("krieg") || base.includes("peace")) return "peace";
     return "community";
   }
-  // A personal
   if(base.includes("fit") || base.includes("sport") || base.includes("gesund")) return "health";
   if(base.includes("lernen") || base.includes("study") || base.includes("sprache")) return "learning";
   if(base.includes("karriere") || base.includes("job") || base.includes("bewerb")) return "career";
@@ -94,30 +105,7 @@ function pickFocus(base, cat){
   return "general";
 }
 
-function makeTask(focus, cat, intensity, baseMinutes, idx){
-  const id = crypto.randomUUID();
-  const min = clamp(Math.round(baseMinutes * intensity), 5, 60);
-
-  const templates = getTemplates(focus, cat);
-  const temp = templates[idx % templates.length];
-
-  // Plan-B: always smaller & easier
-  const planBMinutes = clamp(Math.round(min * 0.45), 3, 20);
-
-  return {
-    id,
-    title: temp.title,
-    minutes: min,
-    planB: temp.planB,
-    planBMinutes,
-    done: false
-  };
-}
-
-function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
-
 function getTemplates(focus, cat){
-  // You can expand this anytime (this is where "pseudo-AI" becomes powerful)
   const common = [
     { title:"5 Minuten sortieren: Was ist heute wirklich wichtig?", planB:"1 Satz: 'Heute zählt nur…'" },
     { title:"Eine kleine Handlung starten (ohne perfekt zu sein)", planB:"2 Minuten: nur anfangen" },
@@ -126,33 +114,33 @@ function getTemplates(focus, cat){
 
   const A = {
     health: [
-      { title:"Bewegung: 12–20 Min Walk / Mobility", planB:"3 Min: Dehnen / 30 Kniebeugen" },
-      { title:"Ernährung: 1 kleine Verbesserung planen", planB:"1 Wasser + 1 gesunde Snack-Option" },
+      { title:"Bewegung: 12–20 Min Walk / Mobility", planB:"3 Min: Dehnen / Mini-Mobility" },
+      { title:"Ernährung: 1 kleine Verbesserung planen", planB:"1 Wasser + 1 bessere Snack-Option" },
       { title:"Schlaf: Abendroutine 10 Min vorbereiten", planB:"Handy 5 Min weglegen" },
     ],
     learning: [
-      { title:"Lernen: 20–30 Min Fokus-Session", planB:"5 Min: nur Zusammenfassung lesen" },
+      { title:"Lernen: 20–30 Min Fokus-Session", planB:"5 Min: nur Überblick lesen" },
       { title:"Notizen: 5 Key Points extrahieren", planB:"1 Key Point aufschreiben" },
       { title:"Üben: 10 Min aktive Wiederholung", planB:"2 Min: 3 Flashcards" },
     ],
     career: [
-      { title:"Karriere: 1 konkreter nächster Schritt", planB:"2 Min: nur den Schritt definieren" },
-      { title:"Bewerbung/Projekt: 25 Min Deep Work", planB:"5 Min: Dokument öffnen & 1 Satz" },
+      { title:"Karriere: 1 konkreter nächster Schritt", planB:"2 Min: Schritt definieren" },
+      { title:"Projekt/Bewerbung: 25 Min Deep Work", planB:"5 Min: öffnen + 1 Satz" },
       { title:"Skill: 15 Min gezielt üben", planB:"3 Min: 1 Mini-Übung" },
     ],
     creative: [
-      { title:"Kreativ: 20 Min ohne Bewertung erstellen", planB:"5 Min: nur Skizze/Loop anfangen" },
-      { title:"Ideen: 10 neue Varianten sammeln", planB:"3 Varianten reichen" },
-      { title:"Finish: 1 kleine Sache finalisieren", planB:"Nur aufräumen/speichern" },
+      { title:"Kreativ: 20 Min ohne Bewertung erstellen", planB:"5 Min: nur Skizze/Loop starten" },
+      { title:"Ideen: 10 Varianten sammeln", planB:"3 Varianten reichen" },
+      { title:"Finish: 1 kleine Sache finalisieren", planB:"Nur speichern & aufräumen" },
     ],
     mind: [
       { title:"Atem/Stillness: 10 Min runterfahren", planB:"2 Min: 4-4-6 Atmung" },
       { title:"Mind: 1 Auslöser erkennen & benennen", planB:"1 Wort für den Zustand" },
-      { title:"Körper-Scan: 8–12 Min", planB:"30 Sekunden Schultern entspannen" },
+      { title:"Körper-Scan: 8–12 Min", planB:"30 Sek: Schultern entspannen" },
     ],
     general: [
       { title:"Fokus: 25 Min auf 1 Sache", planB:"5 Min: Start & Struktur" },
-      { title:"Organisation: 10 Min aufräumen/sortieren", planB:"2 Min: nur Tisch frei" },
+      { title:"Organisation: 10 Min aufräumen/sortieren", planB:"2 Min: nur Fläche frei" },
       { title:"Planung: morgen 1 Sache leichter machen", planB:"1 Sache streichen" },
     ]
   };
@@ -160,21 +148,21 @@ function getTemplates(focus, cat){
   const B = {
     community: [
       { title:"Hilfe: 1 Person kontaktieren (kurz & ehrlich)", planB:"1 Satz Nachricht schreiben" },
-      { title:"Gemeinwohl: 15–30 Min Micro-Volunteer Task", planB:"5 Min: Infos sammeln / Termin setzen" },
+      { title:"Gemeinwohl: 15–30 Min Micro-Volunteer Schritt", planB:"5 Min: Termin/Info setzen" },
       { title:"Community: 1 kleine Verbesserung im Umfeld", planB:"1 kleine Sache vorbereiten" },
     ],
     peace: [
-      { title:"Peace Practice: 1 Deeskalations-Handlung heute", planB:"1 Pause vor der Antwort (10 Sek)" },
+      { title:"Peace Practice: 1 Deeskalations-Handlung heute", planB:"10 Sek Pause vor der Antwort" },
       { title:"Zuhören: 10 Min echtes Zuhören (ohne Urteil)", planB:"1 empathischer Satz" },
-      { title:"Hass/Stress-Feed vermeiden: 1 Trigger weniger", planB:"1 Quelle stummschalten" },
+      { title:"Stress-Feed reduzieren: 1 Trigger weniger", planB:"1 Quelle stummschalten" },
     ]
   };
 
   const C = {
     earth: [
-      { title:"Nachhaltig: 1 Konsum-Änderung planen", planB:"1 Sache nicht kaufen" },
-      { title:"Erde & Tiere: 20 Min kleine Umwelt-Handlung", planB:"5 Min Müll sammeln / trennen" },
-      { title:"Tierschutz: 1 Support-Aktion (Info/Spende später)", planB:"1 seriöse Orga bookmarken" },
+      { title:"Nachhaltig: 1 Konsum-Änderung planen", planB:"1 Sache heute nicht kaufen" },
+      { title:"Erde & Tiere: 20 Min kleine Umwelt-Handlung", planB:"5 Min Müll trennen/sammeln" },
+      { title:"Tierschutz: 1 Support-Aktion (Info/Plan)", planB:"1 seriöse Orga bookmarken" },
     ]
   };
 
@@ -187,70 +175,12 @@ function getTemplates(focus, cat){
     return bucket.concat(common);
   }
   if(cat === "C"){
-    const bucket = C.earth;
-    return bucket.concat(common);
+    return C.earth.concat(common);
   }
   return common;
 }
 
-// ---------- UI rendering ----------
-
-function render(){
-  // Ensure "today" is for current date
-  if(state.today.date !== isoDate()){
-    // roll over softly
-    state.today = { date: isoDate(), tasks: [], meta: {} };
-    // streak doesn't auto-reset here (we do in checkin)
-    localStorage.setItem(LS_KEY, JSON.stringify(state));
-  }
-
-  // meta
-  const meta = state.today.meta || {};
-  const metaText = meta.goalTitle
-    ? `Ziel: "${meta.goalTitle}" • Kategorie ${meta.cat} • ${meta.minutes||""} Min • Energie: ${meta.energy||""} • Modus: ${meta.styleMode||""}`
-    : "Noch kein Plan für heute. Erzeuge einen Today-Plan.";
-
-  $("todayMeta").textContent = metaText;
-
-  // tasks list
-  const list = $("taskList");
-  list.innerHTML = "";
-
-  state.today.tasks.forEach((t) => {
-    const li = document.createElement("li");
-    li.className = "task";
-
-    li.innerHTML = `
-      <div class="taskTop">
-        <div class="taskTitle">${escapeHtml(t.title)}</div>
-        <span class="badge">${t.minutes} min</span>
-      </div>
-      <div class="planB">Plan B: ${escapeHtml(t.planB)} <span class="badge" style="margin-left:8px">${t.planBMinutes} min</span></div>
-      <div class="taskActions">
-        <button class="smallBtn done" data-id="${t.id}">${t.done ? "✅ Erledigt" : "Erledigt"}</button>
-        <button class="smallBtn swap" data-id="${t.id}">Plan B nutzen</button>
-      </div>
-    `;
-
-    list.appendChild(li);
-  });
-
-  // impact/streak/checkin
-  $("impactUnits").textContent = String(state.impactUnits || 0);
-  $("streak").textContent = String(state.streak || 0);
-  $("lastCheckin").textContent = state.lastCheckin ? state.lastCheckin : "—";
-
-  // reflection question
-  if(!$("question").textContent) $("question").textContent = pickQuestion();
-  const todayReflection = state.reflections.find(r => r.date === isoDate());
-  $("answer").value = todayReflection?.answer || "";
-}
-
-function escapeHtml(s){
-  return String(s||"").replace(/[&<>"']/g, (c) => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[c]));
-}
+// ---------- Render ----------
 
 function pickQuestion(){
   const qs = [
@@ -262,6 +192,55 @@ function pickQuestion(){
     "Was wäre eine freundlichere Version deines Plans?"
   ];
   return qs[Math.floor(Math.random()*qs.length)];
+}
+
+function ensureToday(){
+  if(state.today.date !== isoDate()){
+    state.today = { date: isoDate(), tasks: [], meta: {} };
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }
+}
+
+function render(){
+  ensureToday();
+
+  const meta = state.today.meta || {};
+  $("todayMeta").textContent = meta.goalTitle
+    ? `Ziel: "${meta.goalTitle}" • Kategorie ${meta.cat} • ${meta.minutes||""} Min • Energie: ${meta.energy||""} • Modus: ${meta.styleMode||""}`
+    : "Noch kein Plan für heute. Erzeuge einen Today-Plan.";
+
+  const list = $("taskList");
+  list.innerHTML = "";
+
+  state.today.tasks.forEach((t) => {
+    const li = document.createElement("li");
+    li.className = "item";
+    li.innerHTML = `
+      <div class="itemTop">
+        <div class="itemTitle">${escapeHtml(t.title)}</div>
+        <span class="badge badge-turq">${t.minutes} min</span>
+      </div>
+      <div class="itemSub">
+        Plan B: ${escapeHtml(t.planB)}
+        <span class="badge badge-gold" style="margin-left:8px">${t.planBMinutes} min</span>
+      </div>
+      <div class="mini-actions">
+        <button class="btn ${t.done ? "btn-primary" : ""}" data-action="done" data-id="${t.id}">
+          ${t.done ? "✅ Erledigt" : "Erledigt"}
+        </button>
+        <button class="btn btn-ghost" data-action="swap" data-id="${t.id}">Plan B nutzen</button>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+
+  $("impactUnits").textContent = String(state.impactUnits || 0);
+  $("streak").textContent = String(state.streak || 0);
+  $("lastCheckin").textContent = state.lastCheckin ? state.lastCheckin : "—";
+
+  if(!$("question").textContent) $("question").textContent = pickQuestion();
+  const todayReflection = state.reflections.find(r => r.date === isoDate());
+  $("answer").value = todayReflection?.answer || "";
 }
 
 // ---------- Events ----------
@@ -299,29 +278,29 @@ $("taskList").addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if(!btn) return;
   const id = btn.getAttribute("data-id");
+  const action = btn.getAttribute("data-action");
+
   const t = state.today.tasks.find(x => x.id === id);
   if(!t) return;
 
-  if(btn.classList.contains("done")){
+  if(action === "done"){
     t.done = !t.done;
     saveState();
     return;
   }
-  if(btn.classList.contains("swap")){
-    // swap to plan B version
+
+  if(action === "swap"){
     t.title = t.planB;
     t.minutes = t.planBMinutes;
     t.planB = "Schon im Plan-B Modus.";
     t.planBMinutes = t.minutes;
+    t.done = false;
     saveState();
-    return;
   }
 });
 
 $("minDayBtn").addEventListener("click", () => {
-  // Reduce plan to 1 most meaningful task
   if(state.today.tasks.length === 0) return;
-  // pick first unfinished else first
   const pick = state.today.tasks.find(t => !t.done) || state.today.tasks[0];
   state.today.tasks = [{
     ...pick,
@@ -334,23 +313,22 @@ $("minDayBtn").addEventListener("click", () => {
 });
 
 $("checkinBtn").addEventListener("click", () => {
-  // Simple streak logic: streak increments if at least 1 task done today
   const doneCount = state.today.tasks.filter(t => t.done).length;
   const today = isoDate();
 
   if(doneCount >= 1){
     state.streak = (state.streak || 0) + 1;
-    state.impactUnits = (state.impactUnits || 0) + 1; // small reward
+    state.impactUnits = (state.impactUnits || 0) + 1;
   } else {
-    // no guilt: don't punish; but streak pauses (optional)
     state.streak = state.streak || 0;
   }
 
   state.lastCheckin = today;
   saveState();
+
   alert(doneCount >= 1
     ? "Check-in gespeichert ✅ (Streak +1, Impact Units +1)"
-    : "Check-in gespeichert ✅ (morgen kleiner planen?)"
+    : "Check-in gespeichert ✅ (Tipp: morgen kleiner planen)"
   );
 });
 
@@ -362,13 +340,12 @@ $("resetBtn").addEventListener("click", () => {
 });
 
 $("addImpactBtn").addEventListener("click", () => {
-  // Micro impact: user chooses quick action (no politics, no claims)
   const opts = [
     "1 Sache reparieren statt neu kaufen",
     "1 unnötigen Kauf heute vermeiden",
-    "5 Minuten Müll sammeln / trennen",
+    "5 Minuten Müll trennen/sammeln",
     "1 Person unterstützen (Nachricht / Hilfe)",
-    "1 stressigen Feed-Trigger weniger"
+    "1 Trigger weniger (Feed/Quelle stummschalten)"
   ];
   const pick = opts[Math.floor(Math.random()*opts.length)];
   state.impactUnits = (state.impactUnits || 0) + 1;
@@ -395,9 +372,7 @@ $("newQuestionBtn").addEventListener("click", () => {
   $("question").textContent = pickQuestion();
 });
 
-
-// ---------- PWA install ----------
-
+// ---------- PWA Install (optional) ----------
 let deferredPrompt = null;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -413,12 +388,11 @@ $("installBtn").addEventListener("click", async () => {
   $("installBtn").style.display = "none";
 });
 
-// register service worker
+// Service worker (if exists)
 if("serviceWorker" in navigator){
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("/sw.js").catch(()=>{});
   });
 }
 
-// initial render
 render();
