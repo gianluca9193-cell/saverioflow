@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#0b0b0f" />
 
   <title>SaverIoFlow — Premium Life Planner</title>
-  <meta name="description" content="SaverIoFlow: AI coach & planner for goals, daily plans, and meaningful progress." />
+
+  <!-- ✅ removed "AI coach" wording -->
+  <meta name="description" content="SaverIoFlow: premium planner for goals, daily plans, and meaningful progress." />
 
   <!-- Base styles -->
   <link rel="stylesheet" href="/theme.css" />
@@ -23,63 +25,46 @@
 <body class="landing cinema">
   <!-- Cosmic background layers -->
   <div class="cosmos" aria-hidden="true"></div>
-<a class="brand" href="/" aria-label="SaverIoFlow">
-  <!-- START LOGO -->
-  <svg xmlns="http://www.w3.org/2000/svg"
-       viewBox="0 0 520 120"
-       class="brand__logo"
-       role="img"
-       aria-label="SaverIoFlow">
-
-    <defs>
-      <linearGradient id="sf-g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="currentColor" stop-opacity="0.95"/>
-        <stop offset="1" stop-color="currentColor" stop-opacity="0.70"/>
-      </linearGradient>
-      <style>
-        .sf-stroke{fill:none;stroke:url(#sf-g);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
-        .sf-thin{fill:none;stroke:url(#sf-g);stroke-width:2;opacity:.75}
-        .sf-fill{fill:url(#sf-g)}
-        .sf-text{font-family:ui-sans-serif,system-ui;font-weight:650;letter-spacing:.18em}
-        .sf-sub{font-weight:520;letter-spacing:.08em;opacity:.82}
-      </style>
-    </defs>
-
-    <g transform="translate(24,18)">
-      <ellipse class="sf-thin" cx="42" cy="42" rx="34" ry="34"/>
-      <ellipse class="sf-thin" cx="42" cy="42" rx="34" ry="18"
-               transform="rotate(-22 42 42)" opacity=".55"/>
-      <path class="sf-stroke"
-            d="M22 46c10-18 38-20 42-2 3 13-10 24-24 22-10-1-16-10-12-18 4-10 20-10 26-2"/>
-      <circle class="sf-fill" cx="68" cy="24" r="2.8"/>
-    </g>
-
-    <g transform="translate(118,44)">
-      <text class="sf-text" x="0" y="0" font-size="26" fill="currentColor">
-        SAVERIOFLOW
-      </text>
-      <text class="sf-text sf-sub" x="2" y="28" font-size="12" fill="currentColor">
-        PLANNER • REFLECTION • IMPACT
-      </text>
-    </g>
-  </svg>
-  <!-- END LOGO -->
-</a>
 
   <!-- Top bar -->
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/" aria-label="SaverIoFlow Home">
-        <!-- Inline Saverio Logo (no asset needed) -->
-        <span class="logoMark" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 8.2C6.2 5.2 10 3.6 13.9 4.1C16.9 4.5 19.2 6.1 20.7 8.2H16.9C15.9 7.3 14.7 6.8 13.4 6.6C10.8 6.2 8.4 7.1 6.8 8.2H4Z" fill="currentColor" opacity=".92"/>
-            <path d="M24 14C21.7 18.2 17.1 20.9 12.3 20.3C9.4 20 7.1 18.6 5.4 16.6H9.3C10.4 17.4 11.6 17.9 12.9 18.1C15.6 18.5 18.2 17.4 20.1 16.1C21 15.5 21.8 14.8 22.4 14H24Z" fill="currentColor"/>
-            <path d="M6.2 12.9C9 10.2 13.2 9.3 17 10.2C17.7 10.4 18.4 10.6 19 10.9L16.9 13.2C16.4 13 15.8 12.9 15.2 12.7C12.7 12.2 10.2 12.8 8.4 13.9L6.2 12.9Z" fill="currentColor" opacity=".75"/>
-          </svg>
-        </span>
 
-        <span class="brand-mark">SAVERIOFLOW</span>
+      <!-- ✅ SINGLE brand only (replaces old mark+text) -->
+      <a class="brand" href="/" aria-label="SaverIoFlow Home">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 520 120"
+             class="brand__logo"
+             role="img"
+             aria-label="SaverIoFlow">
+          <defs>
+            <linearGradient id="sf-g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="currentColor" stop-opacity="0.95"/>
+              <stop offset="1" stop-color="currentColor" stop-opacity="0.70"/>
+            </linearGradient>
+            <style>
+              .sf-stroke{fill:none;stroke:url(#sf-g);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+              .sf-thin{fill:none;stroke:url(#sf-g);stroke-width:2;opacity:.75}
+              .sf-fill{fill:url(#sf-g)}
+              .sf-text{font-family:ui-sans-serif,system-ui;font-weight:650;letter-spacing:.18em}
+              .sf-sub{font-weight:520;letter-spacing:.08em;opacity:.82}
+            </style>
+          </defs>
+
+          <g transform="translate(24,18)">
+            <ellipse class="sf-thin" cx="42" cy="42" rx="34" ry="34"/>
+            <ellipse class="sf-thin" cx="42" cy="42" rx="34" ry="18"
+                     transform="rotate(-22 42 42)" opacity=".55"/>
+            <path class="sf-stroke"
+                  d="M22 46c10-18 38-20 42-2 3 13-10 24-24 22-10-1-16-10-12-18 4-10 20-10 26-2"/>
+            <circle class="sf-fill" cx="68" cy="24" r="2.8"/>
+          </g>
+
+          <g transform="translate(118,44)">
+            <text class="sf-text" x="0" y="0" font-size="26" fill="currentColor">SAVERIOFLOW</text>
+            <text class="sf-text sf-sub" x="2" y="28" font-size="12" fill="currentColor">PLANNER • REFLECTION • IMPACT</text>
+          </g>
+        </svg>
       </a>
 
       <!-- Language Switch -->
@@ -105,7 +90,9 @@
   <main class="hero">
     <section class="hero-grid">
       <div class="hero-copy">
-        <div class="kicker glass" data-i18n="hero.kicker">AI Coach • Planner • Impact</div>
+
+        <!-- ✅ removed "AI Coach" wording -->
+        <div class="kicker glass" data-i18n="hero.kicker">Planner • Philosophy • Impact</div>
 
         <h1 class="hero-title">
           <span data-i18n="hero.title">Build your life plan.</span>
@@ -131,31 +118,30 @@
       <div class="hero-art-wrap glass">
         <div class="vitruvian" aria-hidden="true"></div>
 
-        <!-- Replace statue with tree asset (optional) -->
+        <!-- ✅ updated to your planned asset name -->
         <img
           class="hero-tree"
-          src="/images/tree-of-life.png"
-          alt="Tree of Life"
+          src="/images/tree-life-min.png"
+          alt=""
+          aria-hidden="true"
           loading="eager"
           decoding="async"
           onerror="this.style.display='none'; this.parentElement && this.parentElement.classList.add('no-tree');"
         />
 
-        <!-- Fallback glow if tree image missing -->
         <div class="tree-fallback" aria-hidden="true"></div>
       </div>
     </section>
 
     <div class="neon-divider" aria-hidden="true"></div>
 
-    <!-- Premium section (matches screenshot: 3 cards) -->
+    <!-- Premium section -->
     <section class="cinema-strip" id="premium">
       <h2 class="section-title" data-i18n="premium.title">Premium that funds real impact</h2>
       <p class="section-subtitle" data-i18n="premium.subtitle">
         Transparent share to trees & animal protection. No greenwashing.
       </p>
 
-      <!-- Slider-friendly container; also looks perfect without JS -->
       <div class="slider" id="featureSlider">
         <div class="slide glass">
           <div class="starsRow" aria-hidden="true">★★★★★</div>
@@ -229,4 +215,3 @@
   </script>
 </body>
 </html>
-
