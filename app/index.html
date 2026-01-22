@@ -1,3 +1,6 @@
+<!-- ✅ APP: /app/index.html — KOMPLETT ERSETZEN (TOP NIVEAU UI + Tabs + Premium Layout)
+     Works with your app.js I gave you (Compass/Year/Week/Today/Review).
+-->
 <!doctype html>
 <html lang="de">
 <head>
@@ -5,131 +8,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SaverIoFlow — App</title>
 
-  <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#070b10" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
   <link rel="stylesheet" href="/theme.css">
   <link rel="stylesheet" href="/components.css">
   <link rel="stylesheet" href="./app.css">
 </head>
+
 <body>
   <div class="container">
+
+    <!-- Topbar -->
     <header class="topbar">
       <div class="brand">
         <h1>SaverIoFlow</h1>
-        <p class="sub">Quiet plan • real steps • optional impact</p>
+        <p class="sub">Compass • Year • Week • Today • Review</p>
       </div>
-      <button id="installBtn" class="btn btn-ghost btn-pill" style="display:none;">Installieren</button>
+      <div class="row" style="gap:10px; align-items:center; justify-content:flex-end;">
+        <a href="/" class="btn btn-ghost btn-pill">Landing</a>
+        <button id="installBtn" class="btn btn-ghost btn-pill" style="display:none;">Installieren</button>
+      </div>
     </header>
 
-    <hr class="hr"/>
+    <!-- Tabs -->
+    <nav class="card" style="padding:12px;">
+      <div class="row" style="gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-pill" data-view="today">Today</button>
+        <button class="btn btn-ghost btn-pill" data-view="week">Week</button>
+        <button class="btn btn-ghost btn-pill" data-view="year">Year</button>
+        <button class="btn btn-ghost btn-pill" data-view="compass">Compass</button>
+        <button class="btn btn-ghost btn-pill" data-view="review">Review</button>
+      </div>
+      <div class="meta" style="margin-top:10px;">
+        Tipp: Wenn du überfordert bist → <strong>Minimum-Day</strong>. Fortschritt ohne Druck.
+      </div>
+    </nav>
 
-    <main class="app-grid">
-      <!-- Left -->
-      <section class="card">
-        <h2>Neues Ziel</h2>
+    <div style="height:12px;"></div>
 
-        <label class="label">Ziel (1 Satz)</label>
-        <input id="goalTitle" class="input" placeholder="z.B. fitter werden / lernen / helfen / nachhaltiger leben" />
+    <!-- Views -->
+    <main>
 
-        <div class="row">
-          <div>
-            <label class="label">Kategorie</label>
-            <select id="goalCat" class="select">
-              <option value="A">A — Persönlich</option>
-              <option value="B">B — Gemeinwohl</option>
-              <option value="C">C — Erde & Tiere</option>
-            </select>
-          </div>
-          <div>
-            <label class="label">Energie heute</label>
-            <select id="energy" class="select">
-              <option value="low">Low</option>
-              <option value="med" selected>Medium</option>
-              <option value="high">High</option>
-            </select>
-          </div>
+      <!-- TODAY -->
+      <section id="viewToday">
+        <div class="app-grid">
+
+          <!-- Left: Create -->
+          <section class="card">
+            <h2>Neues Ziel → Today Plan</h2>
+
+            <label class="label">Ziel (1 Satz)</label>
+            <input id="goalTitle" class="input" placeholder="z.B. fitter werden / lernen / helfen / nachhaltiger leben" />
+
+            <div class="row">
+              <div>
+                <label class="label">Kategorie</label>
+                <select id="goalCat" class="select">
+                  <option value="A">A — Persönlich</option>
+                  <option value="B">B — Gemeinwohl</option>
+                  <option value="C">C — Erde & Tiere</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Energie heute</label>
+                <select id="energy" class="select">
+                  <option value="low">Low</option>
+                  <option value="med" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label class="label">Zeitbudget heute</label>
+                <select id="timeBudget" class="select">
+                  <option value="15">15 Min</option>
+                  <option value="30" selected>30 Min</option>
+                  <option value="60">60 Min</option>
+                  <option value="90">90 Min</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Stil</label>
+                <select id="styleMode" class="select">
+                  <option value="calm" selected>Calm</option>
+                  <option value="normal">Normal</option>
+                  <option value="push">Push</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <button id="genPlanBtn" class="btn btn-primary">Today-Plan erzeugen</button>
+              <button id="saveGoalBtn" class="btn">Ziel speichern</button>
+            </div>
+
+            <div class="hint"><strong>Philosophie:</strong> Der Plan soll dich respektieren. Wenn er dich bricht, war er zu groß.</div>
+          </section>
+
+          <!-- Right: Today -->
+          <section class="card">
+            <div class="space">
+              <h2>Heute</h2>
+              <button id="minDayBtn" class="btn btn-ghost btn-pill">Minimum-Day</button>
+            </div>
+
+            <div id="todayMeta" class="meta"></div>
+            <ol id="taskList" class="list"></ol>
+
+            <div class="row">
+              <button id="checkinBtn" class="btn">Check-in</button>
+              <button id="resetBtn" class="btn btn-ghost">Reset</button>
+            </div>
+          </section>
+
+          <!-- Bottom: Impact & Daily Reflection -->
+          <section class="card" style="grid-column:1/-1;">
+            <div class="space">
+              <h2>Impact & Ruhe</h2>
+              <button id="addImpactBtn" class="btn btn-ghost btn-pill">+ Micro-Impact</button>
+            </div>
+
+            <div class="kpi">
+              <div class="pill"><div class="k">Impact Units</div><div class="v" id="impactUnits">0</div></div>
+              <div class="pill"><div class="k">Streak</div><div class="v" id="streak">0</div></div>
+              <div class="pill"><div class="k">Letzter Check-in</div><div class="v" id="lastCheckin">—</div></div>
+            </div>
+
+            <div class="stack" style="margin-top:14px;">
+              <div class="label">1 Frage für heute</div>
+              <div id="question" class="item" style="border-color:rgba(215,184,92,.25); background:rgba(215,184,92,.06);"></div>
+              <textarea id="answer" class="textarea" placeholder="1–2 Sätze reichen…"></textarea>
+              <div class="row">
+                <button id="saveReflectionBtn" class="btn">Speichern</button>
+                <button id="newQuestionBtn" class="btn btn-ghost">Neue Frage</button>
+              </div>
+            </div>
+          </section>
+
         </div>
-
-        <div class="row">
-          <div>
-            <label class="label">Zeitbudget heute</label>
-            <select id="timeBudget" class="select">
-              <option value="15">15 Min</option>
-              <option value="30" selected>30 Min</option>
-              <option value="60">60 Min</option>
-              <option value="90">90 Min</option>
-            </select>
-          </div>
-          <div>
-            <label class="label">Stil</label>
-            <select id="styleMode" class="select">
-              <option value="calm" selected>Calm</option>
-              <option value="normal">Normal</option>
-              <option value="push">Push</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <button id="genPlanBtn" class="btn btn-primary">Today-Plan erzeugen</button>
-          <button id="saveGoalBtn" class="btn">Ziel speichern</button>
-        </div>
-
-        <div class="hint"><strong>Tip:</strong> Plan B ist immer verfügbar — wenn’s schwer wird, wird’s kleiner.</div>
       </section>
 
-      <!-- Right -->
-      <section class="card">
-        <div class="space">
-          <h2>Heute</h2>
-          <button id="minDayBtn" class="btn btn-ghost btn-pill">Minimum-Day</button>
-        </div>
-
-        <div id="todayMeta" class="meta"></div>
-        <ol id="taskList" class="list"></ol>
-
-        <div class="row">
-          <button id="checkinBtn" class="btn">Check-in</button>
-          <button id="resetBtn" class="btn btn-ghost">Reset</button>
-        </div>
+      <!-- WEEK -->
+      <section id="viewWeek" style="display:none;">
+        <div id="weekWrap"></div>
       </section>
 
-      <!-- Bottom -->
-      <section class="card" style="grid-column:1/-1;">
-        <div class="space">
-          <h2>Impact & Ruhe</h2>
-          <button id="addImpactBtn" class="btn btn-ghost btn-pill">+ Micro-Impact</button>
-        </div>
-
-        <div class="kpi">
-          <div class="pill">
-            <div class="k">Impact Units</div>
-            <div class="v" id="impactUnits">0</div>
-          </div>
-          <div class="pill">
-            <div class="k">Streak</div>
-            <div class="v" id="streak">0</div>
-          </div>
-          <div class="pill">
-            <div class="k">Letzter Check-in</div>
-            <div class="v" id="lastCheckin">—</div>
-          </div>
-        </div>
-
-        <div class="stack" style="margin-top:14px;">
-          <div class="label">1 Frage für heute</div>
-          <div id="question" class="item" style="border-color:rgba(215,184,92,.25); background:rgba(215,184,92,.06);"></div>
-          <textarea id="answer" class="textarea" placeholder="1–2 Sätze reichen…"></textarea>
-          <div class="row">
-            <button id="saveReflectionBtn" class="btn">Speichern</button>
-            <button id="newQuestionBtn" class="btn btn-ghost">Neue Frage</button>
-          </div>
-        </div>
+      <!-- YEAR -->
+      <section id="viewYear" style="display:none;">
+        <div id="yearWrap"></div>
       </section>
+
+      <!-- COMPASS -->
+      <section id="viewCompass" style="display:none;">
+        <div id="compassWrap"></div>
+      </section>
+
+      <!-- REVIEW -->
+      <section id="viewReview" style="display:none;">
+        <div id="reviewWrap"></div>
+      </section>
+
     </main>
 
-    <footer class="footer">Offline-first • Daten bleiben auf deinem Gerät</footer>
+    <footer class="footer">Offline-first • Daten bleiben lokal auf deinem Gerät</footer>
   </div>
 
   <script src="./app.js"></script>
