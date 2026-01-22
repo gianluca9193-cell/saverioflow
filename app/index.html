@@ -8,14 +8,14 @@
   <title>SaverIoFlow — App</title>
   <meta name="description" content="SaverIoFlow app: daily/weekly/year plans, compass wizard, reviews, offline-first." />
 
-  <!-- PWA -->
-  <link rel="manifest" href="./manifest.webmanifest" />
+  <!-- PWA (absolute paths to avoid /app vs /app/ issues) -->
+  <link rel="manifest" href="/app/manifest.webmanifest" />
   <link rel="apple-touch-icon" href="/images/icon-192.png" />
 
   <!-- App styles -->
   <link rel="stylesheet" href="/theme.css" />
   <link rel="stylesheet" href="/components.css" />
-  <link rel="stylesheet" href="./app.css" />
+  <link rel="stylesheet" href="/app/app.css" />
 </head>
 
 <body class="app">
@@ -40,7 +40,6 @@
         </select>
       </div>
 
-      <!-- PWA install (your app.js can hook this) -->
       <button class="btn btn-ghost" id="installBtn" type="button">Install</button>
     </div>
   </header>
@@ -54,39 +53,42 @@
     <button class="tab" type="button" data-view="review" data-i18n="tabs.review">Review</button>
   </nav>
 
-  <!-- Views (IDs match your OS v2 description) -->
+  <!-- Views + Wraps (OS v2 erwartet diese Struktur) -->
   <main class="views">
     <section id="viewToday" class="view is-active"></section>
-    <section id="viewWeek" class="view is-hidden"></section>
-    <section id="viewYear" class="view is-hidden"></section>
-    <section id="viewCompass" class="view is-hidden"></section>
-    <section id="viewReview" class="view is-hidden"></section>
 
-    <!-- Wraps you mentioned (kept for your existing JS) -->
-    <div id="weekWrap" hidden></div>
-    <div id="yearWrap" hidden></div>
-    <div id="compassWrap" hidden></div>
-    <div id="reviewWrap" hidden></div>
+    <div id="weekWrap" class="viewWrap is-hidden">
+      <section id="viewWeek" class="view"></section>
+    </div>
+
+    <div id="yearWrap" class="viewWrap is-hidden">
+      <section id="viewYear" class="view"></section>
+    </div>
+
+    <div id="compassWrap" class="viewWrap is-hidden">
+      <section id="viewCompass" class="view"></section>
+    </div>
+
+    <div id="reviewWrap" class="viewWrap is-hidden">
+      <section id="viewReview" class="view"></section>
+    </div>
   </main>
 
-  <!-- =========================
-       SaverIoFlow i18n (App)
-       ========================= -->
+  <!-- i18n -->
   <script src="/i18n/en.js"></script>
   <script src="/i18n/de.js"></script>
   <script src="/i18n/es.js"></script>
   <script src="/i18n/it.js"></script>
   <script src="/i18n/ar.js"></script>
-
   <script src="/i18n/i18n.js"></script>
   <script>
-    window.SIF_I18N && window.SIF_I18N.init();
+    try { window.SIF_I18N && window.SIF_I18N.init(); } catch(e){ console.warn("i18n init failed:", e); }
   </script>
 
-  <!-- App logic -->
-  <script src="./app.js"></script>
+  <!-- App logic (absolute path!) -->
+  <script src="/app/app.js"></script>
 
-  <!-- Language switch wiring (kept in HTML so you don't have to patch app.js) -->
+  <!-- Language switch wiring -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const sel = document.getElementById("langSelect");
