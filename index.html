@@ -18,6 +18,20 @@
   <link rel="stylesheet" href="/hero-art.css" />
   <link rel="stylesheet" href="/motion.css" />
   <link rel="stylesheet" href="/cinema.css" />
+
+  <!-- Minimal safety CSS for lang switch + missing statue -->
+  <style>
+    .langSwitch{display:flex;gap:10px;align-items:center;flex:0 0 auto;}
+    .langLabel{opacity:.78;font-size:.9rem;}
+    #langSelectLanding{
+      background: rgba(255,255,255,.06);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px;
+      padding: 8px 10px;
+    }
+    .hero-art-wrap.no-statue{display:none;}
+  </style>
 </head>
 
 <body class="landing cinema">
@@ -52,9 +66,11 @@
     <section class="hero-grid">
       <div class="hero-copy">
         <div class="kicker">SaverIoFlow</div>
+
         <h1 class="hero-title">
           <span data-i18n="hero.title">Build your life plan.</span>
         </h1>
+
         <p class="hero-subtitle" data-i18n="hero.subtitle">
           From goals to daily action — with philosophy, impact, and momentum.
         </p>
@@ -67,23 +83,30 @@
         <div class="hero-meta">
           <span class="pill" data-i18n="meta.offline">Offline-first PWA</span>
           <span class="pill" data-i18n="meta.impact">Impact dashboard</span>
-          <span class="pill" data-i18n="meta.philo">Stoic & Socratic modes</span>
+          <span class="pill" data-i18n="meta.philo">Stoic &amp; Socratic modes</span>
         </div>
       </div>
 
       <div class="hero-art-wrap">
-        <!-- The statue is controlled by hero-art.css; keep src stable -->
-        <img class="hero-statue" src="/images/statue.png" alt="Statue" loading="eager" decoding="async" />
+        <!-- Statue with hard fallback -->
+        <img
+          class="hero-statue"
+          src="/images/statue.png"
+          alt="Statue"
+          loading="eager"
+          decoding="async"
+          onerror="this.style.display='none'; if(this.parentElement){this.parentElement.classList.add('no-statue');}"
+        />
       </div>
     </section>
 
     <div class="neon-divider" aria-hidden="true"></div>
 
-    <!-- Slider / cinema section (kept generic; your slider.js can target it) -->
+    <!-- Slider / cinema section -->
     <section class="cinema-strip" id="premium">
       <h2 class="section-title" data-i18n="premium.title">Premium that funds real impact</h2>
       <p class="section-subtitle" data-i18n="premium.subtitle">
-        Transparent share to trees & animal protection. No greenwashing.
+        Transparent share to trees &amp; animal protection. No greenwashing.
       </p>
 
       <div class="slider" id="featureSlider">
@@ -115,7 +138,11 @@
   <script src="/slider.js"></script>
 
   <script>
-    document.getElementById("yearNow").textContent = String(new Date().getFullYear());
+    // Year
+    (function(){
+      var el = document.getElementById("yearNow");
+      if (el) el.textContent = String(new Date().getFullYear());
+    })();
   </script>
 
   <!-- =========================
@@ -126,22 +153,29 @@
   <script src="/i18n/es.js"></script>
   <script src="/i18n/it.js"></script>
   <script src="/i18n/ar.js"></script>
-
   <script src="/i18n/i18n.js"></script>
+
   <script>
-    window.SIF_I18N && window.SIF_I18N.init();
+    // Defensive i18n init + language switch wiring (never break landing)
+    (function(){
+      try { window.SIF_I18N && window.SIF_I18N.init(); } catch(e){ console.warn("i18n init failed:", e); }
 
-    // Wire landing language select
-    document.addEventListener("DOMContentLoaded", () => {
-      const sel = document.getElementById("langSelectLanding");
-      if (!sel || !window.SIF_I18N) return;
+      document.addEventListener("DOMContentLoaded", function(){
+        try {
+          var sel = document.getElementById("langSelectLanding");
+          if (!sel || !window.SIF_I18N) return;
 
-      sel.value = window.SIF_I18N.getCurrent();
-      sel.addEventListener("change", (e) => window.SIF_I18N.set(e.target.value));
-      window.addEventListener("sif:lang-changed", (ev) => {
-        if (ev?.detail?.lang) sel.value = ev.detail.lang;
+          sel.value = window.SIF_I18N.getCurrent();
+          sel.addEventListener("change", function(e){ window.SIF_I18N.set(e.target.value); });
+
+          window.addEventListener("sif:lang-changed", function(ev){
+            if (ev && ev.detail && ev.detail.lang) sel.value = ev.detail.lang;
+          });
+        } catch(e) {
+          console.warn("lang select wiring failed:", e);
+        }
       });
-    });
+    })();
   </script>
 </body>
 </html>
