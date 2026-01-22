@@ -1089,3 +1089,24 @@ function init() {
 
 // run
 init();
+// =========================
+// Language switch wiring
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const sel = document.getElementById("langSelect");
+  if (!sel || !window.SIF_I18N) return;
+
+  // set initial
+  sel.value = window.SIF_I18N.getCurrent();
+
+  // user change
+  sel.addEventListener("change", (e) => {
+    window.SIF_I18N.set(e.target.value);
+  });
+
+  // keep in sync if language is changed elsewhere
+  window.addEventListener("sif:lang-changed", (ev) => {
+    if (ev?.detail?.lang) sel.value = ev.detail.lang;
+  });
+});
+
