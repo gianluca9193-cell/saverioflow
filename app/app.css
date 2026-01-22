@@ -10,11 +10,7 @@ body.app{
   overflow-x: hidden;
 
   background:
-    radial-gradient(
-      700px 1200px at 50% 10%,
-      rgba(255,255,255,.045),
-      transparent 70%
-    ),
+    radial-gradient(700px 1200px at 50% 10%, rgba(255,255,255,.045), transparent 70%),
     #07070b;
 
   color: rgba(255,255,255,.92);
@@ -32,7 +28,7 @@ body.app{
   background-position: center 120px;
   background-size: min(720px, 85vw);
 
-  opacity: 0.035; /* VERY subtle */
+  opacity: 0.035;
   filter: grayscale(100%) contrast(0.95);
 }
 
@@ -56,11 +52,8 @@ body.app{
   box-shadow: 0 20px 50px rgba(0,0,0,.45);
 }
 
-/* Blur fallback */
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
-  .glass{
-    background: rgba(20,20,28,.72);
-  }
+  .glass{ background: rgba(20,20,28,.72); }
 }
 
 /* ---------- Topbar ---------- */
@@ -80,22 +73,19 @@ body.app{
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-/* Old brand-mark (safe to keep; won't break if still in HTML) */
-.appTop .brand-mark{
-  letter-spacing: .22em;
-  font-weight: 700;
-  font-size: 12px;
-  opacity: .92;
+.appTop-left,
+.appTop-right{
+  display:flex;
+  align-items:center;
+  gap: 12px;
 }
 
-/* ---------- New App Brand (recommended) ---------- */
+/* ---------- App Brand (final) ---------- */
 .appBrand{
   display:flex;
   align-items:center;
   gap:.6rem;
   text-decoration:none;
-
-  /* allow currentColor inside inline SVG */
   color: rgba(255,255,255,.92);
   min-width: 0;
 }
@@ -117,13 +107,12 @@ body.app{
   font-weight:650;
   letter-spacing:.14em;
   font-size:.92rem;
-  color: inherit;
+  white-space:nowrap;
   opacity: .92;
-  white-space: nowrap;
 }
 
 @media (max-width: 520px){
-  .appBrand__name{ display:none; } /* icon-only on small screens */
+  .appBrand__name{ display:none; }
 }
 
 /* ---------- Language Switch ---------- */
@@ -179,16 +168,9 @@ body.app{
     transform .15s ease;
 }
 
-.tab:hover{
-  color: rgba(255,255,255,.85);
-}
+.tab:hover{ color: rgba(255,255,255,.85); }
+.tab:active{ transform: translateY(1px); }
 
-.tab:active{
-  transform: translateY(1px);
-}
-
-/* Active Tab:
-   supports both your current .is-active and aria-selected="true" */
 .tab.is-active,
 .tab[aria-selected="true"]{
   background: rgba(255,255,255,.08);
@@ -202,12 +184,8 @@ body.app{
   padding: 0 14px 20px;
 }
 
-/* Wraps */
-.viewWrap.is-hidden{
-  display: none;
-}
+.viewWrap.is-hidden{ display:none; }
 
-/* Individual view panels (Today / Week / etc.) */
 .view{
   padding: 16px;
   margin-bottom: 14px;
@@ -219,21 +197,12 @@ body.app{
 
 /* ---------- Mobile ---------- */
 @media (max-width: 820px){
-  .tabs{
-    flex-direction: column;
-  }
+  .tabs{ flex-direction: column; }
 }
 
 /* ---------- RTL ---------- */
 html[dir="rtl"] .appTop,
-html[dir="rtl"] .tabs{
-  direction: rtl;
-}
+html[dir="rtl"] .tabs{ direction: rtl; }
 
-html[dir="rtl"] .langSwitch{
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .appBrand{
-  flex-direction: row-reverse;
-}
+html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
+html[dir="rtl"] .appBrand{ flex-direction: row-reverse; }
