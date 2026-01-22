@@ -65,17 +65,17 @@
         </svg>
       </a>
 
-      <!-- Language Switch -->
-      <div class="langSwitch glass">
-        <label class="langLabel" for="langSelectLanding" data-i18n="lang.label">Language</label>
-        <select id="langSelectLanding" aria-label="Language">
-          <option value="en" data-i18n="lang.en">English</option>
-          <option value="de" data-i18n="lang.de">German</option>
-          <option value="es" data-i18n="lang.es">Spanish</option>
-          <option value="it" data-i18n="lang.it">Italian</option>
-          <option value="ar" data-i18n="lang.ar">Arabic</option>
-        </select>
-      </div>
+    <!-- Language Switch (disabled for EN-only) -->
+<div class="langSwitch glass" aria-hidden="true">
+  <label class="langLabel" for="langSelectLanding">Language</label>
+  <select id="langSelectLanding" aria-label="Language" disabled>
+    <option value="en" selected>English</option>
+    <option value="de">German</option>
+    <option value="es">Spanish</option>
+    <option value="it">Italian</option>
+    <option value="ar">Arabic</option>
+  </select>
+</div>
 
       <nav class="top-actions">
         <a class="btn btn-ghost glass" href="/app/" aria-label="Open app" data-i18n="nav.openApp">Open App</a>
@@ -369,3 +369,4 @@
   </script>
 </body>
 </html>
+
