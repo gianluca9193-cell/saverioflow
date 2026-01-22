@@ -712,9 +712,35 @@
     });
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const acc = document.getElementById("featureAccordion");
+    const items = Array.from(acc?.querySelectorAll(".accItem") || []);
+    const links = Array.from(document.querySelectorAll(".featureLink"));
+
+    function openKey(key){
+      const target = items.find(d => d.dataset.key === key);
+      if (!target) return;
+
+      items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
+      target.setAttribute("open", "");
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    links.forEach(btn => btn.addEventListener("click", () => openKey(btn.dataset.open)));
+
+    items.forEach(d => {
+      d.addEventListener("toggle", () => {
+        if (!d.open) return;
+        items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
