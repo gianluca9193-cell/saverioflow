@@ -783,3 +783,70 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   .accSummary{ flex-direction: column; align-items:flex-start; }
   .accMeta{ white-space: normal; }
 }
+/* === Feature Grid (Hero) === */
+.featureGrid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
+  gap:12px;
+  margin-top:18px;
+}
+
+@media (max-width: 1100px){
+  .featureGrid{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 640px){
+  .featureGrid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
+
+.featureCard{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(10,12,18,.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,.22);
+  border-radius:16px;
+  padding:14px 14px 12px;
+  text-align:start;
+  cursor:pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  min-height:86px;
+}
+
+.featureCard .featureTitle{
+  font-weight:650;
+  letter-spacing:.02em;
+  font-size:14px;
+  line-height:1.15;
+  margin-bottom:6px;
+  opacity:.98;
+}
+
+.featureCard .featureText{
+  font-size:12.5px;
+  line-height:1.35;
+  opacity:.78;
+}
+
+.featureCard:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.18);
+  background:rgba(12,14,22,.45);
+  box-shadow: 0 14px 38px rgba(0,0,0,.28);
+}
+
+.featureCard:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.10),
+    0 0 0 5px rgba(135,180,255,.18),
+    0 14px 38px rgba(0,0,0,.28);
+}
+
+/* Active (if JS adds .is-active) */
+.featureCard.is-active{
+  border-color: rgba(135,180,255,.40);
+  background:rgba(14,18,30,.55);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .featureCard{ transition:none; }
+}
