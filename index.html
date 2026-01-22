@@ -6,8 +6,6 @@
   <meta name="theme-color" content="#0b0b0f" />
 
   <title>SaverIoFlow — Premium Life Planner</title>
-
-  <!-- ✅ removed "AI coach" wording -->
   <meta name="description" content="SaverIoFlow: premium planner for goals, daily plans, and meaningful progress." />
 
   <!-- Base styles -->
@@ -23,17 +21,14 @@
 </head>
 
 <body class="landing cinema">
-  <!-- Cosmic background layers -->
+  <!-- Background layers -->
   <div class="cosmos" aria-hidden="true"></div>
-<!-- Cover art layers (full-page) -->
-<div class="coverArt" aria-hidden="true"></div>
-<div class="coverTree" aria-hidden="true"></div>
+  <div class="coverArt" aria-hidden="true"></div>
+  <div class="coverTree" aria-hidden="true"></div>
 
   <!-- Top bar -->
   <header class="topbar">
     <div class="topbar-inner">
-
-      <!-- ✅ SINGLE brand only (replaces old mark+text) -->
       <a class="brand" href="/" aria-label="SaverIoFlow Home">
         <svg xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 520 120"
@@ -90,463 +85,186 @@
   </header>
 
   <!-- Hero -->
- <main class="hero">
-  <section class="hero-grid">
-    <div class="hero-copy">
+  <main class="hero">
+    <section class="hero-grid">
+      <div class="hero-copy">
 
-      <div class="kicker glass" data-i18n="hero.kicker">Planner • Philosophy • Impact</div>
+        <div class="kicker glass" data-i18n="hero.kicker">Planner • Philosophy • Impact</div>
 
-      <h1 class="hero-title">
-        <span data-i18n="hero.title">Build your life plan.</span>
-      </h1>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title">Build your life plan.</span>
+        </h1>
 
-      <p class="hero-trackline">
-        Track goals with streaks, milestones, and reviews — across A/B/C.
-      </p>
+        <p class="hero-trackline">
+          Track goals with streaks, milestones, and reviews — across A/B/C.
+        </p>
 
-      <p class="hero-subtitle" data-i18n="hero.subtitle">
-        From goals to daily action — with philosophy, impact, and momentum.
-      </p>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          From goals to daily action — with philosophy, impact, and momentum.
+        </p>
 
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="/app/" data-i18n="cta.start">Start now</a>
-        <a class="btn btn-ghost glass" href="#features" data-i18n="cta.learn">Learn more</a>
-      </div>
-
-      <!-- ✅ ONE Feature Grid only (clean, scanable) -->
-      <div class="featureGrid">
-        <button class="featureCard glass featureLink" type="button" data-open="today">
-          <div class="featureTitle">Today</div>
-          <div class="featureText">Top 3 + Plan B + Minimum Day.</div>
-        </button>
-
-        <button class="featureCard glass featureLink" type="button" data-open="week">
-          <div class="featureTitle">Week</div>
-          <div class="featureText">Realistic week with buffer + priorities.</div>
-        </button>
-
-        <button class="featureCard glass featureLink" type="button" data-open="year">
-          <div class="featureTitle">Year</div>
-          <div class="featureText">Goals → quarters → measurable direction.</div>
-        </button>
-
-        <button class="featureCard glass featureLink" type="button" data-open="compass">
-          <div class="featureTitle">Compass</div>
-          <div class="featureText">Values + A/B/C categories.</div>
-        </button>
-
-        <button class="featureCard glass featureLink" type="button" data-open="review">
-          <div class="featureTitle">Review</div>
-          <div class="featureText">Reflection loops. Calm improvement.</div>
-        </button>
-      </div>
-
-      <div class="hero-meta">
-        <span class="pill glass" data-i18n="meta.offline">Offline-first PWA</span>
-        <span class="pill glass" data-i18n="meta.impact">Impact dashboard</span>
-        <span class="pill glass" data-i18n="meta.philo">Stoic & Socratic modes</span>
-      </div>
-    </div>
-
-    <!-- Hero Gadget: Goal Tracker Preview -->
-    <aside class="hero-gadget glass" aria-label="Goal Tracker preview">
-      <div class="gadget-head">
-        <div>
-          <div class="gadget-title">Goal Tracker</div>
-          <div class="gadget-sub">Streaks • Milestones • Reviews</div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/app/" data-i18n="cta.start">Start now</a>
+          <a class="btn btn-ghost glass" href="#features" data-i18n="cta.learn">Learn more</a>
         </div>
 
-        <div class="ring" aria-hidden="true" style="--p:72">
-          <div class="ring__value">72%</div>
-          <div class="ring__label">Year</div>
+        <!-- One Feature Grid (buttons open accordion) -->
+        <div class="featureGrid">
+          <button class="featureCard glass featureLink" type="button" data-open="today">
+            <div class="featureTitle">Today</div>
+            <div class="featureText">Top 3 + Plan B + Minimum Day.</div>
+          </button>
+
+          <button class="featureCard glass featureLink" type="button" data-open="week">
+            <div class="featureTitle">Week</div>
+            <div class="featureText">Weekly structure with buffer + priorities.</div>
+          </button>
+
+          <button class="featureCard glass featureLink" type="button" data-open="year">
+            <div class="featureTitle">Year</div>
+            <div class="featureText">Goals → quarters → measurable direction.</div>
+          </button>
+
+          <button class="featureCard glass featureLink" type="button" data-open="compass">
+            <div class="featureTitle">Compass</div>
+            <div class="featureText">Values + A/B/C categories.</div>
+          </button>
+
+          <button class="featureCard glass featureLink" type="button" data-open="review">
+            <div class="featureTitle">Review</div>
+            <div class="featureText">Reflection loops. Calm improvement.</div>
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <span class="pill glass" data-i18n="meta.offline">Offline-first PWA</span>
+          <span class="pill glass" data-i18n="meta.impact">Impact dashboard</span>
+          <span class="pill glass" data-i18n="meta.philo">Stoic & Socratic modes</span>
         </div>
       </div>
 
-      <div class="gadget-kpis">
-        <div class="kpi">
-          <div class="kpi-label">Streak</div>
-          <div class="kpi-value">7</div>
-          <div class="kpi-meta">days</div>
+      <!-- Hero Gadget -->
+      <aside class="hero-gadget glass" aria-label="Goal Tracker preview">
+        <div class="gadget-head">
+          <div>
+            <div class="gadget-title">Goal Tracker</div>
+            <div class="gadget-sub">Streaks • Milestones • Reviews</div>
+          </div>
+
+          <div class="ring" aria-hidden="true" style="--p:72">
+            <div class="ring__value">72%</div>
+            <div class="ring__label">Year</div>
+          </div>
         </div>
-        <div class="kpi">
-          <div class="kpi-label">Focus</div>
-          <div class="kpi-value">3</div>
-          <div class="kpi-meta">top tasks</div>
+
+        <div class="gadget-progress">
+          <div class="progress-row">
+            <span class="progress-name">Write book</span>
+            <span class="progress-pct">62%</span>
+          </div>
+          <div class="progress-bar"><span style="width:62%"></span></div>
+
+          <div class="progress-row">
+            <span class="progress-name">Fitness</span>
+            <span class="progress-pct">48%</span>
+          </div>
+          <div class="progress-bar"><span style="width:48%"></span></div>
+
+          <div class="progress-row">
+            <span class="progress-name">Plant trees</span>
+            <span class="progress-pct">80%</span>
+          </div>
+          <div class="progress-bar"><span style="width:80%"></span></div>
         </div>
-        <div class="kpi">
-          <div class="kpi-label">Impact</div>
-          <div class="kpi-value">A/B/C</div>
-          <div class="kpi-meta">balanced</div>
+
+        <div class="gadget-cta">
+          <a class="btn btn-ghost glass" href="/app/" aria-label="Open Today view">Open Today</a>
+          <a class="btn btn-primary" href="#features" aria-label="See how it works">How it works</a>
         </div>
-      </div>
+      </aside>
+    </section>
 
-      <div class="gadget-progress">
-        <div class="progress-row">
-          <span class="progress-name">Write book</span>
-          <span class="progress-pct">62%</span>
-        </div>
-        <div class="progress-bar"><span style="width:62%"></span></div>
+    <div class="neon-divider" aria-hidden="true"></div>
 
-        <div class="progress-row">
-          <span class="progress-name">Fitness</span>
-          <span class="progress-pct">48%</span>
-        </div>
-        <div class="progress-bar"><span style="width:48%"></span></div>
-
-        <div class="progress-row">
-          <span class="progress-name">Plant trees</span>
-          <span class="progress-pct">80%</span>
-        </div>
-        <div class="progress-bar"><span style="width:80%"></span></div>
-      </div>
-
-      <div class="gadget-cta">
-        <a class="btn btn-ghost glass" href="/app/" aria-label="Open Today view">Open Today</a>
-        <a class="btn btn-primary" href="#features" aria-label="See how it works">How it works</a>
-      </div>
-    </aside>
-  </section>
-
-  <div class="neon-divider" aria-hidden="true"></div>
-</main>
-
-<!-- Features Overview -->
-<section class="features" id="features">
-  <h2 class="section-title">How SaverIoFlow works</h2>
-  <p class="section-subtitle">One system: plan, track, reflect — across A (You), B (Common Good), C (Earth & Animals).</p>
-
-  <div class="featureGrid featureGrid--overview">
-    <button class="featureCard glass featureLink" type="button" data-target="#feature-today">
-      <div class="featureTitle">Today</div>
-      <div class="featureText">Top 3 + Plan B + Minimum Day. Keep momentum.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-target="#feature-week">
-      <div class="featureTitle">Week</div>
-      <div class="featureText">Weekly structure with buffer + priorities.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-target="#feature-year">
-      <div class="featureTitle">Year</div>
-      <div class="featureText">Goals → quarters → direction you can measure.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-target="#feature-compass">
-      <div class="featureTitle">Compass</div>
-      <div class="featureText">Values + A/B/C categories — decide what matters.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-target="#feature-review">
-      <div class="featureTitle">Review</div>
-      <div class="featureText">Reflection loops. Learn and improve calmly.</div>
-    </button>
-  </div>
-
-  <!-- Details -->
-  <div class="featureDetails">
-    <article class="featureDetail glass" id="feature-today">
-      <h3>Today — execute & track</h3>
-      <ul>
-        <li>Pick Top 3 tasks that move your goals.</li>
-        <li>Plan B when energy is low.</li>
-        <li>Minimum Day keeps your streak alive.</li>
-      </ul>
-      <a class="btn btn-ghost glass" href="/app/" aria-label="Open Today in app">Open Today</a>
-    </article>
-
-    <article class="featureDetail glass" id="feature-week">
-      <h3>Week — realistic planning</h3>
-      <ul>
-        <li>Turn goals into weekly actions.</li>
-        <li>Balance A/B/C so life stays aligned.</li>
-        <li>Keep buffer for surprises.</li>
-      </ul>
-      <a class="btn btn-ghost glass" href="/app/" aria-label="Open Week in app">Open Week</a>
-    </article>
-
-    <article class="featureDetail glass" id="feature-year">
-      <h3>Year — measurable direction</h3>
-      <ul>
-        <li>Define outcomes, not vague wishes.</li>
-        <li>Split into quarters and milestones.</li>
-        <li>Track progress with reviews.</li>
-      </ul>
-      <a class="btn btn-ghost glass" href="/app/" aria-label="Open Year in app">Open Year</a>
-    </article>
-
-    <article class="featureDetail glass" id="feature-compass">
-      <h3>Compass — values & choices</h3>
-      <ul>
-        <li>Socratic / Stoic / Eco lenses.</li>
-        <li>Clarify trade-offs and priorities.</li>
-        <li>Choose one next step with confidence.</li>
-      </ul>
-      <a class="btn btn-ghost glass" href="/app/" aria-label="Open Compass in app">Open Compass</a>
-    </article>
-
-    <article class="featureDetail glass" id="feature-review">
-      <h3>Review — learn the loop</h3>
-      <ul>
-        <li>Weekly + yearly reflection rituals.</li>
-        <li>Keep what works, drop what doesn’t.</li>
-        <li>See your progress over time.</li>
-      </ul>
-      <a class="btn btn-ghost glass" href="/app/" aria-label="Open Review in app">Open Review</a>
-    </article>
-  </div>
-</section>
-
+    <!-- ✅ ONLY ONE Features section -->
     <section class="features" id="features">
-  <h2 class="section-title">How SaverIoFlow works</h2>
-  <p class="section-subtitle">
-    Plan, track, reflect — across A (You), B (Common Good), C (Earth & Animals).
-  </p>
+      <h2 class="section-title" data-i18n="features.title">How SaverIoFlow works</h2>
+      <p class="section-subtitle" data-i18n="features.subtitle">
+        Plan, track, reflect — across A (You), B (Common Good), C (Earth & Animals).
+      </p>
 
-  <!-- Overview cards -->
-  <div class="featureGrid featureGrid--overview" id="featureOverview">
-    <button class="featureCard glass featureLink" type="button" data-open="today">
-      <div class="featureTitle">Today</div>
-      <div class="featureText">Top 3 + Plan B + Minimum Day.</div>
-    </button>
+      <div class="accordion glass" id="featureAccordion">
+        <details class="accItem" data-key="today" open>
+          <summary class="accSummary">
+            <span class="accTitle">Today — execute & track</span>
+            <span class="accMeta">Top 3 • Plan B • Minimum Day</span>
+          </summary>
+          <div class="accBody">
+            <ul>
+              <li>Choose Top 3 tasks that move your goals.</li>
+              <li>Plan B for low energy (still progress).</li>
+              <li>Minimum Day keeps streak + identity.</li>
+            </ul>
+          </div>
+        </details>
 
-    <button class="featureCard glass featureLink" type="button" data-open="week">
-      <div class="featureTitle">Week</div>
-      <div class="featureText">Weekly structure with buffer + priorities.</div>
-    </button>
+        <details class="accItem" data-key="week">
+          <summary class="accSummary">
+            <span class="accTitle">Week — realistic planning</span>
+            <span class="accMeta">Structure • Buffer • Priorities</span>
+          </summary>
+          <div class="accBody">
+            <ul>
+              <li>Turn goals into weekly actions.</li>
+              <li>Balance A/B/C for a meaningful week.</li>
+              <li>Keep buffer for surprises.</li>
+            </ul>
+          </div>
+        </details>
 
-    <button class="featureCard glass featureLink" type="button" data-open="year">
-      <div class="featureTitle">Year</div>
-      <div class="featureText">Goals → quarters → measurable direction.</div>
-    </button>
+        <details class="accItem" data-key="year">
+          <summary class="accSummary">
+            <span class="accTitle">Year — measurable direction</span>
+            <span class="accMeta">Quarters • Milestones • Reviews</span>
+          </summary>
+          <div class="accBody">
+            <ul>
+              <li>Define outcomes you can measure.</li>
+              <li>Split into quarters + milestones.</li>
+              <li>Review progress and adjust.</li>
+            </ul>
+          </div>
+        </details>
 
-    <button class="featureCard glass featureLink" type="button" data-open="compass">
-      <div class="featureTitle">Compass</div>
-      <div class="featureText">Values + A/B/C categories.</div>
-    </button>
+        <details class="accItem" data-key="compass">
+          <summary class="accSummary">
+            <span class="accTitle">Compass — values & choices</span>
+            <span class="accMeta">Socratic • Stoic • Eco • Peace</span>
+          </summary>
+          <div class="accBody">
+            <ul>
+              <li>Use philosophy modes as a lens.</li>
+              <li>Prioritize with A/B/C categories.</li>
+              <li>Choose the next step with clarity.</li>
+            </ul>
+          </div>
+        </details>
 
-    <button class="featureCard glass featureLink" type="button" data-open="review">
-      <div class="featureTitle">Review</div>
-      <div class="featureText">Reflection loops. Calm improvement.</div>
-    </button>
-  </div>
-
-  <!-- Accordion -->
-  <div class="accordion glass" id="featureAccordion">
-
-    <details class="accItem" data-key="today" open>
-      <summary class="accSummary">
-        <span class="accTitle">Today — execute & track</span>
-        <span class="accMeta">Top 3 • Plan B • Minimum Day</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Pick Top 3 tasks that move your goals.</li>
-          <li>Plan B for low energy days.</li>
-          <li>Minimum Day keeps momentum & streak.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Today in app">Open Today</a>
-        </div>
+        <details class="accItem" data-key="review">
+          <summary class="accSummary">
+            <span class="accTitle">Review — learn the loop</span>
+            <span class="accMeta">Reflect • Improve • Repeat</span>
+          </summary>
+          <div class="accBody">
+            <ul>
+              <li>Weekly + yearly review rituals.</li>
+              <li>Keep what works, drop what doesn’t.</li>
+              <li>See progress over time.</li>
+            </ul>
+          </div>
+        </details>
       </div>
-    </details>
-
-    <details class="accItem" data-key="week">
-      <summary class="accSummary">
-        <span class="accTitle">Week — realistic planning</span>
-        <span class="accMeta">Structure • Buffer • Priorities</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Turn goals into weekly actions.</li>
-          <li>Balance A/B/C so life stays aligned.</li>
-          <li>Keep buffer for surprises.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Week in app">Open Week</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="year">
-      <summary class="accSummary">
-        <span class="accTitle">Year — measurable direction</span>
-        <span class="accMeta">Quarters • Milestones • Progress</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Define outcomes, not vague wishes.</li>
-          <li>Split into quarters and milestones.</li>
-          <li>Track progress through reviews.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Year in app">Open Year</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="compass">
-      <summary class="accSummary">
-        <span class="accTitle">Compass — values & choices</span>
-        <span class="accMeta">Socratic • Stoic • Eco • Peace</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Choose a philosophy lens for clarity.</li>
-          <li>Decide trade-offs with A/B/C categories.</li>
-          <li>Pick one next step with confidence.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Compass in app">Open Compass</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="review">
-      <summary class="accSummary">
-        <span class="accTitle">Review — learn the loop</span>
-        <span class="accMeta">Reflect • Improve • Repeat</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Weekly + yearly reflection rituals.</li>
-          <li>Keep what works, drop what doesn’t.</li>
-          <li>See progress over time.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Review in app">Open Review</a>
-        </div>
-      </div>
-    </details>
-
-  </div>
-</section>
-<section class="features" id="features">
-  <h2 class="section-title" data-i18n="features.title">
-  How SaverIoFlow works
-</h2>
-
-  <p class="section-subtitle">
-    One calm system: plan, track, reflect — across A (You), B (Common Good), C (Earth & Animals).
-  </p>
-
-  <!-- Overview cards -->
-  <div class="featureGrid featureGrid--overview" id="featureOverview">
-    <button class="featureCard glass featureLink" type="button" data-open="today">
-      <div class="featureTitle">Today</div>
-      <div class="featureText">Top 3 + Plan B + Minimum Day.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-open="week">
-      <div class="featureTitle">Week</div>
-      <div class="featureText">Weekly structure with buffer + priorities.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-open="year">
-      <div class="featureTitle">Year</div>
-      <div class="featureText">Goals → quarters → measurable direction.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-open="compass">
-      <div class="featureTitle">Compass</div>
-      <div class="featureText">Values + A/B/C categories.</div>
-    </button>
-
-    <button class="featureCard glass featureLink" type="button" data-open="review">
-      <div class="featureTitle">Review</div>
-      <div class="featureText">Reflection loops. Calm improvement.</div>
-    </button>
-  </div>
-
-  <!-- Accordion -->
-  <div class="accordion glass" id="featureAccordion">
-
-    <details class="accItem" data-key="today" open>
-      <summary class="accSummary">
-        <span class="accTitle">Today — execute & track</span>
-        <span class="accMeta">Top 3 • Plan B • Minimum Day</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Choose Top 3 tasks that move your goals.</li>
-          <li>Plan B for low energy (still progress).</li>
-          <li>Minimum Day keeps streak + identity.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Today in app">Open Today</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="week">
-      <summary class="accSummary">
-        <span class="accTitle">Week — realistic planning</span>
-        <span class="accMeta">Structure • Buffer • Priorities</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Turn goals into weekly actions.</li>
-          <li>Balance A/B/C for a meaningful week.</li>
-          <li>Keep buffer for surprises.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Week in app">Open Week</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="year">
-      <summary class="accSummary">
-        <span class="accTitle">Year — measurable direction</span>
-        <span class="accMeta">Quarters • Milestones • Reviews</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Define outcomes you can measure.</li>
-          <li>Split into quarters + milestones.</li>
-          <li>Review progress and adjust.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Year in app">Open Year</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="compass">
-      <summary class="accSummary">
-        <span class="accTitle">Compass — values & choices</span>
-        <span class="accMeta">Socratic • Stoic • Eco • Peace</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Use philosophy modes as a “lens”.</li>
-          <li>Prioritize with A/B/C categories.</li>
-          <li>Choose the next step with clarity.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Compass in app">Open Compass</a>
-        </div>
-      </div>
-    </details>
-
-    <details class="accItem" data-key="review">
-      <summary class="accSummary">
-        <span class="accTitle">Review — learn the loop</span>
-        <span class="accMeta">Reflect • Improve • Repeat</span>
-      </summary>
-      <div class="accBody">
-        <ul>
-          <li>Weekly + yearly review rituals.</li>
-          <li>Keep what works, drop what doesn’t.</li>
-          <li>See your progress over time.</li>
-        </ul>
-        <div class="accActions">
-          <a class="btn btn-primary" href="/app/" aria-label="Open Review in app">Open Review</a>
-        </div>
-      </div>
-    </details>
-
-  </div>
-</section>
+    </section>
 
     <!-- Premium section -->
     <section class="cinema-strip" id="premium">
@@ -591,7 +309,7 @@
     </div>
   </footer>
 
-  <!-- Existing motion/slider scripts -->
+  <!-- Scripts -->
   <script src="/motion.js"></script>
   <script src="/slider.js"></script>
 
@@ -609,115 +327,45 @@
   <script src="/i18n/i18n.js"></script>
 
   <script>
-    // Defensive i18n init + language switch wiring (never break landing)
     try { window.SIF_I18N && window.SIF_I18N.init(); } catch(e){ console.warn("i18n init failed:", e); }
 
     document.addEventListener("DOMContentLoaded", () => {
+      // Language select wiring
       try {
         const sel = document.getElementById("langSelectLanding");
-        if (!sel || !window.SIF_I18N) return;
-        sel.value = window.SIF_I18N.getCurrent();
-        sel.addEventListener("change", (e) => window.SIF_I18N.set(e.target.value));
-        window.addEventListener("sif:lang-changed", (ev) => {
-          if (ev?.detail?.lang) sel.value = ev.detail.lang;
-        });
+        if (sel && window.SIF_I18N) {
+          sel.value = window.SIF_I18N.getCurrent();
+          sel.addEventListener("change", (e) => window.SIF_I18N.set(e.target.value));
+          window.addEventListener("sif:lang-changed", (ev) => {
+            if (ev?.detail?.lang) sel.value = ev.detail.lang;
+          });
+        }
       } catch(e) {
         console.warn("langSelectLanding wiring failed:", e);
       }
+
+      // Accordion control: open from hero feature buttons + keep one open
+      const acc = document.getElementById("featureAccordion");
+      const items = Array.from(acc?.querySelectorAll(".accItem") || []);
+      const links = Array.from(document.querySelectorAll(".featureLink"));
+
+      function openKey(key){
+        const target = items.find(d => d.dataset.key === key);
+        if (!target) return;
+        items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
+        target.setAttribute("open", "");
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      links.forEach(btn => btn.addEventListener("click", () => openKey(btn.dataset.open)));
+
+      items.forEach(d => {
+        d.addEventListener("toggle", () => {
+          if (!d.open) return;
+          items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
+        });
+      });
     });
   </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".featureLink").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-target");
-        const el = target ? document.querySelector(target) : null;
-        if (!el) return;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        el.classList.add("featureDetail--pulse");
-        window.setTimeout(() => el.classList.remove("featureDetail--pulse"), 450);
-      });
-    });
-  });
-</script>
-.featureDetail--pulse{
-  outline: 1px solid rgba(255,255,255,.18);
-  box-shadow: 0 18px 50px rgba(0,0,0,.55);
-}
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const acc = document.getElementById("featureAccordion");
-    const items = Array.from(acc?.querySelectorAll(".accItem") || []);
-    const links = Array.from(document.querySelectorAll(".featureLink"));
-
-    function openKey(key){
-      const target = items.find(d => d.dataset.key === key);
-      if (!target) return;
-
-      // close others
-      items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
-
-      // open target
-      target.setAttribute("open", "");
-
-      // scroll nicely
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    // clicking overview cards opens corresponding accordion item
-    links.forEach(btn => {
-      btn.addEventListener("click", () => openKey(btn.dataset.open));
-    });
-
-    // ensure only one open even when user clicks the summary directly
-    items.forEach(d => {
-      d.addEventListener("toggle", () => {
-        if (!d.open) return;
-        items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
-      });
-    });
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const acc = document.getElementById("featureAccordion");
-    const items = Array.from(acc?.querySelectorAll(".accItem") || []);
-    const links = Array.from(document.querySelectorAll(".featureLink"));
-
-    function openKey(key){
-      const target = items.find(d => d.dataset.key === key);
-      if (!target) return;
-
-      items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
-      target.setAttribute("open", "");
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    links.forEach(btn => btn.addEventListener("click", () => openKey(btn.dataset.open)));
-
-    items.forEach(d => {
-      d.addEventListener("toggle", () => {
-        if (!d.open) return;
-        items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
-      });
-    });
-  });
-</script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
