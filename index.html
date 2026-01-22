@@ -90,163 +90,126 @@
   </header>
 
   <!-- Hero -->
-  <main class="hero">
-    <section class="hero-grid">
-      <div class="hero-copy">
+ <main class="hero">
+  <section class="hero-grid">
+    <div class="hero-copy">
 
-        <!-- ✅ removed "AI Coach" wording -->
-        <div class="kicker glass" data-i18n="hero.kicker">Planner • Philosophy • Impact</div>
+      <div class="kicker glass" data-i18n="hero.kicker">Planner • Philosophy • Impact</div>
 
-        <h1 class="hero-title">
-          <span data-i18n="hero.title">Build your life plan.</span>
-        </h1>
-<p class="hero-trackline">
-  Track goals with streaks, milestones, and reviews — across A/B/C.
-</p>
+      <h1 class="hero-title">
+        <span data-i18n="hero.title">Build your life plan.</span>
+      </h1>
 
-        <p class="hero-subtitle" data-i18n="hero.subtitle">
-          From goals to daily action — with philosophy, impact, and momentum.
-        </p>
+      <p class="hero-trackline">
+        Track goals with streaks, milestones, and reviews — across A/B/C.
+      </p>
 
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="/app/" data-i18n="cta.start">Start now</a>
-          <a class="btn btn-ghost glass" href="#premium" data-i18n="cta.learn">Learn more</a>
-        </div>
-        <div class="hero-copy">
-  …
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
+        From goals to daily action — with philosophy, impact, and momentum.
+      </p>
 
-  <div class="hero-cta">
-    …
-  </div>
-
-  <!-- ✅ FEATURE GRID (Punkt 3) -->
-  <div class="featureGrid">
-    <div class="featureCard glass">
-      <div class="featureTitle">Today</div>
-      <div class="featureText">Top 3, Plan B, Minimum Day.</div>
-    </div>
-
-    <div class="featureCard glass">
-      <div class="featureTitle">Week</div>
-      <div class="featureText">Realistische Woche mit Fokus.</div>
-    </div>
-
-    <div class="featureCard glass">
-      <div class="featureTitle">Year</div>
-      <div class="featureText">Ziele → Quartale → Richtung.</div>
-    </div>
-
-    <div class="featureCard glass">
-      <div class="featureTitle">Compass</div>
-      <div class="featureText">Werte & Kategorien A/B/C.</div>
-    </div>
-
-    <div class="featureCard glass">
-      <div class="featureTitle">Review</div>
-      <div class="featureText">Reflektieren & verbessern.</div>
-    </div>
-  </div>
-</div>
-
- <div class="featureGrid">
-  <div class="featureCard glass">
-    <div class="featureTitle">Today</div>
-    <div class="featureText">Top 3, Plan B, Minimum Day — ohne Druck.</div>
-  </div>
-
-  <div class="featureCard glass">
-    <div class="featureTitle">Week</div>
-    <div class="featureText">Realistische Woche mit Fokus & Puffer.</div>
-  </div>
-
-  <div class="featureCard glass">
-    <div class="featureTitle">Year</div>
-    <div class="featureText">Ziele → Quartale → Richtung halten.</div>
-  </div>
-
-  <div class="featureCard glass">
-    <div class="featureTitle">Compass</div>
-    <div class="featureText">Werte & Kategorien: A, B, C — klar priorisiert.</div>
-  </div>
-
-  <div class="featureCard glass">
-    <div class="featureTitle">Review</div>
-    <div class="featureText">Reflektieren. Lernen. Ruhig verbessern.</div>
-  </div>
-</div>
-     
-
-        <div class="hero-meta">
-          <span class="pill glass" data-i18n="meta.offline">Offline-first PWA</span>
-          <span class="pill glass" data-i18n="meta.impact">Impact dashboard</span>
-          <span class="pill glass" data-i18n="meta.philo">Stoic & Socratic modes</span>
-        </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/app/" data-i18n="cta.start">Start now</a>
+        <a class="btn btn-ghost glass" href="#features" data-i18n="cta.learn">Learn more</a>
       </div>
+
+      <!-- ✅ ONE Feature Grid only (clean, scanable) -->
+      <div class="featureGrid">
+        <button class="featureCard glass featureLink" type="button" data-open="today">
+          <div class="featureTitle">Today</div>
+          <div class="featureText">Top 3 + Plan B + Minimum Day.</div>
+        </button>
+
+        <button class="featureCard glass featureLink" type="button" data-open="week">
+          <div class="featureTitle">Week</div>
+          <div class="featureText">Realistic week with buffer + priorities.</div>
+        </button>
+
+        <button class="featureCard glass featureLink" type="button" data-open="year">
+          <div class="featureTitle">Year</div>
+          <div class="featureText">Goals → quarters → measurable direction.</div>
+        </button>
+
+        <button class="featureCard glass featureLink" type="button" data-open="compass">
+          <div class="featureTitle">Compass</div>
+          <div class="featureText">Values + A/B/C categories.</div>
+        </button>
+
+        <button class="featureCard glass featureLink" type="button" data-open="review">
+          <div class="featureTitle">Review</div>
+          <div class="featureText">Reflection loops. Calm improvement.</div>
+        </button>
+      </div>
+
+      <div class="hero-meta">
+        <span class="pill glass" data-i18n="meta.offline">Offline-first PWA</span>
+        <span class="pill glass" data-i18n="meta.impact">Impact dashboard</span>
+        <span class="pill glass" data-i18n="meta.philo">Stoic & Socratic modes</span>
+      </div>
+    </div>
 
     <!-- Hero Gadget: Goal Tracker Preview -->
-<aside class="hero-gadget glass" aria-label="Goal Tracker preview">
- <div class="gadget-head">
-  <div>
-    <div class="gadget-title">Goal Tracker</div>
-    <div class="gadget-sub">Streaks • Milestones • Reviews</div>
-  </div>
+    <aside class="hero-gadget glass" aria-label="Goal Tracker preview">
+      <div class="gadget-head">
+        <div>
+          <div class="gadget-title">Goal Tracker</div>
+          <div class="gadget-sub">Streaks • Milestones • Reviews</div>
+        </div>
 
-  <!-- CSS-only progress ring -->
-  <div class="ring" aria-hidden="true" style="--p:72">
-    <div class="ring__value">72%</div>
-    <div class="ring__label">Year</div>
-  </div>
-</div>
-
-
-  <div class="gadget-kpis">
-    <div class="kpi">
-      <div class="kpi-label">Streak</div>
-      <div class="kpi-value">7</div>
-      <div class="kpi-meta">days</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Focus</div>
-      <div class="kpi-value">3</div>
-      <div class="kpi-meta">top tasks</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Impact</div>
-      <div class="kpi-value">A/B/C</div>
-      <div class="kpi-meta">balanced</div>
-    </div>
-  </div>
-
-  <div class="gadget-progress">
-    <div class="progress-row">
-      <span class="progress-name">Write book</span>
-      <span class="progress-pct">62%</span>
-    </div>
-    <div class="progress-bar"><span style="width:62%"></span></div>
-
-    <div class="progress-row">
-      <span class="progress-name">Fitness</span>
-      <span class="progress-pct">48%</span>
-    </div>
-    <div class="progress-bar"><span style="width:48%"></span></div>
-
-    <div class="progress-row">
-      <span class="progress-name">Plant trees</span>
-      <span class="progress-pct">80%</span>
-    </div>
-    <div class="progress-bar"><span style="width:80%"></span></div>
-  </div>
-
-  <div class="gadget-cta">
-    <a class="btn btn-ghost glass" href="/app/" aria-label="Open Today view">Open Today</a>
-    <a class="btn btn-primary" href="#features" aria-label="See how it works">How it works</a>
-  </div>
-</aside>
-
+        <div class="ring" aria-hidden="true" style="--p:72">
+          <div class="ring__value">72%</div>
+          <div class="ring__label">Year</div>
+        </div>
       </div>
-    </section>
 
-    <div class="neon-divider" aria-hidden="true"></div>
+      <div class="gadget-kpis">
+        <div class="kpi">
+          <div class="kpi-label">Streak</div>
+          <div class="kpi-value">7</div>
+          <div class="kpi-meta">days</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Focus</div>
+          <div class="kpi-value">3</div>
+          <div class="kpi-meta">top tasks</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Impact</div>
+          <div class="kpi-value">A/B/C</div>
+          <div class="kpi-meta">balanced</div>
+        </div>
+      </div>
+
+      <div class="gadget-progress">
+        <div class="progress-row">
+          <span class="progress-name">Write book</span>
+          <span class="progress-pct">62%</span>
+        </div>
+        <div class="progress-bar"><span style="width:62%"></span></div>
+
+        <div class="progress-row">
+          <span class="progress-name">Fitness</span>
+          <span class="progress-pct">48%</span>
+        </div>
+        <div class="progress-bar"><span style="width:48%"></span></div>
+
+        <div class="progress-row">
+          <span class="progress-name">Plant trees</span>
+          <span class="progress-pct">80%</span>
+        </div>
+        <div class="progress-bar"><span style="width:80%"></span></div>
+      </div>
+
+      <div class="gadget-cta">
+        <a class="btn btn-ghost glass" href="/app/" aria-label="Open Today view">Open Today</a>
+        <a class="btn btn-primary" href="#features" aria-label="See how it works">How it works</a>
+      </div>
+    </aside>
+  </section>
+
+  <div class="neon-divider" aria-hidden="true"></div>
+</main>
+
 <!-- Features Overview -->
 <section class="features" id="features">
   <h2 class="section-title">How SaverIoFlow works</h2>
@@ -743,6 +706,7 @@
 
 </body>
 </html>
+
 
 
 
