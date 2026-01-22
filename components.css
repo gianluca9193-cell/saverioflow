@@ -152,3 +152,24 @@
   font-size: 12px;
   padding: 14px 0 4px;
 }
+/* Make sure the inline SVG inherits a visible color */
+.topbar .brand{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  color: rgba(255,255,255,.92);
+}
+
+/* Size control for the big wordmark logo */
+.topbar .brand__logo{
+  height: 40px;
+  width: auto;
+  display:block;
+}
+
+@media (max-width: 720px){
+  .topbar .brand__logo{ height: 34px; }
+}
+@media (max-width: 520px){
+  .topbar .brand__logo{ height: 30px; }
+}
