@@ -1,20 +1,25 @@
-window.SIF_I18N_DE = {
-  "lang.label": "Sprache",
-  "lang.en": "Englisch",
-  "lang.de": "Deutsch",
-  "lang.es": "Spanisch",
-  "lang.it": "Italienisch",
-  "lang.ar": "Arabisch",
+  "nav.openApp": "App öffnen",
+  "nav.goPremium": "Premium holen",
 
-  "tabs.today": "Heute",
-  "tabs.week": "Woche",
-  "tabs.year": "Jahr",
-  "tabs.compass": "Kompass",
-  "tabs.review": "Review",
+  "hero.kicker": "KI-Coach • Planer • Impact",
+  "hero.title": "Baue deinen Lebensplan.",
+  "hero.subtitle": "Von Zielen zu täglicher Umsetzung — mit Philosophie, Impact und Momentum.",
 
-  "app.today.title": "Heute",
-  "app.week.title": "Diese Woche",
-  "app.year.title": "Jahreskarte",
-  "app.compass.title": "Kompass",
-  "app.review.title": "Review"
-};
+  "cta.start": "Jetzt starten",
+  "cta.learn": "Mehr erfahren",
+
+  "meta.offline": "Offline-first PWA",
+  "meta.impact": "Impact-Dashboard",
+  "meta.philo": "Stoisch & sokratisch",
+
+  "premium.title": "Premium, das echten Impact finanziert",
+  "premium.subtitle": "Transparenter Anteil für Bäume & Tierschutz. Kein Greenwashing.",
+  "premium.s1.title": "Pläne, die halten",
+  "premium.s1.text": "Tages-/Wochen-/Jahresstruktur mit Plan B und Minimum Day.",
+  "premium.s2.title": "Sokratische Klarheit",
+  "premium.s2.text": "Geführte Fragen, um herauszufinden, was du wirklich willst.",
+  "premium.s3.title": "Impact-Dashboard",
+  "premium.s3.text": "Sieh genau, was dein Beitrag unterstützt.",
+  "premium.join": "Schließ dich 10.000+ an",
+
+  "footer.openApp": "App öffnen"
