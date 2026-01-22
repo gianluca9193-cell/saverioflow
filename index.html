@@ -325,48 +325,50 @@
   <script src="/i18n/it.js"></script>
   <script src="/i18n/ar.js"></script>
   <script src="/i18n/i18n.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const acc = document.getElementById("featureAccordion");
+    const items = Array.from(acc?.querySelectorAll(".accItem") || []);
+    const links = Array.from(document.querySelectorAll(".featureLink"));
 
-  <script>
-    try { window.SIF_I18N && window.SIF_I18N.init(); } catch(e){ console.warn("i18n init failed:", e); }
+    function setActive(key){
+      links.forEach(b =>
+        b.classList.toggle("is-active", b.dataset.open === key)
+      );
+    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      // Language select wiring
-      try {
-        const sel = document.getElementById("langSelectLanding");
-        if (sel && window.SIF_I18N) {
-          sel.value = window.SIF_I18N.getCurrent();
-          sel.addEventListener("change", (e) => window.SIF_I18N.set(e.target.value));
-          window.addEventListener("sif:lang-changed", (ev) => {
-            if (ev?.detail?.lang) sel.value = ev.detail.lang;
-          });
-        }
-      } catch(e) {
-        console.warn("langSelectLanding wiring failed:", e);
-      }
+    function openKey(key){
+      const target = items.find(d => d.dataset.key === key);
+      if (!target) return;
 
-      // Accordion control: open from hero feature buttons + keep one open
-      const acc = document.getElementById("featureAccordion");
-      const items = Array.from(acc?.querySelectorAll(".accItem") || []);
-      const links = Array.from(document.querySelectorAll(".featureLink"));
+      items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
+      target.setAttribute("open", "");
 
-      function openKey(key){
-        const target = items.find(d => d.dataset.key === key);
-        if (!target) return;
-        items.forEach(d => { if (d !== target) d.removeAttribute("open"); });
-        target.setAttribute("open", "");
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
 
-      links.forEach(btn => btn.addEventListener("click", () => openKey(btn.dataset.open)));
+      setActive(key);
+    }
 
-      items.forEach(d => {
-        d.addEventListener("toggle", () => {
-          if (!d.open) return;
-          items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
-        });
+    links.forEach(btn =>
+      btn.addEventListener("click", () => openKey(btn.dataset.open))
+    );
+
+    items.forEach(d => {
+      d.addEventListener("toggle", () => {
+        if (!d.open) return;
+        items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
+        setActive(d.dataset.key);
       });
     });
-  </script>
+
+    // initial highlight (because "today" is open by default)
+    const initiallyOpen = items.find(x => x.open);
+    if (initiallyOpen) setActive(initiallyOpen.dataset.key);
+  });
+</script>
+
+
 </body>
 </html>
+
 
