@@ -942,3 +942,10 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   .accSummary{ align-items:flex-start; }
   .accMeta{ white-space:normal; }
 }
+/* FeatureGrid – clamp text for scanability */
+.featureCard .featureText{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
