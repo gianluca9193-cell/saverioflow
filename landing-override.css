@@ -395,3 +395,110 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
     mask-image: radial-gradient(85% 85% at 50% 28%, #000 0 50%, transparent 78%);
   }
 }
+/* =========================================
+   Hero Gadget (Goal Tracker Preview)
+   ========================================= */
+.hero-gadget{
+  padding: 14px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 340px;
+}
+
+.gadget-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gadget-title{
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .86rem;
+  color: rgba(255,255,255,.92);
+}
+
+.gadget-sub{
+  color: rgba(255,255,255,.62);
+  font-size: .9rem;
+}
+
+.gadget-kpis{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi{
+  padding: 10px 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.kpi-label{
+  color: rgba(255,255,255,.55);
+  font-size: .75rem;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
+.kpi-value{
+  font-size: 1.45rem;
+  font-weight: 760;
+  color: rgba(255,255,255,.92);
+  margin-top: 2px;
+}
+
+.kpi-meta{
+  color: rgba(255,255,255,.62);
+  font-size: .85rem;
+  margin-top: 2px;
+}
+
+.gadget-progress{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.progress-row{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255,255,255,.78);
+  font-size: .95rem;
+}
+
+.progress-name{ opacity:.92; }
+.progress-pct{ opacity:.75; }
+
+.progress-bar{
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  overflow: hidden;
+}
+
+.progress-bar > span{
+  display:block;
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(255,255,255,.20);
+}
+
+.gadget-cta{
+  display:flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+@media (max-width: 980px){
+  .hero-gadget{ min-height: auto; }
+}
