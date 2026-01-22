@@ -1,104 +1,311 @@
-/* landing-override.css
-   Ziel: Landing sieht automatisch wie App aus – ohne HTML umbauen.
-   Muss NACH style.css geladen werden.
-*/
+/* =========================================
+   SaverIoFlow Landing — HARD OVERRIDE LAYOUT
+   Purpose: make landing ordered + robust
+   Works with your existing theme/components
+   ========================================= */
 
-/* 1) Force brand background + type (falls style.css drüberbügelt) */
-html, body { background: none !important; }
-body{
-  font-family: var(--font) !important;
-  color: var(--text) !important;
-  background:
-    radial-gradient(1100px 700px at 18% 8%, rgba(56,224,211,.11), transparent 58%),
-    radial-gradient(1000px 600px at 82% 16%, rgba(215,184,92,.11), transparent 58%),
-    radial-gradient(900px 650px at 52% 120%, rgba(56,224,211,.05), transparent 55%),
-    linear-gradient(180deg, var(--bg), var(--bg2)) !important;
+:root{
+  --lpMax: 1120px;
+  --lpPad: clamp(16px, 3vw, 28px);
+  --lpRadius: 18px;
 }
 
-/* 2) Links / Text */
-a{ color: inherit !important; text-decoration: none; }
-p, li { color: rgba(234,242,251,.88); }
+/* Base */
+body.landing{
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-/* 3) Default sections “premium” */
-section, header, main, footer, nav{
+/* -----------------------------------------
+   Topbar
+   ----------------------------------------- */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(10,10,14,.55);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.topbar-inner{
+  max-width: var(--lpMax);
+  margin: 0 auto;
+  padding: 14px var(--lpPad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-mark{
+  letter-spacing: .22em;
+  font-weight: 700;
+  font-size: 12px;
+  opacity: .92;
+  white-space: nowrap;
+}
+
+/* Language switch (safe) */
+.langSwitch{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.langLabel{ opacity:.75; font-size: .9rem; white-space: nowrap; }
+
+#langSelectLanding{
+  background: rgba(255,255,255,.06);
   color: inherit;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 8px 10px;
+  outline: none;
+  min-width: 140px;
 }
 
-/* 4) Buttons: macht fast jeden Landing-Button premium, egal wie er heißt */
-button,
-input[type="button"],
-input[type="submit"],
-a.button,
-a.btn,
-a.cta,
-a[href*="app"],
-a[href*="waitlist"],
-a[href*="signup"]{
+/* Top actions */
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+/* Mobile: keep topbar from exploding */
+@media (max-width: 860px){
+  .topbar-inner{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .top-actions{
+    width: 100%;
+    justify-content: center;
+  }
+  .langSwitch{
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* -----------------------------------------
+   Hero layout
+   ----------------------------------------- */
+main.hero{
+  max-width: var(--lpMax);
+  margin: 0 auto;
+  padding: 28px var(--lpPad) 18px;
+}
+
+.hero-grid{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: clamp(18px, 3vw, 36px);
+  align-items: center;
+}
+
+@media (max-width: 920px){
+  .hero-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Copy */
+.hero-copy .kicker{
   display:inline-flex;
   align-items:center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 14px;
+  opacity: .9;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.hero-title{
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: 1.04;
+  margin: 0 0 10px 0;
+}
+
+.hero-subtitle{
+  max-width: 62ch;
+  opacity: .88;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.5;
+  margin: 0 0 18px 0;
+}
+
+.hero-cta{
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 14px;
+}
+
+.hero-meta{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.hero-meta .pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  opacity: .9;
+  font-size: 13px;
+}
+
+/* -----------------------------------------
+   Statue / art container
+   ----------------------------------------- */
+.hero-art-wrap{
+  position: relative;
+  min-height: 320px;
+  border-radius: var(--lpRadius);
+  background: radial-gradient(120% 120% at 50% 20%,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,0) 55%
+  );
+  border: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
+  display:flex;
+  align-items:center;
   justify-content:center;
-  gap:10px;
-  border-radius: 14px !important;
-  border: 1px solid var(--line) !important;
-  padding: 11px 14px !important;
-  font-weight: 700 !important;
-  letter-spacing: .2px !important;
-  cursor: pointer;
-  background: rgba(255,255,255,.03) !important;
-  color: var(--text) !important;
-  transition: transform var(--fast) var(--ease), border var(--fast) var(--ease), background var(--fast) var(--ease);
-}
-button:hover,
-a.button:hover,
-a.btn:hover,
-a.cta:hover{
-  border-color: var(--line2) !important;
-  transform: translateY(-1px);
 }
 
-/* 5) Primary CTA: wenn du irgendwo eine Klasse wie primary/cta nutzt */
-.primary, .btn-primary, .cta-primary, .hero-cta{
-  border-color: rgba(215,184,92,.35) !important;
-  background: linear-gradient(90deg, rgba(215,184,92,.22), rgba(56,224,211,.14)) !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,.25) !important;
+.hero-art-wrap.no-statue{
+  display:none;
 }
 
-/* 6) Cards: macht typische Feature-Boxen automatisch wie App-Cards */
-.card, .box, .feature, .feature-card, .panel, .tile, .pricing, .price-card{
-  border-radius: var(--r-xl) !important;
-  border: 1px solid var(--line) !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02) 34%, rgba(255,255,255,.01)),
-    rgba(15,22,33,.76) !important;
-  box-shadow: var(--shadow-md) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+/* make sure the image is always visible even if hero-art.css is imperfect */
+.hero-statue{
+  width: min(420px, 88%);
+  height: auto;
+  display:block;
+  transform: translateY(8px);
+  filter: brightness(1.05) contrast(1.08) drop-shadow(0 28px 40px rgba(0,0,0,.55));
+  opacity: .98;
 }
 
-/* 7) Inputs: Premium wie App */
-input, select, textarea{
-  border-radius: var(--r-md) !important;
-  border: 1px solid var(--line) !important;
-  background: rgba(255,255,255,.03) !important;
-  color: var(--text) !important;
-  padding: 11px 12px !important;
-  outline:none;
-}
-input:focus, select:focus, textarea:focus{
-  border-color: rgba(56,224,211,.35) !important;
-  background: rgba(255,255,255,.04) !important;
+/* -----------------------------------------
+   Neon divider
+   ----------------------------------------- */
+.neon-divider{
+  max-width: var(--lpMax);
+  margin: 18px auto 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,.55),
+    rgba(255,255,255,0)
+  );
+  box-shadow: 0 0 20px rgba(255,255,255,.15);
 }
 
-/* 8) Headings */
-h1,h2,h3,h4{
-  color: var(--text) !important;
-  letter-spacing: .25px;
+/* -----------------------------------------
+   Cinema strip / slider area
+   ----------------------------------------- */
+.cinema-strip{
+  max-width: var(--lpMax);
+  margin: 18px auto 34px;
+  padding: 18px var(--lpPad) 26px;
 }
-h1{ font-size: 34px; line-height: 1.1; }
-h2{ font-size: 18px; }
 
-/* 9) Optional: content width falls Landing full width ist */
-.container, .wrap, .content, .page{
-  width:min(1120px, calc(100% - 32px));
+.section-title{
+  margin: 0 0 8px 0;
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+.section-subtitle{
+  margin: 0 0 16px 0;
+  opacity: .85;
+  max-width: 70ch;
+  line-height: 1.5;
+}
+
+/* Slider fallback (even if slider.js fails, it still looks clean) */
+.slider{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 900px){
+  .slider{
+    grid-template-columns: 1fr;
+  }
+}
+
+.slide{
+  border-radius: var(--lpRadius);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 16px 16px 14px;
+}
+
+.slide h3{
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.slide p{
+  margin: 0;
+  opacity: .85;
+  line-height: 1.5;
+}
+
+/* -----------------------------------------
+   Footer
+   ----------------------------------------- */
+.footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: 20px;
+}
+.footer-inner{
+  max-width: var(--lpMax);
   margin: 0 auto;
+  padding: 16px var(--lpPad);
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 12px;
+  opacity: .9;
 }
+
+@media (max-width: 700px){
+  .footer-inner{ flex-direction: column; }
+}
+
+/* RTL basics (if Arabic selected) */
+html[dir="rtl"] .topbar-inner,
+html[dir="rtl"] .hero-grid,
+html[dir="rtl"] .footer-inner{
+  direction: rtl;
+}
+html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
+html[dir="rtl"] .top-actions{ flex-direction: row-reverse; }
