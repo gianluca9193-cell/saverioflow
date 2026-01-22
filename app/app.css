@@ -41,3 +41,17 @@
   padding: 9px 10px;
   font-size: 12px;
 }
+
+/* RTL basics */
+html.rtl body{
+  text-align: right;
+}
+
+html.rtl .tabs,
+html.rtl .tabbar{
+  flex-direction: row-reverse;
+}
+
+/* Prefer logical properties if you add new spacing later:
+   margin-inline-start/end instead of margin-left/right
+*/
