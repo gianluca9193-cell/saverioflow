@@ -299,3 +299,63 @@ html[dir="rtl"] .footer-inner{
 }
 html[dir="rtl"] .top-actions{ flex-direction: row-reverse; }
 html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
+/* =========================================
+   Landing Cover Art (Full-page)
+   ========================================= */
+
+/* Put content above background layers */
+.landing .topbar,
+.landing main,
+.landing footer{
+  position: relative;
+  z-index: 2;
+}
+
+/* 1) Vitruvian watermark across page */
+.coverArt{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255,255,255,.10), transparent 60%),
+    url("/images/vitruvian-bg.png") center/ min(980px, 72vw) no-repeat;
+
+  opacity: .06;
+  mix-blend-mode: screen;
+  filter: grayscale(1) contrast(.95);
+}
+
+/* 2) Tree as page cover (NOT an inserted photo) */
+.coverTree{
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  /* tree is anchored to the right, like a cover illustration */
+  background:
+    radial-gradient(900px 900px at 78% 40%, rgba(255,255,255,.10), transparent 62%),
+    url("/images/tree-life-min.png") right 18% center/ min(720px, 62vw) no-repeat;
+
+  /* subtle + professional */
+  opacity: .32;
+  filter: saturate(.95) contrast(.95) brightness(.95);
+
+  /* fade it out into the page so it feels “printed into the cover” */
+  -webkit-mask-image: radial-gradient(80% 80% at 78% 42%, #000 0 55%, transparent 75%);
+  mask-image: radial-gradient(80% 80% at 78% 42%, #000 0 55%, transparent 75%);
+}
+
+/* Mobile: keep it calm */
+@media (max-width: 720px){
+  .coverTree{
+    background:
+      radial-gradient(800px 800px at 60% 30%, rgba(255,255,255,.08), transparent 65%),
+      url("/images/tree-life-min.png") center 24%/ min(520px, 85vw) no-repeat;
+    opacity: .22;
+    -webkit-mask-image: radial-gradient(85% 85% at 50% 28%, #000 0 50%, transparent 78%);
+    mask-image: radial-gradient(85% 85% at 50% 28%, #000 0 50%, transparent 78%);
+  }
+}
