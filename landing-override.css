@@ -658,3 +658,10 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   .accSummary{ flex-direction: column; align-items:flex-start; }
   .accMeta{ white-space: normal; }
 }
+.hero-trackline{
+  margin: 0 0 10px;
+  color: rgba(255,255,255,.78);
+  max-width: 68ch;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
