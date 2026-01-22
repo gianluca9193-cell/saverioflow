@@ -175,3 +175,14 @@ html[dir="rtl"] .tabs{
 html[dir="rtl"] .langSwitch{
   flex-direction: row-reverse;
 }
+.appBrand{
+  display:flex;
+  align-items:center;
+  color: var(--text-1);
+}
+
+.appBrand__icon{
+  width:26px;
+  height:26px;
+}
+
