@@ -1,217 +1,147 @@
-<!-- ✅ LANDING: index.html (ROOT) — KOMPLETT ERSETZEN -->
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SaverIoFlow — Quiet planning, real progress, real impact</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0f" />
 
-  <meta name="description" content="SaverIoFlow übersetzt Ziele in machbare Tagespläne — ruhig, realistisch, mit Plan B. Optionaler Impact für Mensch, Tiere und Umwelt."/>
-  <meta name="theme-color" content="#070b10"/>
+  <title>SaverIoFlow — Premium Life Planner</title>
+  <meta name="description" content="SaverIoFlow: AI coach & planner for goals, daily plans, and meaningful progress." />
 
-  <!-- DESIGN SYSTEM -->
-  <link rel="stylesheet" href="/theme.css">
-  <link rel="stylesheet" href="/components.css">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/landing-override.css">
+  <!-- Base styles -->
+  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="/components.css" />
+  <link rel="stylesheet" href="/style.css" />
 
-  <!-- CINEMATIC ADDONS -->
-  <link rel="stylesheet" href="/hero-art.css">
-  <link rel="stylesheet" href="/motion.css">
-  <link rel="stylesheet" href="/cinema.css">
+  <!-- Landing addons -->
+  <link rel="stylesheet" href="/landing-override.css" />
+  <link rel="stylesheet" href="/hero-art.css" />
+  <link rel="stylesheet" href="/motion.css" />
+  <link rel="stylesheet" href="/cinema.css" />
 </head>
 
-<body>
+<body class="landing cinema">
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">SAVERIOFLOW</span>
+      </a>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="heroGlow"></div>
-    <div class="heroGlow2"></div>
-    <div class="heroFilm"></div>
-    <div class="heroVignette"></div>
-
-    <div class="container heroInner">
-      <div class="heroCopy stack">
-        <div class="badge badge-gold fadeUp">Offline-first • Keine Accounts • Keine Datenweitergabe</div>
-
-        <h1 class="fadeUp" style="margin:0;">SaverIoFlow</h1>
-
-        <p class="meta fadeUp" style="font-size:16px; line-height:1.7; max-width: 62ch;">
-          Ein ruhiges System, das Ziele in <strong>machbare Tagespläne</strong> übersetzt.
-          Mit <strong>Plan B</strong>, Fortschritt ohne Druck — und optionalem Impact für Mensch, Tier & Umwelt.
-        </p>
-
-        <div class="row fadeUp" style="margin-top:10px; max-width:520px;">
-          <a href="/app/" class="btn btn-primary">Open App</a>
-          <a href="#product" class="btn btn-ghost">Produkt ansehen</a>
-        </div>
-
-        <div class="row fadeUp" style="margin-top:12px; max-width:650px; flex-wrap:wrap;">
-          <div class="badge badge-turq">Today Plan + Plan B</div>
-          <div class="badge">Week Wins</div>
-          <div class="badge badge-gold">Year Map</div>
-          <div class="badge">Philosophy Compass</div>
-        </div>
+      <!-- Language Switch (Landing) -->
+      <div class="langSwitch">
+        <label class="langLabel" for="langSelectLanding" data-i18n="lang.label">Language</label>
+        <select id="langSelectLanding" aria-label="Language">
+          <option value="en" data-i18n="lang.en">English</option>
+          <option value="de" data-i18n="lang.de">German</option>
+          <option value="es" data-i18n="lang.es">Spanish</option>
+          <option value="it" data-i18n="lang.it">Italian</option>
+          <option value="ar" data-i18n="lang.ar">Arabic</option>
+        </select>
       </div>
 
-      <!-- Visible artwork -->
-      <div class="heroArtWrap fadeUp">
-        <div class="heroFrame"></div>
-        <img class="heroArt" src="/images/statue.png" alt="SaverIoFlow Artwork">
-      </div>
+      <nav class="top-actions">
+        <a class="btn btn-ghost" href="/app/" aria-label="Open app">Open App</a>
+        <a class="btn btn-primary" href="/app/" aria-label="Go premium">Go Premium</a>
+      </nav>
     </div>
   </header>
 
-  <div class="container"><hr class="neon-divider"/></div>
+  <!-- Hero -->
+  <main class="hero">
+    <section class="hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">SaverIoFlow</div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title">Build your life plan.</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          From goals to daily action — with philosophy, impact, and momentum.
+        </p>
 
-  <!-- PRODUCT -->
-  <section id="product" class="container" style="padding:76px 0 14px;">
-    <div class="stack">
-      <h2 class="fadeUp">So sieht es aus. So fühlt es sich an.</h2>
-
-      <!-- Slider preview -->
-      <div class="slider fadeUp">
-        <div class="sliderTop">
-          <div class="caption">Feature Preview</div>
-          <div class="tabs">
-            <button class="tab active" data-tab="today">Today</button>
-            <button class="tab" data-tab="year">Year Map</button>
-            <button class="tab" data-tab="compass">Compass</button>
-          </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/app/" data-i18n="cta.start">Start now</a>
+          <a class="btn btn-ghost" href="#premium" data-i18n="cta.learn">Learn more</a>
         </div>
 
-        <div class="sliderBody">
-          <div class="screen active" data-screen="today">
-            <div class="screenHdr">
-              <div class="screenTitle">Heute</div>
-              <span class="badge badge-turq">30 min</span>
-            </div>
-            <div class="kpis">
-              <div class="kpi"><div class="k">Energie</div><div class="v">Medium</div></div>
-              <div class="kpi"><div class="k">Plan</div><div class="v">3 Aufgaben</div></div>
-              <div class="kpi"><div class="k">Fallback</div><div class="v">Plan B</div></div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">25 Min Fokus-Session</div><span class="badge">25m</span></div>
-              <div class="taskRowSub">Plan B: 5 Minuten nur starten</div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">10 Min Ordnung & Klarheit</div><span class="badge">10m</span></div>
-              <div class="taskRowSub">Plan B: 1 Satz „Heute zählt nur…“</div>
-            </div>
-          </div>
-
-          <div class="screen" data-screen="year">
-            <div class="screenHdr">
-              <div class="screenTitle">Year Map</div>
-              <span class="badge badge-gold">Theme</span>
-            </div>
-            <div class="kpis">
-              <div class="kpi"><div class="k">Jahr</div><div class="v">Theme</div></div>
-              <div class="kpi"><div class="k">Quartale</div><div class="v">Q1–Q4</div></div>
-              <div class="kpi"><div class="k">Monate</div><div class="v">Checkpoints</div></div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">Q1: Grundlagen</div><span class="badge">Sprint</span></div>
-              <div class="taskRowSub">Milestones + Plan B definieren</div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">Monats-Checkpoint</div><span class="badge badge-turq">klar</span></div>
-              <div class="taskRowSub">Kurz & machbar – ohne Kalenderstress</div>
-            </div>
-          </div>
-
-          <div class="screen" data-screen="compass">
-            <div class="screenHdr">
-              <div class="screenTitle">Compass</div>
-              <span class="badge badge-turq">Philosophy</span>
-            </div>
-            <div class="kpis">
-              <div class="kpi"><div class="k">Modus</div><div class="v">Sokratisch</div></div>
-              <div class="kpi"><div class="k">Ziel-Findung</div><div class="v">3 Steps</div></div>
-              <div class="kpi"><div class="k">Output</div><div class="v">1 Ziel</div></div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">Frage</div><span class="badge">klar</span></div>
-              <div class="taskRowSub">„Was wäre die kleinste ehrliche Handlung heute?“</div>
-            </div>
-            <div class="taskRow">
-              <div class="taskRowTop"><div class="t">Wizard</div><span class="badge badge-gold">Goal</span></div>
-              <div class="taskRowSub">Ziel + Kategorie + Why → Year/Week/Today</div>
-            </div>
-          </div>
+        <div class="hero-meta">
+          <span class="pill" data-i18n="meta.offline">Offline-first PWA</span>
+          <span class="pill" data-i18n="meta.impact">Impact dashboard</span>
+          <span class="pill" data-i18n="meta.philo">Stoic & Socratic modes</span>
         </div>
       </div>
 
-      <div class="row fadeUp" style="max-width:560px;">
-        <a href="/app/" class="btn btn-primary">Jetzt testen</a>
-        <a href="#features" class="btn btn-ghost">Warum es hilft</a>
+      <div class="hero-art-wrap">
+        <!-- The statue is controlled by hero-art.css; keep src stable -->
+        <img class="hero-statue" src="/images/statue.png" alt="Statue" loading="eager" decoding="async" />
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="container"><hr class="neon-divider"/></div>
+    <div class="neon-divider" aria-hidden="true"></div>
 
-  <!-- FEATURES -->
-  <section id="features" class="container" style="padding:76px 0 96px;">
-    <div class="stack">
-      <h2 class="fadeUp">Was du bekommst (klar sichtbar)</h2>
+    <!-- Slider / cinema section (kept generic; your slider.js can target it) -->
+    <section class="cinema-strip" id="premium">
+      <h2 class="section-title" data-i18n="premium.title">Premium that funds real impact</h2>
+      <p class="section-subtitle" data-i18n="premium.subtitle">
+        Transparent share to trees & animal protection. No greenwashing.
+      </p>
 
-      <div class="row">
-        <div class="card fadeUp">
-          <div class="badge badge-turq" style="width:max-content;">Flow</div>
-          <h2 style="margin-top:10px;">Day • Week • Year</h2>
-          <p class="meta">Today Plan, Week Wins, Year Map. Eine Linie statt 100 To-Dos.</p>
+      <div class="slider" id="featureSlider">
+        <div class="slide">
+          <h3 data-i18n="premium.s1.title">Plans that stick</h3>
+          <p data-i18n="premium.s1.text">Daily / weekly / yearly structure with Plan B and Minimum Day.</p>
         </div>
-
-        <div class="card fadeUp">
-          <div class="badge badge-gold" style="width:max-content;">Safety</div>
-          <h2 style="margin-top:10px;">Plan B & Minimum-Day</h2>
-          <p class="meta">Die App macht den Plan kleiner — nicht dich.</p>
+        <div class="slide">
+          <h3 data-i18n="premium.s2.title">Socratic clarity</h3>
+          <p data-i18n="premium.s2.text">Guided questions to discover what you really want.</p>
         </div>
-
-        <div class="card fadeUp">
-          <div class="badge" style="width:max-content;">Meaning</div>
-          <h2 style="margin-top:10px;">Philosophy Compass</h2>
-          <p class="meta">Sokratisch • Stoisch • Existentiell • Öko • Peace Praxis.</p>
+        <div class="slide">
+          <h3 data-i18n="premium.s3.title">Impact dashboard</h3>
+          <p data-i18n="premium.s3.text">See exactly what your contribution supports.</p>
         </div>
       </div>
+    </section>
+  </main>
 
-      <div class="row" style="margin-top:14px;">
-        <div class="card fadeUp">
-          <h2>Impact ohne Greenwashing</h2>
-          <p class="meta">Transparenz statt Versprechen: € → Projekt → Zeitraum. Optional über Premium.</p>
-        </div>
-        <div class="card fadeUp">
-          <h2>3 Ziel-Welten</h2>
-          <p class="meta"><strong>A</strong> Persönlich • <strong>B</strong> Gemeinwohl • <strong>C</strong> Erde & Tiere</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="container footer">
-    <div class="row">
-      <div>SaverIoFlow © 2026</div>
-      <div style="text-align:right;">Built for calm focus & real impact</div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <small>© <span id="yearNow"></span> SaverIoFlow</small>
+      <a href="/app/" class="footer-link">Open App</a>
     </div>
   </footer>
 
+  <!-- Existing motion/slider scripts -->
   <script src="/motion.js"></script>
   <script src="/slider.js"></script>
-  <!-- i18n dictionaries (order matters) -->
-<script src="/i18n/en.js"></script>
-<script src="/i18n/de.js"></script>
-<script src="/i18n/es.js"></script>
-<script src="/i18n/it.js"></script>
-<script src="/i18n/ar.js"></script>
 
-<!-- i18n runtime -->
-<script src="/i18n/i18n.js"></script>
-<script>
-  window.SIF_I18N && window.SIF_I18N.init();
-</script>
+  <script>
+    document.getElementById("yearNow").textContent = String(new Date().getFullYear());
+  </script>
 
+  <!-- =========================
+       SaverIoFlow i18n (Root)
+       ========================= -->
+  <script src="/i18n/en.js"></script>
+  <script src="/i18n/de.js"></script>
+  <script src="/i18n/es.js"></script>
+  <script src="/i18n/it.js"></script>
+  <script src="/i18n/ar.js"></script>
+
+  <script src="/i18n/i18n.js"></script>
+  <script>
+    window.SIF_I18N && window.SIF_I18N.init();
+
+    // Wire landing language select
+    document.addEventListener("DOMContentLoaded", () => {
+      const sel = document.getElementById("langSelectLanding");
+      if (!sel || !window.SIF_I18N) return;
+
+      sel.value = window.SIF_I18N.getCurrent();
+      sel.addEventListener("change", (e) => window.SIF_I18N.set(e.target.value));
+      window.addEventListener("sif:lang-changed", (ev) => {
+        if (ev?.detail?.lang) sel.value = ev.detail.lang;
+      });
+    });
+  </script>
 </body>
 </html>
-
