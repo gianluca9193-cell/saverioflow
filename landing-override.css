@@ -310,6 +310,42 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   position: relative;
   z-index: 2;
 }
+/* =========================================
+   Landing Feature Grid (clarity)
+   ========================================= */
+.featureGrid{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.featureCard{
+  padding: 12px 12px;
+  border-radius: 16px;
+}
+
+.featureTitle{
+  font-weight: 700;
+  letter-spacing: .10em;
+  font-size: .78rem;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.90);
+  margin-bottom: 6px;
+}
+
+.featureText{
+  color: rgba(255,255,255,.68);
+  font-size: .92rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 1100px){
+  .featureGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px){
+  .featureGrid{ grid-template-columns: 1fr; }
+}
 
 /* 1) Vitruvian watermark across page */
 .coverArt{
