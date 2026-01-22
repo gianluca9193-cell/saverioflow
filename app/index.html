@@ -26,7 +26,37 @@
   <header class="appTop">
     <div class="appTop-left">
       <div class="brand">
-        <span class="brand-mark">SAVERIOFLOW</span>
+       .appBrand{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  text-decoration:none;
+  color: var(--text-1, rgba(255,255,255,.92));
+}
+
+.appBrand__icon{
+  width:26px;
+  height:26px;
+  flex:0 0 auto;
+}
+
+.appBrand__icon svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.appBrand__name{
+  font-weight:650;
+  letter-spacing:.14em;
+  font-size:.92rem;
+  white-space:nowrap;
+}
+
+@media (max-width: 520px){
+  .appBrand__name{ display:none; }
+}
+
       </div>
     </div>
 
@@ -106,4 +136,5 @@
   </script>
 </body>
 </html>
+
 
