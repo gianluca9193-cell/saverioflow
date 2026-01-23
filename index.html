@@ -652,6 +652,11 @@
       applyStyle(res.primary, tieNote);
 
       if (btnOpenFromDiscover) btnOpenFromDiscover.hidden = false;
+      if (btnOpenFromDiscover){
+  btnOpenFromDiscover.href = "/app/?archetype=" + encodeURIComponent(res.primary);
+  btnOpenFromDiscover.hidden = false;
+}
+
       if (btnNext) btnNext.hidden = true;
       if (btnBack) btnBack.hidden = true;
 
@@ -710,6 +715,7 @@
 
 </body>
 </html>
+
 
 
 
