@@ -444,6 +444,191 @@
         items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
         setActive(d.dataset.key);
       });
+      // Discover archetype (5-question stepper)
+const btnDiscover = document.getElementById("btnDiscover");
+const discoverPanel = document.getElementById("discoverPanel");
+const discoverTitle = document.getElementById("discoverTitle");
+const discoverQ = document.getElementById("discoverQ");
+const discoverOptions = document.getElementById("discoverOptions");
+const btnBack = document.getElementById("btnBack");
+const btnNext = document.getElementById("btnNext");
+const discoverProg = document.getElementById("discoverProg");
+
+// reuse your existing style panel if present
+const styleTitleEl = document.getElementById("styleTitle");
+const styleMetaEl = document.getElementById("styleMeta");
+const styleBodyEl = document.getElementById("styleBody");
+
+const QUESTIONS = [
+  {
+    q: "Starting a week — what feels right?",
+    opts: [
+      { key:"builder",  name:"Builder",  tag:"Structure", text:"Pick 3 priorities and block time." },
+      { key:"balancer", name:"Balancer", tag:"Harmony",   text:"Balance A/B/C and protect buffer." },
+      { key:"explorer", name:"Explorer", tag:"Discovery", text:"Choose 1–2 experiments + 1 must-do." },
+      { key:"guardian", name:"Guardian", tag:"Care",      text:"Choose sustainable actions + reduce friction." }
+    ]
+  },
+  {
+    q: "When you're low energy — what's best?",
+    opts: [
+      { key:"builder",  name:"Builder",  tag:"Streak",    text:"Shrink scope, keep the streak." },
+      { key:"balancer", name:"Balancer", tag:"Balance",   text:"Do the smallest A/B/C touch." },
+      { key:"explorer", name:"Explorer", tag:"Curiosity", text:"Do one curiosity micro-step." },
+      { key:"guardian", name:"Guardian", tag:"Recovery",  text:"Do one care action, protect recovery." }
+    ]
+  },
+  {
+    q: "What feels most satisfying?",
+    opts: [
+      { key:"builder",  name:"Builder",  tag:"Milestones", text:"Clear milestones completed." },
+      { key:"balancer", name:"Balancer", tag:"Meaning",    text:"A week that felt stable and meaningful." },
+      { key:"explorer", name:"Explorer", tag:"Learning",   text:"Learning something and adjusting." },
+      { key:"guardian", name:"Guardian", tag:"Steady",     text:"Consistency that protects what matters." }
+    ]
+  },
+  {
+    q: "Planning horizon — what do you prefer?",
+    opts: [
+      { key:"builder",  name:"Builder",  tag:"Quarter",    text:"Quarters + measurable outcomes." },
+      { key:"balancer", name:"Balancer", tag:"Rhythm",     text:"Weeks with rhythm + flexibility." },
+      { key:"explorer", name:"Explorer", tag:"Adaptive",   text:"A rolling plan I can adapt." },
+      { key:"guardian", name:"Guardian", tag:"Long-term",  text:"Long-term direction with gentle steps." }
+    ]
+  },
+  {
+    q: "Review style — what helps most?",
+    opts: [
+      { key:"builder",  name:"Builder",  tag:"Next",    text:"Numbers + next actions." },
+      { key:"balancer", name:"Balancer", tag:"Align",   text:"What was aligned / out of balance?" },
+      { key:"explorer", name:"Explorer", tag:"Insight", text:"What did I learn? What to try next?" },
+      { key:"guardian", name:"Guardian", tag:"Care",    text:"What did I protect? What needs care?" }
+    ]
+  }
+];
+
+const STYLE_RESULT = {
+  builder:  { title:"Builder — structured momentum", meta:"Suggested setup: measurable goals + consistent routines.", body:`<ul><li><strong>Today:</strong> Top 3 + time blocks.</li><li><strong>Week:</strong> 3 priorities, 2 maintenance tasks, 1 buffer.</li><li><strong>Tracking:</strong> streak + milestone every 2–4 weeks.</li></ul>` },
+  balancer: { title:"Balancer — A/B/C harmony",       meta:"Suggested setup: meaningful progress without overload.", body:`<ul><li><strong>Today:</strong> 1 task each for A, B, and C.</li><li><strong>Week:</strong> keep 20–30% buffer for life.</li><li><strong>Review:</strong> “What was aligned this week?”</li></ul>` },
+  explorer: { title:"Explorer — learning-driven",     meta:"Suggested setup: experiments, reflection, flexible direction.", body:`<ul><li><strong>Today:</strong> one curiosity task + one must-do.</li><li><strong>Week:</strong> 2 experiments, 1 commitment, 1 recovery slot.</li><li><strong>Review:</strong> capture insights, adjust next week.</li></ul>` },
+  guardian: { title:"Guardian — care & long-term",    meta:"Suggested setup: sustainability, responsibility, steady actions.", body:`<ul><li><strong>Today:</strong> minimum day + one care action.</li><li><strong>Week:</strong> reduce friction, protect energy and focus.</li><li><strong>Tracking:</strong> trend lines over time (not pressure).</li></ul>` }
+};
+
+let step = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+
+function renderStep(){
+  if (!discoverPanel) return;
+
+  const total = QUESTIONS.length;
+  const data = QUESTIONS[step];
+
+  if (discoverTitle) discoverTitle.textContent = `Question ${step + 1} of ${total}`;
+  if (discoverQ) discoverQ.textContent = data.q;
+
+  if (discoverProg){
+    const pct = Math.round(((step + 1) / total) * 100);
+    discoverProg.style.width = `${pct}%`;
+  }
+
+  if (discoverOptions){
+    discoverOptions.innerHTML = data.opts.map(o => {
+      const selected = answers[step] === o.key ? "is-selected" : "";
+      return `
+        <button type="button" class="optBtn ${selected}" data-pick="${o.key}">
+          <div class="optTop">
+            <span class="optName">${o.name}</span>
+            <span class="optTag">${o.tag}</span>
+          </div>
+          <p class="optText">${o.text}</p>
+        </button>
+      `;
+    }).join("");
+  }
+
+  if (btnBack) btnBack.disabled = step === 0;
+  if (btnNext) btnNext.disabled = answers[step] == null;
+  if (btnNext) btnNext.textContent = (step === total - 1) ? "See result" : "Next";
+}
+
+function computeResult(){
+  const score = { builder:0, balancer:0, explorer:0, guardian:0 };
+  answers.forEach(k => { if (k && score[k] != null) score[k] += 1; });
+
+  const sorted = Object.entries(score).sort((a,b) => b[1] - a[1]);
+  const [primary, pScore] = sorted[0];
+  const [secondary, sScore] = sorted[1];
+
+  return { primary, secondary, pScore, sScore };
+}
+
+function applyResult(result){
+  const { primary, secondary, pScore, sScore } = result;
+  const primaryData = STYLE_RESULT[primary];
+
+  // highlight matching style cards if you have them
+  const styleCards = Array.from(document.querySelectorAll(".styleCard"));
+  styleCards.forEach(c => c.classList.toggle("is-active", c.dataset.style === primary));
+
+  if (styleTitleEl && primaryData) styleTitleEl.textContent = primaryData.title;
+  if (styleMetaEl) {
+    const tieNote = (pScore === sScore) ? ` (also close to ${secondary})` : "";
+    styleMetaEl.textContent = (primaryData?.meta || "") + tieNote;
+  }
+  if (styleBodyEl && primaryData) styleBodyEl.innerHTML = primaryData.body;
+
+  // collapse discover panel (optional)
+  if (discoverPanel && btnDiscover){
+    discoverPanel.hidden = true;
+    btnDiscover.setAttribute("aria-expanded", "false");
+    btnDiscover.textContent = "Discover your archetype (done)";
+  }
+}
+
+if (btnDiscover && discoverPanel){
+  btnDiscover.addEventListener("click", () => {
+    const isOpen = !discoverPanel.hidden;
+    discoverPanel.hidden = isOpen;
+    btnDiscover.setAttribute("aria-expanded", String(!isOpen));
+    if (!isOpen) {
+      // open and start (or continue)
+      renderStep();
+      discoverPanel.scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+  });
+}
+
+if (discoverOptions){
+  discoverOptions.addEventListener("click", (e) => {
+    const btn = e.target.closest(".optBtn");
+    if (!btn) return;
+    const pick = btn.getAttribute("data-pick");
+    answers[step] = pick;
+    renderStep();
+  });
+}
+
+if (btnBack){
+  btnBack.addEventListener("click", () => {
+    if (step > 0) step -= 1;
+    renderStep();
+  });
+}
+
+if (btnNext){
+  btnNext.addEventListener("click", () => {
+    const total = QUESTIONS.length;
+    if (answers[step] == null) return;
+
+    if (step < total - 1){
+      step += 1;
+      renderStep();
+    } else {
+      applyResult(computeResult());
+    }
+  });
+}
+
     });
 
     // initial highlight (because "today" is open by default)
@@ -521,6 +706,7 @@ styleCards.forEach(card => {
 
 </body>
 </html>
+
 
 
 
