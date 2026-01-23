@@ -680,6 +680,11 @@
         sScore: sorted[1][1]
       };
     }
+function showMoreFor(key){
+  if (!styleMore) return;
+  styleMore.hidden = false;
+  styleMore.innerHTML = STYLE_MORE[key] || "";
+}
 
     function applyResult(res) {
       var tieNote = (res.pScore === res.sScore) ? ("(also close to " + res.secondary + ")") : "";
@@ -786,6 +791,7 @@
 
 </body>
 </html>
+
 
 
 
