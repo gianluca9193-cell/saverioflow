@@ -253,8 +253,6 @@
 
         <div class="stylePanelBody" id="styleBody">
           <div class="styleMoreRow">
-            <div class="archAfter glass" id="archAfter" hidden></div>
-
             <button class="btn btn-ghost glass" type="button" id="btnMore" disabled>
               Learn more about this archetype
             </button>
@@ -265,7 +263,6 @@
 
           <div class="styleMore glass" id="styleMore" hidden></div>
           <div class="archAfter glass" id="archAfter" hidden></div>
-
 
           <ul>
             <li><strong>Today:</strong> Start with a small “Minimum Day”.</li>
@@ -510,6 +507,8 @@
       var styleTitleEl = document.getElementById("styleTitle");
       var styleMetaEl = document.getElementById("styleMeta");
       var styleBodyEl = document.getElementById("styleBody");
+      var archBadge = document.getElementById("archBadge");
+      var archAfter = document.getElementById("archAfter");
 
       var STYLE_RESULT = {
         builder:  {
@@ -563,25 +562,23 @@
         setStyleActive(key);
         if (styleTitleEl) styleTitleEl.textContent = data.title;
         if (styleMetaEl) styleMetaEl.textContent = data.meta + (extraMeta ? (" " + extraMeta) : "");
+
         if (styleBodyEl) {
-          // keep the "More" row + More panel as-is; only swap the suggested list part if needed.
-          // simplest: replace the FIRST <ul> inside styleBodyEl AFTER the More panel
-          var existing = styleBodyEl.querySelectorAll(":scope > ul");
-          if (existing && existing[0]) {
-            existing[0].outerHTML = data.body;
+          // Replace the last UL inside styleBody (the suggested list)
+          var uls = styleBodyEl.querySelectorAll(":scope > ul");
+          if (uls && uls[0]) {
+            uls[0].outerHTML = data.body;
           } else {
             styleBodyEl.insertAdjacentHTML("beforeend", data.body);
           }
         }
       }
 
-      // Clicking a style card sets current archetype
+      // Optional: clicking a style card also sets current archetype (no score graph here)
       styleCards.forEach(function (card) {
         card.addEventListener("click", function () {
           currentArchetype = card.dataset.style;
           applyStyle(currentArchetype, "");
-          
-
 
           if (btnOpenFromPanel) {
             btnOpenFromPanel.href = "/app/?archetype=" + encodeURIComponent(currentArchetype);
@@ -589,16 +586,129 @@
 
           if (btnMore) btnMore.disabled = false;
 
-          if (styleMore) {
-            styleMore.hidden = true;
-            styleMore.innerHTML = "";
-          }
-          renderAfterMix(res.primary, res.score);
+          if (styleMore) { styleMore.hidden = true; styleMore.innerHTML = ""; }
+          if (archAfter) { archAfter.hidden = true; archAfter.innerHTML = ""; archAfter.removeAttribute("data-primary"); }
+          if (archBadge) { archBadge.textContent = ""; }
         });
       });
 
       // ---------------------------
-      // (D) Discover archetype (5-question stepper) - FIXED + STABLE
+      // (D) After-result mix (Radar + Bars)
+      // ---------------------------
+      function esc(s){
+        return String(s).replace(/[&<>"']/g, function(c){
+          return ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[c];
+        });
+      }
+
+      function renderBars(score, max){
+        var keys = ["builder","balancer","explorer","guardian"];
+        var labels = { builder:"Builder", balancer:"Balancer", explorer:"Explorer", guardian:"Guardian" };
+
+        var rows = keys.map(function(k){
+          var v = score[k] || 0;
+          var pct = Math.round((v / max) * 100);
+          return (
+            '<div class="archBarRow" data-k="' + esc(k) + '">' +
+              '<div class="archBarTop">' +
+                '<span class="archBarName">' + esc(labels[k]) + '</span>' +
+                '<span class="archBarVal">' + v + '/' + max + '</span>' +
+              '</div>' +
+              '<div class="archBarTrack"><span class="archBarFill" style="width:' + pct + '%"></span></div>' +
+            '</div>'
+          );
+        }).join("");
+
+        return '<div class="archBars">' + rows + '</div>';
+      }
+
+      function renderRadar(score, max){
+        var keys = ["builder","balancer","explorer","guardian"];
+        var labels = { builder:"Builder", balancer:"Balancer", explorer:"Explorer", guardian:"Guardian" };
+
+        var W = 220, H = 220;
+        var cx = W/2, cy = H/2;
+        var R = 78;
+
+        function polar(i, t){
+          var a = (-Math.PI/2) + i * (Math.PI/2);
+          var r = R * t;
+          return [cx + Math.cos(a)*r, cy + Math.sin(a)*r];
+        }
+
+        var rings = [0.25, 0.5, 0.75, 1].map(function(t){
+          var pts = keys.map(function(_, i){
+            var p = polar(i, t);
+            return p[0].toFixed(2) + "," + p[1].toFixed(2);
+          }).join(" ");
+          return '<polygon class="radarGrid" points="' + pts + '"></polygon>';
+        }).join("");
+
+        var axes = keys.map(function(_, i){
+          var p = polar(i, 1);
+          return '<line class="radarAxis" x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(2) + '" y2="' + p[1].toFixed(2) + '"></line>';
+        }).join("");
+
+        var dataPts = keys.map(function(k, i){
+          var v = score[k] || 0;
+          var t = (max === 0) ? 0 : (v / max);
+          var p = polar(i, t);
+          return p[0].toFixed(2) + "," + p[1].toFixed(2);
+        }).join(" ");
+
+        var dots = keys.map(function(k, i){
+          var v = score[k] || 0;
+          var t = (max === 0) ? 0 : (v / max);
+          var p = polar(i, t);
+          return '<circle class="radarDot" cx="' + p[0].toFixed(2) + '" cy="' + p[1].toFixed(2) + '" r="2.8"></circle>';
+        }).join("");
+
+        var labelPos = [
+          [cx, cy - (R + 26), "middle"],
+          [cx + (R + 34), cy, "start"],
+          [cx, cy + (R + 32), "middle"],
+          [cx - (R + 34), cy, "end"]
+        ];
+
+        var labelEls = keys.map(function(k, i){
+          var lp = labelPos[i];
+          return '<text class="radarLabel" x="' + lp[0] + '" y="' + lp[1] + '" text-anchor="' + lp[2] + '">' + esc(labels[k]) + '</text>';
+        }).join("");
+
+        return (
+          '<div class="archRadarWrap" aria-hidden="true">' +
+            '<svg class="archRadar" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Archetype radar">' +
+              rings +
+              axes +
+              '<polygon class="radarData" points="' + dataPts + '"></polygon>' +
+              dots +
+              labelEls +
+              '<circle class="radarCenter" cx="' + cx + '" cy="' + cy + '" r="2"></circle>' +
+            '</svg>' +
+          '</div>'
+        );
+      }
+
+      function renderAfterMix(primaryKey, score, max){
+        if (!archAfter) return;
+
+        archAfter.setAttribute("data-primary", primaryKey);
+
+        archAfter.innerHTML =
+          '<div class="archAfterHead">' +
+            '<div class="archAfterTitle">Your archetype profile</div>' +
+            '<div class="archAfterMeta">Radar + breakdown from your 5 answers</div>' +
+          '</div>' +
+          '<div class="archAfterGrid">' +
+            renderRadar(score, max) +
+            renderBars(score, max) +
+          '</div>';
+
+        archAfter.hidden = false;
+      }
+
+      // ---------------------------
+      // (E) Discover archetype (5-question stepper) - stable
       // ---------------------------
       var btnDiscover = document.getElementById("btnDiscover");
       var discoverPanel = document.getElementById("discoverPanel");
@@ -609,7 +719,6 @@
       var btnNext = document.getElementById("btnNext");
       var discoverProg = document.getElementById("discoverProg");
       var btnOpenFromDiscover = document.getElementById("btnOpenFromDiscover");
-      var archBadge = document.getElementById("archBadge");
 
       var QUESTIONS = [
         { q: "Starting a week — what feels right?", opts: [
@@ -702,38 +811,38 @@
         }
       }
 
-     function computeResult() {
-  var score = { builder:0, balancer:0, explorer:0, guardian:0 };
-  answers.forEach(function(k){ if (k && score[k] != null) score[k] += 1; });
+      function computeResult() {
+        var score = { builder:0, balancer:0, explorer:0, guardian:0 };
+        answers.forEach(function(k){ if (k && score[k] != null) score[k] += 1; });
 
-  var sorted = Object.keys(score)
-    .map(function(k){ return [k, score[k]]; })
-    .sort(function(a,b){ return b[1] - a[1]; });
+        var sorted = Object.keys(score)
+          .map(function(k){ return [k, score[k]]; })
+          .sort(function(a,b){ return b[1] - a[1]; });
 
-  return {
-    primary: sorted[0][0],
-    secondary: sorted[1][0],
-    pScore: sorted[0][1],
-    sScore: sorted[1][1],
-    score: score
-  };
-}
+        return {
+          primary: sorted[0][0],
+          secondary: sorted[1][0],
+          pScore: sorted[0][1],
+          sScore: sorted[1][1],
+          score: score
+        };
+      }
 
       function showAfterResult(primaryKey) {
-        // auto-show "Learn more" content (your requested next step)
+        // auto-show "Learn more" content
         if (styleMore) {
           styleMore.hidden = false;
           styleMore.innerHTML = STYLE_MORE[primaryKey] || "";
         }
-
-        // Optional badge: simple text (no ARCH_SVG dependency)
+        // badge (simple)
         if (archBadge) {
-          archBadge.textContent = primaryKey.toUpperCase();
+          archBadge.textContent = String(primaryKey).toUpperCase();
         }
       }
 
       function applyResult(res) {
         var tieNote = (res.pScore === res.sScore) ? ("(also close to " + res.secondary + ")") : "";
+        var max = QUESTIONS.length;
 
         currentArchetype = res.primary;
         applyStyle(res.primary, tieNote);
@@ -747,11 +856,11 @@
           btnOpenFromPanel.href = "/app/?archetype=" + encodeURIComponent(res.primary);
         }
 
-        // enable "Learn more"
         if (btnMore) btnMore.disabled = false;
 
-        // auto-show graph/more slot
+        // auto-show more + radar/bars
         showAfterResult(res.primary);
+        renderAfterMix(res.primary, res.score, max);
 
         // lock stepper UI
         if (btnNext) btnNext.hidden = true;
@@ -779,6 +888,7 @@
             if (btnMore) btnMore.disabled = true;
 
             if (styleMore) { styleMore.hidden = true; styleMore.innerHTML = ""; }
+            if (archAfter) { archAfter.hidden = true; archAfter.innerHTML = ""; archAfter.removeAttribute("data-primary"); }
             if (archBadge) { archBadge.textContent = ""; }
 
             if (btnOpenFromDiscover) btnOpenFromDiscover.hidden = true;
@@ -788,8 +898,6 @@
             renderStep();
             discoverPanel.scrollIntoView({ behavior:"smooth", block:"start" });
           }
-          if (archAfter) { archAfter.hidden = true; archAfter.innerHTML = ""; archAfter.removeAttribute("data-primary"); }
-
         });
       }
 
@@ -817,136 +925,12 @@
             renderStep();
           } else {
             applyResult(computeResult());
-            var archAfter = document.getElementById("archAfter");
-
-function esc(s){
-  return String(s).replace(/[&<>"']/g, function(c){
-    return ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[c];
-  });
-}
-
-function renderBars(score){
-  var keys = ["builder","balancer","explorer","guardian"];
-  var labels = { builder:"Builder", balancer:"Balancer", explorer:"Explorer", guardian:"Guardian" };
-  var max = QUESTIONS.length; // 5
-
-  var rows = keys.map(function(k){
-    var v = score[k] || 0;
-    var pct = Math.round((v / max) * 100);
-    return (
-      '<div class="archBarRow" data-k="' + esc(k) + '">' +
-        '<div class="archBarTop">' +
-          '<span class="archBarName">' + esc(labels[k]) + '</span>' +
-          '<span class="archBarVal">' + v + '/' + max + '</span>' +
-        '</div>' +
-        '<div class="archBarTrack"><span class="archBarFill" style="width:' + pct + '%"></span></div>' +
-      '</div>'
-    );
-  }).join("");
-
-  return '<div class="archBars">' + rows + '</div>';
-}
-
-function renderRadar(score){
-  // 4-axis radar in SVG
-  var keys = ["builder","balancer","explorer","guardian"];
-  var labels = { builder:"Builder", balancer:"Balancer", explorer:"Explorer", guardian:"Guardian" };
-  var max = QUESTIONS.length; // 5
-
-  var W = 220, H = 220;
-  var cx = W/2, cy = H/2;
-  var R = 78;
-
-  function polar(i, t){
-    // start at -90° (top), go clockwise, 4 axes
-    var a = (-Math.PI/2) + i * (Math.PI/2);
-    var r = R * t;
-    return [cx + Math.cos(a)*r, cy + Math.sin(a)*r];
-  }
-
-  // grid rings (25/50/75/100%)
-  var rings = [0.25, 0.5, 0.75, 1].map(function(t){
-    var pts = keys.map(function(_, i){
-      var p = polar(i, t);
-      return p[0].toFixed(2) + "," + p[1].toFixed(2);
-    }).join(" ");
-    return '<polygon class="radarGrid" points="' + pts + '"></polygon>';
-  }).join("");
-
-  // axes lines
-  var axes = keys.map(function(_, i){
-    var p = polar(i, 1);
-    return '<line class="radarAxis" x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(2) + '" y2="' + p[1].toFixed(2) + '"></line>';
-  }).join("");
-
-  // data polygon
-  var dataPts = keys.map(function(k, i){
-    var v = score[k] || 0;
-    var t = (max === 0) ? 0 : (v / max);
-    var p = polar(i, t);
-    return p[0].toFixed(2) + "," + p[1].toFixed(2);
-  }).join(" ");
-
-  // small dots
-  var dots = keys.map(function(k, i){
-    var v = score[k] || 0;
-    var t = (max === 0) ? 0 : (v / max);
-    var p = polar(i, t);
-    return '<circle class="radarDot" cx="' + p[0].toFixed(2) + '" cy="' + p[1].toFixed(2) + '" r="2.8"></circle>';
-  }).join("");
-
-  // labels
-  var labelPos = [
-    [cx, cy - (R + 26), "middle"],      // top
-    [cx + (R + 34), cy, "start"],       // right
-    [cx, cy + (R + 32), "middle"],      // bottom
-    [cx - (R + 34), cy, "end"]          // left
-  ];
-
-  var labelEls = keys.map(function(k, i){
-    var lp = labelPos[i];
-    return '<text class="radarLabel" x="' + lp[0] + '" y="' + lp[1] + '" text-anchor="' + lp[2] + '">' + esc(labels[k]) + '</text>';
-  }).join("");
-
-  return (
-    '<div class="archRadarWrap" aria-hidden="true">' +
-      '<svg class="archRadar" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Archetype radar">' +
-        rings +
-        axes +
-        '<polygon class="radarData" points="' + dataPts + '"></polygon>' +
-        dots +
-        labelEls +
-        '<circle class="radarCenter" cx="' + cx + '" cy="' + cy + '" r="2"></circle>' +
-      '</svg>' +
-    '</div>'
-  );
-}
-
-function renderAfterMix(primaryKey, score){
-  if (!archAfter) return;
-
-  // highlight primary row via data attribute (CSS)
-  archAfter.setAttribute("data-primary", primaryKey);
-
-  archAfter.innerHTML =
-    '<div class="archAfterHead">' +
-      '<div class="archAfterTitle">Your archetype profile</div>' +
-      '<div class="archAfterMeta">Radar + breakdown from your 5 answers</div>' +
-    '</div>' +
-    '<div class="archAfterGrid">' +
-      renderRadar(score) +
-      renderBars(score) +
-    '</div>';
-
-  archAfter.hidden = false;
-}
-
           }
         });
       }
 
       // ---------------------------
-      // (E) Learn more toggle (ONE TIME)
+      // (F) Learn more toggle (ONE TIME)
       // ---------------------------
       if (btnMore && styleMore){
         btnMore.addEventListener("click", function(){
@@ -966,7 +950,3 @@ function renderAfterMix(primaryKey, score){
   </script>
 </body>
 </html>
-
-
-
-
