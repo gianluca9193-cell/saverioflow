@@ -788,6 +788,8 @@
             renderStep();
             discoverPanel.scrollIntoView({ behavior:"smooth", block:"start" });
           }
+          if (archAfter) { archAfter.hidden = true; archAfter.innerHTML = ""; archAfter.removeAttribute("data-primary"); }
+
         });
       }
 
@@ -964,6 +966,7 @@ function renderAfterMix(primaryKey, score){
   </script>
 </body>
 </html>
+
 
 
 
