@@ -1279,3 +1279,28 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   margin-top:12px;
   flex-wrap:wrap;
 }
+.styleMoreRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  margin-top: 12px;
+}
+
+.styleMore{
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(18,22,36,.34);
+}
+
+.styleMore ul{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.styleMore li{
+  margin: 6px 0;
+  opacity: .88;
+}
