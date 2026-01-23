@@ -1271,3 +1271,11 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
 @media (max-width: 640px){
   .styleIllustration{ display:none; }
 }
+/* Discover actions layout (3 buttons) */
+.discoverActions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
