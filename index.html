@@ -687,6 +687,8 @@ function showMoreFor(key){
   styleMore.hidden = false;
   styleMore.innerHTML = STYLE_MORE[key] || "";
 }
+var archBadge = document.getElementById("archBadge");
+if (archBadge) archBadge.innerHTML = ARCH_SVG[res.primary] || "";
 
     function applyResult(res) {
       var tieNote = (res.pScore === res.sScore) ? ("(also close to " + res.secondary + ")") : "";
@@ -795,6 +797,7 @@ function showMoreFor(key){
 
 </body>
 </html>
+
 
 
 
