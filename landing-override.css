@@ -949,3 +949,8 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
+.accBody{ 
+  transition: opacity .18s ease;
+  opacity:.0;
+}
+.accItem[open] .accBody{ opacity:.92; }
