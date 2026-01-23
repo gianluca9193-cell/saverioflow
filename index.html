@@ -225,6 +225,32 @@
       <p class="styleBlurb">Protection, responsibility, long-term impact.</p>
     </button>
   </div>
+<div class="discoverRow">
+  <button class="btn btn-ghost glass" type="button" id="btnDiscover" aria-expanded="false" aria-controls="discoverPanel">
+    Discover your archetype
+  </button>
+  <span class="discoverHint">2 minutes • 5 questions • no signup</span>
+</div>
+
+<div class="discoverPanel glass" id="discoverPanel" hidden>
+  <div class="discoverHead">
+    <div class="discoverTitle" id="discoverTitle">Question 1 of 5</div>
+    <div class="discoverProgress" aria-hidden="true"><span id="discoverProg" style="width:20%"></span></div>
+  </div>
+
+  <div class="discoverQ" id="discoverQ">
+    Starting a week — what feels right?
+  </div>
+
+  <div class="discoverOptions" id="discoverOptions">
+    <!-- options injected by JS -->
+  </div>
+
+  <div class="discoverActions">
+    <button class="btn btn-ghost glass" type="button" id="btnBack" disabled>Back</button>
+    <button class="btn btn-primary" type="button" id="btnNext" disabled>Next</button>
+  </div>
+</div>
 
   <div class="stylePanel glass" id="stylePanel" aria-live="polite">
     <div class="stylePanelHead">
@@ -495,6 +521,7 @@ styleCards.forEach(card => {
 
 </body>
 </html>
+
 
 
 
