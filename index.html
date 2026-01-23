@@ -186,6 +186,78 @@
     </section>
 
     <div class="neon-divider" aria-hidden="true"></div>
+    <section class="styleSection" id="style">
+  <div class="styleIllustration" aria-hidden="true"></div>
+
+  <h2 class="section-title">Your planning style</h2>
+  <p class="section-subtitle">
+    A calm starting point. Choose one — you can change anytime.
+  </p>
+
+  <div class="styleGrid">
+    <button class="styleCard glass" type="button" data-style="builder">
+      <div class="styleTop"><span class="styleName">Builder</span><span class="styleTag">Structure</span></div>
+      <p class="styleBlurb">Clear plans, consistent output, measurable progress.</p>
+    </button>
+
+    <button class="styleCard glass" type="button" data-style="balancer">
+      <div class="styleTop"><span class="styleName">Balancer</span><span class="styleTag">Harmony</span></div>
+      <p class="styleBlurb">A/B/C balance, sustainable pace, meaningful weeks.</p>
+    </button>
+
+    <button class="styleCard glass" type="button" data-style="explorer">
+      <div class="styleTop"><span class="styleName">Explorer</span><span class="styleTag">Discovery</span></div>
+      <p class="styleBlurb">Curiosity, learning loops, flexible direction.</p>
+    </button>
+
+    <button class="styleCard glass" type="button" data-style="guardian">
+      <div class="styleTop"><span class="styleName">Guardian</span><span class="styleTag">Care</span></div>
+      <p class="styleBlurb">Protection, responsibility, long-term impact.</p>
+    </button>
+  </div>
+
+  <div class="discoverRow">
+    <button class="btn btn-ghost glass" type="button" id="btnDiscover" aria-expanded="false" aria-controls="discoverPanel">
+      Discover your archetype
+    </button>
+    <span class="discoverHint">2 minutes • 5 questions • no signup</span>
+  </div>
+
+  <div class="discoverPanel glass" id="discoverPanel" hidden>
+    <div class="discoverHead">
+      <div class="discoverTitle" id="discoverTitle">Question 1 of 5</div>
+      <div class="discoverProgress" aria-hidden="true"><span id="discoverProg"></span></div>
+    </div>
+
+    <div class="discoverQ" id="discoverQ">Starting a week — what feels right?</div>
+    <div class="discoverOptions" id="discoverOptions"></div>
+
+    <div class="discoverActions">
+      <button class="btn btn-ghost glass" type="button" id="btnBack" disabled>Back</button>
+      <button class="btn btn-primary" type="button" id="btnNext" disabled>Next</button>
+      <a class="btn btn-primary" href="/app/" id="btnOpenFromDiscover" hidden>Open app</a>
+    </div>
+  </div>
+
+  <div class="stylePanel glass" id="stylePanel" aria-live="polite">
+    <div class="stylePanelHead">
+      <div>
+        <div class="stylePanelTitle" id="styleTitle">Pick a style to see a suggested setup</div>
+        <div class="stylePanelMeta" id="styleMeta">No signup. Just a preview.</div>
+      </div>
+      <a class="btn btn-ghost glass" href="/app/" aria-label="Open app">Open App</a>
+    </div>
+
+    <div class="stylePanelBody" id="styleBody">
+      <ul>
+        <li><strong>Today:</strong> Start with a small “Minimum Day”.</li>
+        <li><strong>Week:</strong> Keep one buffer slot.</li>
+        <li><strong>Review:</strong> End with one sentence: “What worked?”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
     <!-- Planning Style -->
     <section class="styleSection" id="style">
@@ -721,4 +793,5 @@
 
 </body>
 </html>
+
 
