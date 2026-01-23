@@ -423,12 +423,79 @@
     // initial highlight (because "today" is open by default)
     const initiallyOpen = items.find(x => x.open);
     if (initiallyOpen) setActive(initiallyOpen.dataset.key);
+    // Planning style panel (simple preview)
+const styleCards = Array.from(document.querySelectorAll(".styleCard"));
+const styleTitle = document.getElementById("styleTitle");
+const styleMeta = document.getElementById("styleMeta");
+const styleBody = document.getElementById("styleBody");
+
+const STYLE = {
+  builder: {
+    title: "Builder — structured momentum",
+    meta: "Suggested setup: measurable goals + consistent routines.",
+    body: `
+      <ul>
+        <li><strong>Today:</strong> Top 3 + time blocks.</li>
+        <li><strong>Week:</strong> 3 priorities, 2 maintenance tasks, 1 buffer.</li>
+        <li><strong>Tracking:</strong> streak + milestone every 2–4 weeks.</li>
+      </ul>`
+  },
+  balancer: {
+    title: "Balancer — A/B/C harmony",
+    meta: "Suggested setup: meaningful progress without overload.",
+    body: `
+      <ul>
+        <li><strong>Today:</strong> 1 task each for A, B, and C.</li>
+        <li><strong>Week:</strong> keep 20–30% buffer for life.</li>
+        <li><strong>Review:</strong> “What did I protect this week?”</li>
+      </ul>`
+  },
+  explorer: {
+    title: "Explorer — learning-driven planning",
+    meta: "Suggested setup: experiments, reflection, flexible direction.",
+    body: `
+      <ul>
+        <li><strong>Today:</strong> one “curiosity task” + one “must-do”.</li>
+        <li><strong>Week:</strong> 2 experiments, 1 commitment, 1 recovery slot.</li>
+        <li><strong>Review:</strong> capture insights, adjust next week.</li>
+      </ul>`
+  },
+  guardian: {
+    title: "Guardian — care & long-term impact",
+    meta: "Suggested setup: sustainability, responsibility, steady actions.",
+    body: `
+      <ul>
+        <li><strong>Today:</strong> minimum day + one care action.</li>
+        <li><strong>Week:</strong> reduce friction, protect energy and focus.</li>
+        <li><strong>Tracking:</strong> trend lines over time (not pressure).</li>
+      </ul>`
+  }
+};
+
+function setStyleActive(key){
+  styleCards.forEach(c => c.classList.toggle("is-active", c.dataset.style === key));
+}
+
+styleCards.forEach(card => {
+  card.addEventListener("click", () => {
+    const key = card.dataset.style;
+    const data = STYLE[key];
+    if (!data) return;
+
+    setStyleActive(key);
+    if (styleTitle) styleTitle.textContent = data.title;
+    if (styleMeta) styleMeta.textContent = data.meta;
+    if (styleBody) styleBody.innerHTML = data.body;
+  });
+});
+
   });
 </script>
 
 
 </body>
 </html>
+
 
 
 
