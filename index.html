@@ -690,6 +690,8 @@ function showMoreFor(key){
       var tieNote = (res.pScore === res.sScore) ? ("(also close to " + res.secondary + ")") : "";
 
       currentArchetype = res.primary;
+      showMoreFor(res.primary);
+
       applyStyle(res.primary, tieNote);
 
       // app deep links
@@ -791,6 +793,7 @@ function showMoreFor(key){
 
 </body>
 </html>
+
 
 
 
