@@ -450,6 +450,26 @@
         items.forEach(x => { if (x !== d) x.removeAttribute("open"); });
         setActive(d.dataset.key);
       });
+      // ===============================
+// C: Discover Archetype Stepper
+// ===============================
+
+const btnDiscover = document.getElementById("btnDiscover");
+const discoverPanel = document.getElementById("discoverPanel");
+const discoverTitle = document.getElementById("discoverTitle");
+const discoverQ = document.getElementById("discoverQ");
+const discoverOptions = document.getElementById("discoverOptions");
+const btnBack = document.getElementById("btnBack");
+const btnNext = document.getElementById("btnNext");
+const discoverProg = document.getElementById("discoverProg");
+const btnOpenFromDiscover = document.getElementById("btnOpenFromDiscover");
+
+/* … HIER kommt dann der restliche Stepper-Code
+   (QUESTIONS, renderStep(), applyResult(), Events etc.)
+*/
+});
+</script>
+
       // Discover archetype (5-question stepper)
 const btnDiscover = document.getElementById("btnDiscover");
 const discoverPanel = document.getElementById("discoverPanel");
@@ -712,6 +732,7 @@ styleCards.forEach(card => {
 
 </body>
 </html>
+
 
 
 
