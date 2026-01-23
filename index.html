@@ -400,7 +400,7 @@
   <script src="/motion.js"></script>
   <script src="/slider.js"></script>
 
- <script>
+<script>
   // Year stamp
   (function(){
     var y = document.getElementById("yearNow");
@@ -408,8 +408,48 @@
   })();
 
   document.addEventListener("DOMContentLoaded", function () {
+
     // ---------------------------
-    // Accordion (FeatureGrid -> Accordion)
+    // (A) Learn more archetype - elements + content
+    // ---------------------------
+    var btnMore = document.getElementById("btnMore");
+    var styleMore = document.getElementById("styleMore");
+    var btnOpenFromPanel = document.getElementById("btnOpenFromPanel");
+    var currentArchetype = null;
+
+    var STYLE_MORE = {
+      builder:
+        "<ul>" +
+        "<li><strong>Strength:</strong> Fast execution, clear milestones.</li>" +
+        "<li><strong>Watch-out:</strong> Overloading the plan (too many goals at once).</li>" +
+        "<li><strong>Best goals:</strong> measurable outcomes, shipping cycles.</li>" +
+        "<li><strong>Review ritual:</strong> numbers → next actions in 5 minutes.</li>" +
+        "</ul>",
+      balancer:
+        "<ul>" +
+        "<li><strong>Strength:</strong> Sustainable pace, meaningful weeks.</li>" +
+        "<li><strong>Watch-out:</strong> Avoiding hard priorities to keep harmony.</li>" +
+        "<li><strong>Best goals:</strong> routines, health, relationships, impact.</li>" +
+        "<li><strong>Review ritual:</strong> What was aligned / out of balance?</li>" +
+        "</ul>",
+      explorer:
+        "<ul>" +
+        "<li><strong>Strength:</strong> Learning speed, smart adaptation.</li>" +
+        "<li><strong>Watch-out:</strong> Too many experiments, not enough closure.</li>" +
+        "<li><strong>Best goals:</strong> skills, discovery, creative output.</li>" +
+        "<li><strong>Review ritual:</strong> 3 insights → 1 next experiment.</li>" +
+        "</ul>",
+      guardian:
+        "<ul>" +
+        "<li><strong>Strength:</strong> Consistency, responsibility, care.</li>" +
+        "<li><strong>Watch-out:</strong> Carrying too much for others.</li>" +
+        "<li><strong>Best goals:</strong> long-term projects, stewardship, habits.</li>" +
+        "<li><strong>Review ritual:</strong> What did I protect? What needs care?</li>" +
+        "</ul>"
+    };
+
+    // ---------------------------
+    // (B) Accordion (FeatureGrid -> Accordion)
     // ---------------------------
     var acc = document.getElementById("featureAccordion");
     var items = Array.prototype.slice.call((acc && acc.querySelectorAll(".accItem")) || []);
@@ -428,7 +468,6 @@
       items.forEach(function (d) { if (d !== target) d.removeAttribute("open"); });
       target.setAttribute("open", "");
       target.scrollIntoView({ behavior: "smooth", block: "start" });
-
       setActive(key);
     }
 
@@ -448,7 +487,7 @@
     if (initiallyOpen) setActive(initiallyOpen.dataset.key);
 
     // ---------------------------
-    // Style panel (shared results)
+    // (C) Style panel (result output)
     // ---------------------------
     var styleCards = Array.prototype.slice.call(document.querySelectorAll(".styleCard"));
     var styleTitleEl = document.getElementById("styleTitle");
@@ -459,46 +498,38 @@
       builder:  {
         title: "Builder — structured momentum",
         meta:  "Suggested setup: measurable goals + consistent routines.",
-        body:  [
-          "<ul>",
-          "<li><strong>Today:</strong> Top 3 + time blocks.</li>",
-          "<li><strong>Week:</strong> 3 priorities, 2 maintenance tasks, 1 buffer.</li>",
-          "<li><strong>Tracking:</strong> streak + milestone every 2–4 weeks.</li>",
-          "</ul>"
-        ].join("")
+        body:  "<ul>" +
+               "<li><strong>Today:</strong> Top 3 + time blocks.</li>" +
+               "<li><strong>Week:</strong> 3 priorities, 2 maintenance tasks, 1 buffer.</li>" +
+               "<li><strong>Tracking:</strong> streak + milestone every 2–4 weeks.</li>" +
+               "</ul>"
       },
       balancer: {
         title: "Balancer — A/B/C harmony",
         meta:  "Suggested setup: meaningful progress without overload.",
-        body:  [
-          "<ul>",
-          "<li><strong>Today:</strong> 1 task each for A, B, and C.</li>",
-          "<li><strong>Week:</strong> keep 20–30% buffer for life.</li>",
-          "<li><strong>Review:</strong> What was aligned this week?</li>",
-          "</ul>"
-        ].join("")
+        body:  "<ul>" +
+               "<li><strong>Today:</strong> 1 task each for A, B, and C.</li>" +
+               "<li><strong>Week:</strong> keep 20–30% buffer for life.</li>" +
+               "<li><strong>Review:</strong> What was aligned this week?</li>" +
+               "</ul>"
       },
       explorer: {
         title: "Explorer — learning-driven",
         meta:  "Suggested setup: experiments, reflection, flexible direction.",
-        body:  [
-          "<ul>",
-          "<li><strong>Today:</strong> one curiosity task + one must-do.</li>",
-          "<li><strong>Week:</strong> 2 experiments, 1 commitment, 1 recovery slot.</li>",
-          "<li><strong>Review:</strong> capture insights, adjust next week.</li>",
-          "</ul>"
-        ].join("")
+        body:  "<ul>" +
+               "<li><strong>Today:</strong> one curiosity task + one must-do.</li>" +
+               "<li><strong>Week:</strong> 2 experiments, 1 commitment, 1 recovery slot.</li>" +
+               "<li><strong>Review:</strong> capture insights, adjust next week.</li>" +
+               "</ul>"
       },
       guardian: {
         title: "Guardian — care & long-term",
         meta:  "Suggested setup: sustainability, responsibility, steady actions.",
-        body:  [
-          "<ul>",
-          "<li><strong>Today:</strong> minimum day + one care action.</li>",
-          "<li><strong>Week:</strong> reduce friction, protect energy and focus.</li>",
-          "<li><strong>Tracking:</strong> trend lines over time (not pressure).</li>",
-          "</ul>"
-        ].join("")
+        body:  "<ul>" +
+               "<li><strong>Today:</strong> minimum day + one care action.</li>" +
+               "<li><strong>Week:</strong> reduce friction, protect energy and focus.</li>" +
+               "<li><strong>Tracking:</strong> trend lines over time (not pressure).</li>" +
+               "</ul>"
       }
     };
 
@@ -518,14 +549,22 @@
       if (styleBodyEl) styleBodyEl.innerHTML = data.body;
     }
 
+    // Optional: clicking a style card also sets current archetype
     styleCards.forEach(function (card) {
       card.addEventListener("click", function () {
-        applyStyle(card.dataset.style, "");
+        currentArchetype = card.dataset.style;
+        applyStyle(currentArchetype, "");
+
+        if (btnOpenFromPanel) {
+          btnOpenFromPanel.href = "/app/?archetype=" + encodeURIComponent(currentArchetype);
+        }
+        if (btnMore) btnMore.disabled = false;
+        if (styleMore) { styleMore.hidden = true; styleMore.innerHTML = ""; }
       });
     });
 
     // ---------------------------
-    // Discover archetype (5-question stepper)
+    // (D) Discover archetype (5-question stepper)
     // ---------------------------
     var btnDiscover = document.getElementById("btnDiscover");
     var discoverPanel = document.getElementById("discoverPanel");
@@ -538,51 +577,36 @@
     var btnOpenFromDiscover = document.getElementById("btnOpenFromDiscover");
 
     var QUESTIONS = [
-      {
-        q: "Starting a week — what feels right?",
-        opts: [
-          { key:"builder",  name:"Builder",  tag:"Structure", text:"Pick 3 priorities and block time." },
-          { key:"balancer", name:"Balancer", tag:"Harmony",   text:"Balance A/B/C and protect buffer." },
-          { key:"explorer", name:"Explorer", tag:"Discovery", text:"Choose 1–2 experiments + 1 must-do." },
-          { key:"guardian", name:"Guardian", tag:"Care",      text:"Choose sustainable actions + reduce friction." }
-        ]
-      },
-      {
-        q: "When you're low energy — what's best?",
-        opts: [
-          { key:"builder",  name:"Builder",  tag:"Streak",    text:"Shrink scope, keep the streak." },
-          { key:"balancer", name:"Balancer", tag:"Balance",   text:"Do the smallest A/B/C touch." },
-          { key:"explorer", name:"Explorer", tag:"Curiosity", text:"Do one curiosity micro-step." },
-          { key:"guardian", name:"Guardian", tag:"Recovery",  text:"Do one care action, protect recovery." }
-        ]
-      },
-      {
-        q: "What feels most satisfying?",
-        opts: [
-          { key:"builder",  name:"Builder",  tag:"Milestones", text:"Clear milestones completed." },
-          { key:"balancer", name:"Balancer", tag:"Meaning",    text:"A week that felt stable and meaningful." },
-          { key:"explorer", name:"Explorer", tag:"Learning",   text:"Learning something and adjusting." },
-          { key:"guardian", name:"Guardian", tag:"Steady",     text:"Consistency that protects what matters." }
-        ]
-      },
-      {
-        q: "Planning horizon — what do you prefer?",
-        opts: [
-          { key:"builder",  name:"Builder",  tag:"Quarter",    text:"Quarters + measurable outcomes." },
-          { key:"balancer", name:"Balancer", tag:"Rhythm",     text:"Weeks with rhythm + flexibility." },
-          { key:"explorer", name:"Explorer", tag:"Adaptive",   text:"A rolling plan I can adapt." },
-          { key:"guardian", name:"Guardian", tag:"Long-term",  text:"Long-term direction with gentle steps." }
-        ]
-      },
-      {
-        q: "Review style — what helps most?",
-        opts: [
-          { key:"builder",  name:"Builder",  tag:"Next",    text:"Numbers + next actions." },
-          { key:"balancer", name:"Balancer", tag:"Align",   text:"What was aligned / out of balance?" },
-          { key:"explorer", name:"Explorer", tag:"Insight", text:"What did I learn? What to try next?" },
-          { key:"guardian", name:"Guardian", tag:"Care",    text:"What did I protect? What needs care?" }
-        ]
-      }
+      { q: "Starting a week — what feels right?", opts: [
+        { key:"builder",  name:"Builder",  tag:"Structure", text:"Pick 3 priorities and block time." },
+        { key:"balancer", name:"Balancer", tag:"Harmony",   text:"Balance A/B/C and protect buffer." },
+        { key:"explorer", name:"Explorer", tag:"Discovery", text:"Choose 1–2 experiments + 1 must-do." },
+        { key:"guardian", name:"Guardian", tag:"Care",      text:"Choose sustainable actions + reduce friction." }
+      ]},
+      { q: "When you're low energy — what's best?", opts: [
+        { key:"builder",  name:"Builder",  tag:"Streak",    text:"Shrink scope, keep the streak." },
+        { key:"balancer", name:"Balancer", tag:"Balance",   text:"Do the smallest A/B/C touch." },
+        { key:"explorer", name:"Explorer", tag:"Curiosity", text:"Do one curiosity micro-step." },
+        { key:"guardian", name:"Guardian", tag:"Recovery",  text:"Do one care action, protect recovery." }
+      ]},
+      { q: "What feels most satisfying?", opts: [
+        { key:"builder",  name:"Builder",  tag:"Milestones", text:"Clear milestones completed." },
+        { key:"balancer", name:"Balancer", tag:"Meaning",    text:"A week that felt stable and meaningful." },
+        { key:"explorer", name:"Explorer", tag:"Learning",   text:"Learning something and adjusting." },
+        { key:"guardian", name:"Guardian", tag:"Steady",     text:"Consistency that protects what matters." }
+      ]},
+      { q: "Planning horizon — what do you prefer?", opts: [
+        { key:"builder",  name:"Builder",  tag:"Quarter",    text:"Quarters + measurable outcomes." },
+        { key:"balancer", name:"Balancer", tag:"Rhythm",     text:"Weeks with rhythm + flexibility." },
+        { key:"explorer", name:"Explorer", tag:"Adaptive",   text:"A rolling plan I can adapt." },
+        { key:"guardian", name:"Guardian", tag:"Long-term",  text:"Long-term direction with gentle steps." }
+      ]},
+      { q: "Review style — what helps most?", opts: [
+        { key:"builder",  name:"Builder",  tag:"Next",    text:"Numbers + next actions." },
+        { key:"balancer", name:"Balancer", tag:"Align",   text:"What was aligned / out of balance?" },
+        { key:"explorer", name:"Explorer", tag:"Insight", text:"What did I learn? What to try next?" },
+        { key:"guardian", name:"Guardian", tag:"Care",    text:"What did I protect? What needs care?" }
+      ]}
     ];
 
     var step = 0;
@@ -660,13 +684,22 @@
 
     function applyResult(res) {
       var tieNote = (res.pScore === res.sScore) ? ("(also close to " + res.secondary + ")") : "";
+
+      currentArchetype = res.primary;
       applyStyle(res.primary, tieNote);
 
-      if (btnOpenFromDiscover) btnOpenFromDiscover.hidden = false;
+      // app deep links
       if (btnOpenFromDiscover){
-  btnOpenFromDiscover.href = "/app/?archetype=" + encodeURIComponent(res.primary);
-  btnOpenFromDiscover.hidden = false;
-}
+        btnOpenFromDiscover.href = "/app/?archetype=" + encodeURIComponent(res.primary);
+        btnOpenFromDiscover.hidden = false;
+      }
+      if (btnOpenFromPanel){
+        btnOpenFromPanel.href = "/app/?archetype=" + encodeURIComponent(res.primary);
+      }
+
+      // enable learn more
+      if (btnMore) btnMore.disabled = false;
+      if (styleMore){ styleMore.hidden = true; styleMore.innerHTML = ""; }
 
       if (btnNext) btnNext.hidden = true;
       if (btnBack) btnBack.hidden = true;
@@ -688,6 +721,15 @@
           if (btnOpenFromDiscover) btnOpenFromDiscover.hidden = true;
           if (btnNext) btnNext.hidden = false;
           if (btnBack) btnBack.hidden = false;
+
+          // reset state
+          step = 0;
+          for (var j=0;j<answers.length;j++) answers[j] = null;
+
+          currentArchetype = null;
+          if (btnMore) btnMore.disabled = true;
+          if (styleMore){ styleMore.hidden = true; styleMore.innerHTML = ""; }
+
           renderStep();
           discoverPanel.scrollIntoView({ behavior:"smooth", block:"start" });
         }
@@ -719,48 +761,33 @@
         } else {
           applyResult(computeResult());
         }
-        const STYLE_MORE = {
-  builder: `
-    <ul>
-      <li><strong>Strength:</strong> Fast execution, clear milestones.</li>
-      <li><strong>Watch-out:</strong> Overloading the plan (too many goals at once).</li>
-      <li><strong>Best goals:</strong> measurable outcomes, shipping cycles.</li>
-      <li><strong>Review ritual:</strong> numbers → next actions in 5 minutes.</li>
-    </ul>
-  `,
-  balancer: `
-    <ul>
-      <li><strong>Strength:</strong> Sustainable pace, meaningful weeks.</li>
-      <li><strong>Watch-out:</strong> Avoiding hard priorities to keep harmony.</li>
-      <li><strong>Best goals:</strong> routines, health, relationships, impact.</li>
-      <li><strong>Review ritual:</strong> “What was aligned / out of balance?”</li>
-    </ul>
-  `,
-  explorer: `
-    <ul>
-      <li><strong>Strength:</strong> Learning speed, smart adaptation.</li>
-      <li><strong>Watch-out:</strong> Too many experiments, not enough closure.</li>
-      <li><strong>Best goals:</strong> skills, discovery, creative output.</li>
-      <li><strong>Review ritual:</strong> 3 insights → 1 next experiment.</li>
-    </ul>
-  `,
-  guardian: `
-    <ul>
-      <li><strong>Strength:</strong> Consistency, responsibility, care.</li>
-      <li><strong>Watch-out:</strong> Carrying too much for others.</li>
-      <li><strong>Best goals:</strong> long-term projects, stewardship, habits.</li>
-      <li><strong>Review ritual:</strong> “What did I protect? What needs care?”</li>
-    </ul>
-  `
-};
-
       });
     }
+
+    // ---------------------------
+    // (E) Learn more toggle (2c) - ONE TIME
+    // ---------------------------
+    if (btnMore && styleMore){
+      btnMore.addEventListener("click", function(){
+        if (!currentArchetype) return;
+
+        var isOpen = !styleMore.hidden;
+        styleMore.hidden = isOpen;
+
+        if (!isOpen){
+          styleMore.innerHTML = STYLE_MORE[currentArchetype] || "";
+          styleMore.scrollIntoView({ behavior:"smooth", block:"nearest" });
+        }
+      });
+    }
+
   });
 </script>
 
+
 </body>
 </html>
+
 
 
 
