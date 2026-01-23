@@ -1244,3 +1244,30 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
 @media (prefers-reduced-motion: reduce){
   .optBtn{ transition:none; }
 }
+/* Style section illustration overlay */
+.styleSection{ position: relative; }
+
+.styleIllustration{
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+  background-image: url("/assets/illustrations/archetypes-orbit-tree.svg");
+  background-repeat: no-repeat;
+  background-position: 92% -10px;
+  background-size: 520px;
+  opacity: .22;
+  mask-image: radial-gradient(closest-side, rgba(0,0,0,1), rgba(0,0,0,0));
+  -webkit-mask-image: radial-gradient(closest-side, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+@media (max-width: 900px){
+  .styleIllustration{
+    background-position: 100% -20px;
+    background-size: 440px;
+    opacity: .18;
+  }
+}
+
+@media (max-width: 640px){
+  .styleIllustration{ display:none; }
+}
