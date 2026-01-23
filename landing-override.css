@@ -1081,3 +1081,29 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
   margin: 8px 0;
   line-height: 1.45;
 }
+/* Planning Style – lighter, airy */
+.styleSection{
+  background:
+    radial-gradient(
+      1200px 400px at 50% -200px,
+      rgba(135,180,255,.12),
+      transparent 60%
+    );
+  padding: 26px 0 18px;
+}
+
+.styleCard{
+  background: rgba(18,22,36,.45); /* heller als vorher */
+}
+
+.stylePanel{
+  background: rgba(18,22,36,.40);
+}
+
+.styleCard:hover{
+  background: rgba(22,28,46,.55);
+}
+
+.styleCard.is-active{
+  background: rgba(28,36,60,.65);
+}
