@@ -1107,3 +1107,140 @@ html[dir="rtl"] .langSwitch{ flex-direction: row-reverse; }
 .styleCard.is-active{
   background: rgba(28,36,60,.65);
 }
+/* === Discover Archetype (Stepper) === */
+.discoverRow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top: 12px;
+}
+
+.discoverHint{
+  font-size: 12px;
+  opacity: .72;
+}
+
+.discoverPanel{
+  margin-top: 10px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(18,22,36,.38);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+
+.discoverHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.discoverTitle{
+  font-weight: 680;
+  letter-spacing:.01em;
+}
+
+.discoverProgress{
+  flex: 0 0 180px;
+  height: 8px;
+  border-radius: 999px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
+}
+
+.discoverProgress > span{
+  display:block;
+  height:100%;
+  width:20%;
+  border-radius: 999px;
+  background: rgba(135,180,255,.55);
+}
+
+.discoverQ{
+  font-size: 13.5px;
+  line-height: 1.45;
+  opacity: .92;
+  margin: 8px 0 12px;
+}
+
+.discoverOptions{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 640px){
+  .discoverOptions{ grid-template-columns: 1fr; }
+}
+
+.optBtn{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(10,12,18,.26);
+  border-radius: 14px;
+  padding: 12px;
+  text-align:start;
+  cursor:pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+.optBtn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(12,14,22,.40);
+}
+
+.optBtn:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.10),
+    0 0 0 5px rgba(135,180,255,.18),
+    0 14px 34px rgba(0,0,0,.26);
+}
+
+.optBtn.is-selected{
+  border-color: rgba(135,180,255,.45);
+  background: rgba(28,36,60,.55);
+}
+
+.optTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.optName{
+  font-weight: 680;
+}
+
+.optTag{
+  font-size: 12px;
+  opacity: .72;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(255,255,255,.04);
+}
+
+.optText{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  opacity: .80;
+}
+
+.discoverActions{
+  display:flex;
+  justify-content:space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .optBtn{ transition:none; }
+}
